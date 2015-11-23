@@ -1,0 +1,48 @@
+<template name="services">
+  <div class="container">
+    <div class="col-md-6">
+      <center>
+        <i class="fa fa-shield fa-5x"></i>
+        <h3>Services</h3>
+      </center>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+        {{#each serviceSecurity}}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{_id}}" aria-expanded="false" aria-controls="{{_id}}">
+              <h4 class="panel-title">
+                {{namePretty}}
+              </h4>
+            </div>
+            <div id="{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{_id}}">
+              <div class="panel-body">
+                {{description}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="col-md-6">
+      <center>
+        <i class="fa fa-users fa-5x"></i>
+        <h3>Staffing</h3>
+      </center>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+        {{#each serviceStaffing}}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{_id}}" aria-expanded="false" aria-controls="{{_id}}">
+              <h4 class="panel-title">
+                {{namePretty}}
+              </h4>
+            </div>
+            <div id="{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{_id}}">
+              <div class="panel-body">
+                {{description}}
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

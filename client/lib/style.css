@@ -1,0 +1,42 @@
+.navbar-brand img {
+  height: 35px;
+  position: relative;
+  top:-5px;
+}
+.navbar-custom-bottom {
+  width: 100%;
+  z-index: 3;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  min-height: inherit;
+  background-color: white;
+  border: none;
+}
+.yellow-container {
+  background-color: #FFB600;
+  padding: 20px 0px 30px 0px;
+}
+h3.person-name {
+  margin-bottom: -2px;
+}
+.top-navbar-custom {
+  background-color: #C7D0DF;
+}
+blockquote {
+  padding: 10px 0;
+  padding-left:10px
+}
+blockquote p {
+  margin: 0;
+}
+blockquote footer {
+  padding:0;
+}
+@media only screen and (min-width: 768px) {
+  .navbar-custom .nav li a {
+    font-size: x-small;
+    padding: 15px;
+  }
+  .navbar-brand img {
+    height: 100px;
+  }
+}

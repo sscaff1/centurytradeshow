@@ -1,0 +1,8 @@
+<template name="layout">
+  {{> mainMenu}}
+  {{#if notHome}}
+    {{> headerRegularPage}}
+  {{/if}}
+  {{> yield}}
+  {{> footer}}
+</template>
