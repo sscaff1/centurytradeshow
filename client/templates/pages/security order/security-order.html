@@ -20,8 +20,8 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'eventDate'}}">
             <label for="eventDate" class="required">Event Date</label>
-            <div class="input-group datepicker">
-              <input type="text" class="form-control" name="eventDate">
+            <div class="input-group">
+              <input type="text" class="form-control datepicker" name="eventDate" id="eventDate">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             <span class="help-block">{{errorMessage 'eventDate'}}</span>
@@ -90,8 +90,8 @@
       </div>
       <div class="row">
         <h3>Pricing Information</h3>
-        <div class="col-md-4">
-          <table class="table table-bordered">
+        <div class="col-md-6">
+          <table class="table">
             <tr>
               <td></td>
               <th>Incentive</th>
@@ -109,7 +109,7 @@
             </tr>
           </table>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           {{#if dateMinus21}}
             Advance payment must be received by {{dateMinus21}} to qualify for
             discount (incentive rates). Base rates apply to all orders/payments received after 21 day
@@ -125,7 +125,7 @@
         {{/each}}
       </div>
       <div class="row">
-        <div class="col-sm-offset-10 col-sm-2">
+        <div class="col-sm-offset-9 col-sm-3">
           <button type="button" class="btn btn-info" id="moreWorkTimes">Add Another Time</button>
         </div>
       </div>
@@ -148,8 +148,55 @@
         </div>
       </div>
       <div class="row">
-        <strong>Total Price: </strong>${{totalPrice}}
+        <div class="col-md-4">
+          <strong>Total Price: </strong>${{totalPrice}}
+        </div>
+        <div class="col-md-4">
+          <strong>Total Armed Hours: </strong>{{totalArmed}}
+        </div>
+        <div class="col-md-4">
+          <strong>Total Unarmed Hours: </strong>{{totalUnarmed}}
+        </div>
       </div>
+      <div class="row">
+        <h3>Billing Information</h3>
+        <div class="col-sm-3">
+          <div class="form-group {{errorClass 'type'}}">
+            <label for="paymentMethod" class="required">Payment Method</label>
+            <select class="form-control" name="paymentMethod">
+              <option value="">Select a Payment Method</option>
+              <option value="noncredit">Company Check or Money Order</option>
+              <option value="credit">Credit Card</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      {{#if noncredit.selected}}
+        {{#if noncredit.noncredit}}
+          <div class="row">
+            <center>
+              <h3>Remit Payment To:</h3>
+              <p class="lead">Century Security & Event Staffing, Inc.<br/>
+              6421 Pinecastle Blvd. (Suite 1)<br/>
+              Orlando, FL 32809</p>
+            </center>
+          </div>
+        {{else}}
+          <div class="row">
+            <center>
+              <p class="lead" style="color:red">
+                An additional 3% Service Charge will apply.
+              </p>
+            </center>
+          </div>
+          {{> billingInfo}}
+        {{/if}}
+        <div class="row">
+          <center>
+            <button type="submit" class="btn btn-primary">Book Order</button>
+          </center>
+        </div>
+      {{/if}}
     </form>
   </div>
 </template>
@@ -160,7 +207,7 @@
       <div class="form-group {{errorClass 'type'}}">
         <label for="type" class="required">Type of Monitor</label>
         <select class="form-control" name="type">
-          <option value="">Please Select a Monitor Type</option>
+          <option value="">Select a Monitor Type</option>
           <option value="armed">Armed Monitor</option>
           <option value="unarmed">Unarmed Monitor</option>
         </select>
@@ -180,30 +227,24 @@
         <span class="help-block">{{errorMessage 'booth'}}</span>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <div class="form-group {{errorClass 'startTime'}}">
         <label for="startTime" class="required">Start Time</label>
-        <div class="input-group datetimepicker">
-          <input type="text" class="form-control startTime" name="startTime" value="{{startTime}}">
+        <div class="input-group">
+          <input type="text" class="form-control datetimepicker startTime" name="startTime" value="{{startTime}}">
           <span class="input-group-addon startTime"><i class="glyphicon glyphicon-calendar"></i></span>
         </div>
         <span class="help-block">{{errorMessage 'startTime'}}</span>
       </div>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       <div class="form-group {{errorClass 'endTime'}}">
         <label for="endTime" class="required">End Time</label>
-        <div class="input-group datetimepicker">
-          <input type="text" class="form-control endTime" name="endTime" value="{{endTime}}">
+        <div class="input-group">
+          <input type="text" class="form-control datetimepicker endTime" name="endTime" value="{{endTime}}">
           <span class="input-group-addon endTime"><i class="glyphicon glyphicon-calendar"></i></span>
         </div>
         <span class="help-block">{{errorMessage 'endTime'}}</span>
-      </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="form-group">
-        <label>Total Hours</label><br/>
-        <span name="totalTime"></span> hours
       </div>
     </div>
   </div>

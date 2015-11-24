@@ -1,0 +1,45 @@
+<template name="billingInfo">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group {{errorClass 'firstName'}}">
+        <label for="firstName" class="required">First Name</label>
+        <input type="text" class="form-control" name="firstName">
+        <span class="help-block">{{errorMessage 'firstName'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group {{errorClass 'lastName'}}">
+        <label for="lastName" class="required">Last Name</label>
+        <input type="text" class="form-control" name="lastName">
+        <span class="help-block">{{errorMessage 'lastName'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group {{errorClass 'email'}}">
+        <label for="email" class="required">Email</label>
+        <input type="email" class="form-control" name="email">
+        <span class="help-block">{{errorMessage 'email'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="text-info required"><i class="fa fa-lock fa-2x"></i>  <i class="fa fa-cc-amex fa-2x"></i>  <i class="fa fa-cc-visa fa-2x"></i>  <i class="fa fa-cc-mastercard fa-2x"></i></label>
+        <input type="text" data-stripe="cardNumber" class="form-control card-number" placeholder="Card Number">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <label class="required">Expiration Month</label>
+      <input type="text" data-stripe="expMo" class="form-control exp-month" placeholder="Exp. Mo.">
+    </div>
+    <div class="col-xs-4">
+      <label class="required">Expiration Year</label>
+      <input type="text" data-stripe="expYr" class="form-control exp-year" placeholder="Exp. Yr.">
+    </div>
+    <div class="col-xs-4">
+      <label class="required">CVC</label>
+      <input type="text" data-stripe="cvc" class="form-control cvc" placeholder="CVC">
+    </div>
+  </div>
+</template>

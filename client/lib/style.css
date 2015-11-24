@@ -48,3 +48,7 @@ form > .row {
   content: '*';
   color:red;
 }
+.table td, .table tr, .table th {
+  padding:2px;
+  border: solid black 1px;
+}
