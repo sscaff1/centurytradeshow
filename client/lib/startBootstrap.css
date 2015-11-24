@@ -5,7 +5,7 @@
  */
 
 body {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 20px;
   color: #404040;
 }
@@ -22,7 +22,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 800;
 }
 a {
@@ -44,7 +44,7 @@ hr.small {
   max-width: 100px;
   margin: 15px auto;
   border-width: 4px;
-  border-color: white;
+  border-color: #141659;
 }
 .navbar-custom {
   position: absolute;
@@ -52,7 +52,7 @@ hr.small {
   left: 0;
   width: 100%;
   z-index: 3;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 .navbar-custom .navbar-brand {
   font-weight: 800;
@@ -77,7 +77,7 @@ hr.small {
     color: rgba(255, 255, 255, 0.8);
   }
   .navbar-custom .nav li a {
-    color: white;
+    color: #2d2f33;
     padding: 20px;
   }
   .navbar-custom .nav li a:hover,
@@ -146,7 +146,7 @@ hr.small {
 .intro-header .post-heading,
 .intro-header .page-heading {
   padding: 100px 0 50px;
-  color: white;
+  color: #141659;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
@@ -392,4 +392,9 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #0085a1;
+}
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+* {
+  font-family: 'Montserrat', sans-serif;
 }
