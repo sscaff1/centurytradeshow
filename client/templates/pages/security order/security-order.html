@@ -1,0 +1,210 @@
+<template name="securityOrder">
+  <div class="container">
+    <form>
+      <div class="row">
+        <h3>Event Information</h3>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'eventName'}}">
+            <label for="eventName" class="required">Event Name</label>
+            <input type="text" class="form-control" name="eventName">
+            <span class="help-block">{{errorMessage 'eventName'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'boothNumber'}}">
+            <label for="boothNumber" class="required">Booth Number</label>
+            <input type="text" class="form-control" name="boothNumber">
+            <span class="help-block">{{errorMessage 'boothNumber'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'eventDate'}}">
+            <label for="eventDate" class="required">Event Date</label>
+            <div class="input-group datepicker">
+              <input type="text" class="form-control" name="eventDate">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            <span class="help-block">{{errorMessage 'eventDate'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'exhibitorName'}}">
+            <label for="exhibitorName" class="required">Exhibitor Name</label>
+            <input type="text" class="form-control" name="exhibitorName">
+            <span class="help-block">{{errorMessage 'exhibitorName'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'contactNumber'}}">
+            <label for="contactNumber" class="required">Contact Number</label>
+            <input type="tel" class="form-control" name="contactNumber">
+            <span class="help-block">{{errorMessage 'contactNumber'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Contact Persons</h3>
+        <div class="col-sm-3">
+          <div class="form-group {{errorClass 'firstName1'}}">
+            <label for="firstName1" class="required">First Name</label>
+            <input type="text" class="form-control" name="firstName1">
+            <span class="help-block">{{errorMessage 'firstName1'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group {{errorClass 'lastName1'}}">
+            <label for="lastName1" class="required">Last Name</label>
+            <input type="text" class="form-control" name="lastName1">
+            <span class="help-block">{{errorMessage 'lastName1'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'phone1'}}">
+            <label for="phone1" class="required">Phone Number</label>
+            <input type="text" class="form-control" name="phone1">
+            <span class="help-block">{{errorMessage 'phone1'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="firstName1">First Name</label>
+            <input type="text" class="form-control" name="firstName1">
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="lastName1">Last Name</label>
+            <input type="text" class="form-control" name="lastName1">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="phone1">Phone Number</label>
+            <input type="text" class="form-control" name="phone1">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Pricing Information</h3>
+        <div class="col-md-4">
+          <table class="table table-bordered">
+            <tr>
+              <td></td>
+              <th>Incentive</th>
+              <th>Base</th>
+            </tr>
+            <tr>
+              <th>Unarmed Monitor</th>
+              <td>$24.25</td>
+              <td>$30.00</td>
+            </tr>
+            <tr>
+              <th>Armed Monitor</th>
+              <td>$50.00</td>
+              <td>$55.00</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-8">
+          {{#if dateMinus21}}
+            Advance payment must be received by {{dateMinus21}} to qualify for
+            discount (incentive rates). Base rates apply to all orders/payments received after 21 day
+            deadlines. All payments must be made in full by check or money order (payable in u.S. Funds
+            on u.S. Banks). Visa, mastercard or american express. No purchase orders accepted.
+          {{/if}}
+        </div>
+      </div>
+      <div class="row">
+        <h3>Security Required</h3>
+        {{#each loopWorkTimes}}
+          {{> workTimes}}
+        {{/each}}
+      </div>
+      <div class="row">
+        <div class="col-sm-offset-10 col-sm-2">
+          <button type="button" class="btn btn-info" id="moreWorkTimes">Add Another Time</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="comments">Special Instructions</label>
+            <textarea class="form-control" row="6"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3>Rules & Regulations</h3>
+          <ol>
+            <li>All booth monitoring personnel must be provided through Century Security.</li>
+            <li>Booth monitoring personnel will remain on duty until released.</li>
+            <li>There is a minimum of four (4) hours per person per shift.</li>
+            <li>Armed monitor must be placed a minimum of 24 hours in advance.</li>
+            <li>Booth Monitoring orders placed less than 24 hours in advance are not guaranteed</li>
+          </ol>
+        </div>
+      </div>
+      <div class="row">
+        <strong>Total Price: </strong>${{totalPrice}}
+      </div>
+    </form>
+  </div>
+</template>
+
+<template name="workTimes">
+  <div class="row" name="workTime">
+    <div class="col-sm-2">
+      <div class="form-group {{errorClass 'type'}}">
+        <label for="type" class="required">Type of Monitor</label>
+        <select class="form-control" name="type">
+          <option value="">Please Select a Monitor Type</option>
+          <option value="armed">Armed Monitor</option>
+          <option value="unarmed">Unarmed Monitor</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group {{errorClass 'personnel'}}">
+        <label for="personnel" class="required"># of Personnel</label>
+        <input type="number" class="form-control" name="personnel" value="{{personnel}}">
+        <span class="help-block">{{errorMessage 'personnel'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group {{errorClass 'booth'}}">
+        <label for="booth" class="required">Booth Number</label>
+        <input type="text" class="form-control" name="booth" value="{{booth}}">
+        <span class="help-block">{{errorMessage 'booth'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group {{errorClass 'startTime'}}">
+        <label for="startTime" class="required">Start Time</label>
+        <div class="input-group datetimepicker">
+          <input type="text" class="form-control startTime" name="startTime" value="{{startTime}}">
+          <span class="input-group-addon startTime"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <span class="help-block">{{errorMessage 'startTime'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group {{errorClass 'endTime'}}">
+        <label for="endTime" class="required">End Time</label>
+        <div class="input-group datetimepicker">
+          <input type="text" class="form-control endTime" name="endTime" value="{{endTime}}">
+          <span class="input-group-addon endTime"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <span class="help-block">{{errorMessage 'endTime'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label>Total Hours</label><br/>
+        <span name="totalTime"></span> hours
+      </div>
+    </div>
+  </div>
+</template>

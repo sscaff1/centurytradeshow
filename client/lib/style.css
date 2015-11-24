@@ -40,3 +40,11 @@ blockquote footer {
     height: 100px;
   }
 }
+form > .row {
+  margin-bottom:25px;
+}
+
+.required::after {
+  content: '*';
+  color:red;
+}

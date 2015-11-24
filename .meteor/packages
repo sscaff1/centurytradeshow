@@ -23,3 +23,5 @@ twbs:bootstrap
 underscore
 underscorestring:underscore.string
 fortawesome:fontawesome
+tsega:bootstrap3-datetimepicker
+momentjs:moment
