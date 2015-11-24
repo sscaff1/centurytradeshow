@@ -105,11 +105,11 @@ Template.securityOrder.events({
       var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
       var armed; var unarmed;
       if (daysToEvent > 21) {
-        armed = 50;
-        unarmed = 24.25;
+        armed = 59;
+        unarmed = 25;
       } else {
-        armed = 55;
-        unarmed = 30;
+        armed = 63.5;
+        unarmed = 31;
       }
       var totalPrice = 0;
       var totalArmed = 0;

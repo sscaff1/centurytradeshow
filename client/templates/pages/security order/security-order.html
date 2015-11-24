@@ -19,7 +19,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'eventDate'}}">
-            <label for="eventDate" class="required">Event Date</label>
+            <label for="eventDate" class="required">First Event Date</label>
             <div class="input-group">
               <input type="text" class="form-control datepicker" name="eventDate" id="eventDate">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -91,28 +91,28 @@
       <div class="row">
         <h3>Pricing Information</h3>
         <div class="col-md-6">
-          <table class="table">
+          <table class="table text-center">
             <tr>
-              <td></td>
-              <th>Incentive</th>
-              <th>Base</th>
+              <th class="text-center lead">Monitor Type/Rates</th>
+              <th class="text-center">Pre-Order</th>
+              <th class="text-center">On-Site</th>
             </tr>
             <tr>
-              <th>Unarmed Monitor</th>
-              <td>$24.25</td>
-              <td>$30.00</td>
+              <th class="text-center">Unarmed Monitor</th>
+              <td>$25.00</td>
+              <td>$31.00</td>
             </tr>
             <tr>
-              <th>Armed Monitor</th>
-              <td>$50.00</td>
-              <td>$55.00</td>
+              <th class="text-center">Armed Monitor</th>
+              <td>$59.00</td>
+              <td>$63.50</td>
             </tr>
           </table>
         </div>
         <div class="col-md-6">
           {{#if dateMinus21}}
-            Advance payment must be received by {{dateMinus21}} to qualify for
-            discount (incentive rates). Base rates apply to all orders/payments received after 21 day
+            Advance payment must be received by <strong>{{dateMinus21}}</strong> to qualify for
+            discount (pre-order rates). On-Site rates apply to all orders/payments received after 21 day
             deadlines. All payments must be made in full by check or money order (payable in u.S. Funds
             on u.S. Banks). Visa, mastercard or american express. No purchase orders accepted.
           {{/if}}
@@ -133,7 +133,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="comments">Special Instructions</label>
-            <textarea class="form-control" row="6"></textarea>
+            <textarea style="min-height:17.5em" class="form-control" row="6"></textarea>
           </div>
         </div>
         <div class="col-md-6">
@@ -174,6 +174,7 @@
       {{#if noncredit.selected}}
         {{#if noncredit.noncredit}}
           <div class="row">
+            {{> billingAddress}}
             <center>
               <h3>Remit Payment To:</h3>
               <p class="lead">Century Security & Event Staffing, Inc.<br/>
@@ -189,6 +190,7 @@
               </p>
             </center>
           </div>
+          {{> billingAddress}}
           {{> billingInfo}}
         {{/if}}
         <div class="row">

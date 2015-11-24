@@ -1,0 +1,58 @@
+<template name="billingAddress">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="form-group {{errorClass 'firstName'}}">
+        <label for="firstName" class="required">First Name</label>
+        <input type="text" class="form-control" name="firstName">
+        <span class="help-block">{{errorMessage 'firstName'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group {{errorClass 'lastName'}}">
+        <label for="lastName" class="required">Last Name</label>
+        <input type="text" class="form-control" name="lastName">
+        <span class="help-block">{{errorMessage 'lastName'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="form-group {{errorClass 'email'}}">
+        <label for="email" class="required">Email</label>
+        <input type="email" class="form-control" name="email">
+        <span class="help-block">{{errorMessage 'email'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="form-group {{errorClass 'address'}}">
+        <label for="address" class="required">Address</label>
+        <input type="text" class="form-control" name="address">
+        <span class="help-block">{{errorMessage 'address'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group {{errorClass 'city'}}">
+        <label for="city" class="required">City</label>
+        <input type="text" class="form-control" name="city">
+        <span class="help-block">{{errorMessage 'city'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="form-group {{errorClass 'state'}}">
+        <label for="state" class="required">State</label>
+        <select class="form-control" name="state">
+          <option value="">--</option>
+          {{#each state}}
+            <option value="{{abbreviation}}">{{abbreviation}}</option>
+          {{/each}}
+        </select>
+        <span class="help-block">{{errorMessage 'state'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group {{errorClass 'zipCode'}}">
+        <label for="zipCode" class="required">Zip Code</label>
+        <input type="text" class="form-control" name="zipCode" pattern="[\d]{5}(-[\d]{4})">
+        <span class="help-block">{{errorMessage 'zipCode'}}</span>
+      </div>
+    </div>
+  </div>
+</template>
