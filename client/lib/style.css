@@ -7,8 +7,12 @@
   width: 100%;
   z-index: 3;
   min-height: inherit;
-  background-color: white;
+  background-color: #A5A5A5;
   border: none;
+}
+.container-fluid.container-divider {
+  background-color: #1d4281;
+  min-height: 3em;
 }
 .yellow-container {
   background-color: #FFB600;
@@ -68,6 +72,8 @@ form > .row {
   border-color: black;
   border-width: medium;
   line-height: 1.7em;
+  font-weight: 300;
+  font-kerning: 2;
 }
 .container-fluid.quotes .fa-lg {
   position:relative; top: 1.1em;
