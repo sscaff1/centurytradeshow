@@ -36,11 +36,19 @@
           <li>
             <a href="{{pathFor 'resources'}}">Resources</a>
           </li>
-          <li>
-            <a href="{{pathFor 'securityOrder'}}">Security Order Form</a>
-          </li>
-          <li>
-            <a href="{{pathFor 'assistantOrder'}}">Assitant Order Form</a>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Order Forms<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{pathFor 'securityOrder'}}">Security Order Form</a>
+              </li>
+              <li>
+                <a href="{{pathFor 'assistantOrder'}}">Booth Staffing Order Form</a>
+              </li>
+              <li>
+                <a href="{{pathFor 'boothCamera'}}">Booth Camera Order Form</a>
+              </li>
+            </ul>
           </li>
           <li>
             <a href="{{pathFor 'careers'}}">Careers</a>

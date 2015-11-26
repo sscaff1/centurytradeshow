@@ -3,6 +3,50 @@
     <form>
       <div class="row">
         <h3>Event Information</h3>
+        <div class="col-md-2">
+          <div class="form-group {{errorClass 'eventLocation'}}">
+            <label for="type" class="required">Century Location</label>
+            <select class="form-control" name="eventLocation">
+              <option value="">Select a City</option>
+              {{#each eventLocations}}
+                <option value="{{value}}">{{label}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          {{#if conventionCenter.newOrleans}}
+            <div class="form-group {{errorClass 'conventionCenter'}}">
+              <label for="type" class="required">Does the event take place at the Ernest N. Morial Convention Center?</label>
+              <select class="form-control" name="conventionCenter">
+                <option value="">--</option>
+                <option value="newOrleans">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          {{else}}
+            {{#if conventionCenter.orlando}}
+              <div class="form-group {{errorClass 'conventionCenter'}}">
+                <label for="type" class="required">Does the event take place at the Orange County Convention Center?</label>
+                <select class="form-control" name="conventionCenter">
+                  <option value="">--</option>
+                  <option value="orlando">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            {{/if}}
+          {{/if}}
+        </div>
+        <div class="col-md-4 text-center">
+          {{#if eventLocation}}
+            <strong>Century Office Location</strong><br/>
+            {{eventLocation.address}}<br/>
+            {{eventLocation.cityState}}<br/>
+            License #: {{eventLocation.lic}}
+          {{/if}}
+        </div>
+      </div>
+      <div class="row">
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'eventName'}}">
             <label for="eventName" class="required">Event Name</label>
@@ -112,9 +156,10 @@
         <div class="col-md-6">
           {{#if dateMinus21}}
             Advance payment must be received by <strong>{{dateMinus21}}</strong> to qualify for
-            discount (pre-order rates). On-Site rates apply to all orders/payments received after 21 day
-            deadlines. All payments must be made in full by check or money order (payable in u.S. Funds
-            on u.S. Banks). Visa, mastercard or american express. No purchase orders accepted.
+            discount (pre-order rates). On-Site rates apply to all orders/payments received after
+            <strong>{{dateMinus21}}</strong>. All payments must be made in full by check or money
+            order (payable in U.S. Funds on U.S. Banks) or credit card (paid below on this form).
+            No purchase orders accepted.
           {{/if}}
         </div>
       </div>
@@ -149,9 +194,6 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <strong>Total Price: </strong>${{totalPrice}}
-        </div>
-        <div class="col-md-4">
           <strong>Total Armed Hours: </strong>{{totalArmed}}
         </div>
         <div class="col-md-4">
@@ -170,6 +212,25 @@
             </select>
           </div>
         </div>
+        <div class="col-sm-9 text-right">
+          <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{totalPrice}}<br/>
+          {{#if noncredit.selected}}
+            {{#each eventLocation.fee}}
+              <strong>{{name}}:</strong> <i class="fa fa-usd"></i>{{value}}<br/>
+            {{/each}}
+            {{#unless noncredit.noncredit}}
+              {{#each eventLocation.ccFee}}
+                {{#if value}}
+                  <strong>{{name}}</strong> <i class="fa fa-usd"></i>{{value}}<br/>
+                {{/if}}
+              {{/each}}
+              <strong>Total:</strong> <i class="fa fa-usd"></i>{{eventLocation.totalPriceCC}}<br/>
+            {{/unless}}
+            {{#if noncredit.noncredit}}
+              <strong>Total:</strong> <i class="fa fa-usd"></i>{{eventLocation.totalPrice}}<br/>
+            {{/if}}
+          {{/if}}
+        </div>
       </div>
       {{#if noncredit.selected}}
         {{#if noncredit.noncredit}}
@@ -183,13 +244,6 @@
             </center>
           </div>
         {{else}}
-          <div class="row">
-            <center>
-              <p class="lead" style="color:red">
-                An additional 3% Service Charge will apply.
-              </p>
-            </center>
-          </div>
           {{> billingAddress}}
           {{> billingInfo}}
         {{/if}}
@@ -200,54 +254,5 @@
         </div>
       {{/if}}
     </form>
-  </div>
-</template>
-
-<template name="workTimes">
-  <div class="row" name="workTime">
-    <div class="col-sm-2">
-      <div class="form-group {{errorClass 'type'}}">
-        <label for="type" class="required">Type of Monitor</label>
-        <select class="form-control" name="type">
-          <option value="">Select a Monitor Type</option>
-          <option value="armed">Armed Monitor</option>
-          <option value="unarmed">Unarmed Monitor</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="form-group {{errorClass 'personnel'}}">
-        <label for="personnel" class="required"># of Personnel</label>
-        <input type="number" class="form-control" name="personnel" value="{{personnel}}">
-        <span class="help-block">{{errorMessage 'personnel'}}</span>
-      </div>
-    </div>
-    <div class="col-sm-2">
-      <div class="form-group {{errorClass 'booth'}}">
-        <label for="booth" class="required">Booth Number</label>
-        <input type="text" class="form-control" name="booth" value="{{booth}}">
-        <span class="help-block">{{errorMessage 'booth'}}</span>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'startTime'}}">
-        <label for="startTime" class="required">Start Time</label>
-        <div class="input-group">
-          <input type="text" class="form-control datetimepicker startTime" name="startTime" value="{{startTime}}">
-          <span class="input-group-addon startTime"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-        <span class="help-block">{{errorMessage 'startTime'}}</span>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'endTime'}}">
-        <label for="endTime" class="required">End Time</label>
-        <div class="input-group">
-          <input type="text" class="form-control datetimepicker endTime" name="endTime" value="{{endTime}}">
-          <span class="input-group-addon endTime"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-        <span class="help-block">{{errorMessage 'endTime'}}</span>
-      </div>
-    </div>
   </div>
 </template>
