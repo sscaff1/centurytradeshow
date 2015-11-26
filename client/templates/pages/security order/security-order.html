@@ -115,20 +115,20 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
-            <label for="firstName1">First Name</label>
-            <input type="text" class="form-control" name="firstName1">
+            <label for="firstName2">First Name</label>
+            <input type="text" class="form-control" name="firstName2">
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group">
-            <label for="lastName1">Last Name</label>
-            <input type="text" class="form-control" name="lastName1">
+            <label for="lastName2">Last Name</label>
+            <input type="text" class="form-control" name="lastName2">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="phone1">Phone Number</label>
-            <input type="text" class="form-control" name="phone1">
+            <label for="phone2">Phone Number</label>
+            <input type="text" class="form-control" name="phone2">
           </div>
         </div>
       </div>
@@ -213,22 +213,19 @@
           </div>
         </div>
         <div class="col-sm-9 text-right">
-          <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{totalPrice}}<br/>
+          <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency totalPrice}}<br/>
           {{#if noncredit.selected}}
             {{#each eventLocation.fee}}
-              <strong>{{name}}:</strong> <i class="fa fa-usd"></i>{{value}}<br/>
+              {{#if value}}
+                <strong>{{name}}:</strong> <i class="fa fa-usd"></i>{{displayCurrency value}}<br/>
+              {{/if}}
             {{/each}}
             {{#unless noncredit.noncredit}}
               {{#each eventLocation.ccFee}}
-                {{#if value}}
-                  <strong>{{name}}</strong> <i class="fa fa-usd"></i>{{value}}<br/>
-                {{/if}}
+                <strong>{{name}}</strong> <i class="fa fa-usd"></i>{{displayCurrency value}}<br/>
               {{/each}}
-              <strong>Total:</strong> <i class="fa fa-usd"></i>{{eventLocation.totalPriceCC}}<br/>
             {{/unless}}
-            {{#if noncredit.noncredit}}
-              <strong>Total:</strong> <i class="fa fa-usd"></i>{{eventLocation.totalPrice}}<br/>
-            {{/if}}
+            <strong>Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency eventLocation.totalPrice}}<br/>
           {{/if}}
         </div>
       </div>

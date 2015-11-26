@@ -43,7 +43,7 @@ Template.securityOrder.helpers({
     return Template.instance().loopWorkTimes.get();
   },
   totalPrice: function() {
-    return (Template.instance().totalPrice.get()*100)/100;
+    return Template.instance().totalPrice.get();
   },
   dateMinus21: function() {
     return Template.instance().incentiveDate.get();
@@ -90,12 +90,21 @@ Template.securityOrder.helpers({
       orlando: eventLocation === 'orlando'
     }
   },
+  displayCurrency: function(num) {
+    return (Math.round(num * 100)/100).toFixed(2);
+  },
   eventLocation: function() {
     var eventLocation = Template.instance().eventLocation.get();
     var totalPrice = Template.instance().totalPrice.get();
+    var paymentMethod = Template.instance().paymentMethod.get();
+    if (paymentMethod === 'credit') {
+      var ccRate = .03;
+    } else {
+      var ccRate = 0;
+    }
 
     if (eventLocation === 'chicago') {
-      var ccFee = Math.round(totalPrice * .03 * 100)/100;
+      var ccFee = totalPrice * ccRate;
       return {
         address: '6334 S Archer Ave. Suite B',
         cityState: 'Chicago, IL 60632',
@@ -103,11 +112,10 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee,
-        totalPrice: totalPrice
+        totalPrice: totalPrice + ccFee
       }
     } else if (eventLocation === 'las vegas') {
-      var ccFee = Math.round(totalPrice * .03 * 100)/100;
+      var ccFee = totalPrice * ccRate;
       return {
         address: '4945 Wilbur St.',
         cityState: 'Las Vegas, NV 89119',
@@ -115,12 +123,11 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee,
-        totalPrice: totalPrice
+        totalPrice: totalPrice + ccFee
       }
     } else if (eventLocation === 'miami') {
-      var salesTax = Math.round(totalPrice * .07 * 100)/100;
-      var ccFee = Math.round(totalPrice * 1.07 * .03 * 100)/100;
+      var salesTax = totalPrice * .07;
+      var ccFee = totalPrice * 1.07 * ccRate;
       return {
         address: '7901 SW 24th St.',
         cityState: 'Miami, FL 33155',
@@ -131,11 +138,10 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee + salesTax,
-        totalPrice: totalPrice + salesTax
+        totalPrice: totalPrice + ccFee + salesTax
       }
     } else if (eventLocation === 'nashville') {
-      var ccFee = Math.round(totalPrice * .03 * 100)/100;
+      var ccFee = totalPrice * ccRate;
       return {
         address: '6421 Pinecastle Blvd. Suite 1',
         cityState: 'Orlando, FL  32809',
@@ -143,17 +149,16 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee,
-        totalPrice: totalPrice
+        totalPrice: totalPrice + ccFee
       }
     } else if (eventLocation === 'new orleans') {
       var conventionCenter = Template.instance().conventionCenter.get();
       if (conventionCenter === 'newOrleans') {
-        var conventionFee = Math.round(totalPrice * .02 * 100)/100;
-        var ccFee = Math.round(totalPrice * 1.02 * .03 * 100)/100;
+        var conventionFee = totalPrice * .02;
+        var ccFee = totalPrice * 1.02 * ccRate;
       } else {
-        var conventionFee = 0;
-        var ccFee = Math.round(totalPrice * .03 * 100)/100;
+        var conventionFee = false;
+        var ccFee = totalPrice * ccRate;
       }
       return {
         address: '2601 N. Hullen St. Suite 227E',
@@ -165,19 +170,18 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee + conventionFee,
-        totalPrice: totalPrice + conventionFee,
+        totalPrice: totalPrice + ccFee + conventionFee
       }
     } else if (eventLocation === 'orlando') {
       var conventionCenter = Template.instance().conventionCenter.get();
       if (conventionCenter === 'orlando') {
-        var conventionFee = Math.round(totalPrice * .05 * 100)/100;
-        var salesTax = Math.round(totalPrice * 1.05 * .065 * 100)/100;
-        var ccFee = Math.round(totalPrice * 1.05 * 1.065 * .03 * 100)/100;
+        var conventionFee = totalPrice * .05;
+        var salesTax = totalPrice * 1.05 * .065;
+        var ccFee = totalPrice * 1.05 * 1.065 * ccRate;
       } else {
         var conventionFee = 0
-        var salesTax = Math.round(totalPrice * .065 * 100)/100;
-        var ccFee = Math.round(totalPrice * 1.065 * .03 * 100)/100;
+        var salesTax = totalPrice * .065;
+        var ccFee = totalPrice * 1.065 * ccRate;
       }
       return {
         address: '6421 Pinecastle Blvd. Suite 1',
@@ -190,11 +194,10 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee + conventionFee + salesTax,
-        totalPrice: totalPrice + conventionFee + salesTax,
+        totalPrice: totalPrice + ccFee + conventionFee + salesTax
       }
     } else if (eventLocation === 'tucson') {
-      var ccFee = Math.round(totalPrice * .03 * 100)/100;
+      var ccFee = totalPrice * ccRate;
       return {
         address: '5425 E Broadway Blvd.',
         cityState: 'Tucson, AZ 85711',
@@ -202,15 +205,14 @@ Template.securityOrder.helpers({
         ccFee: [
           {name: 'Credit Card Fee (3%)', value: ccFee}
         ],
-        totalPriceCC: totalPrice + ccFee,
-        totalPrice: totalPrice + salesTax
+        totalPrice: totalPrice + ccFee,
       }
     }
   }
 });
 
 Template.securityOrder.events({
-  'click #moreWorkTimes, blur .form-control': function(event, template) {
+  'click #moreWorkTimes, blur [name=workTime] .form-control': function(event, template) {
     event.preventDefault();
     var currentWorkTimes = [];
     var workTimes = template.findAll('[name=workTime]');
