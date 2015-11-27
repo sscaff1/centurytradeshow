@@ -58,7 +58,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'boothNumber'}}">
-            <label for="boothNumber" class="required">Booth Number</label>
+            <label for="boothNumber">Booth Number</label>
             <input type="text" class="form-control" name="boothNumber">
             <span class="help-block">{{errorMessage 'boothNumber'}}</span>
           </div>
@@ -167,6 +167,7 @@
       </div>
       <div class="row">
         <h3>Security Required</h3>
+        <span class="help-block lead" style="color:red;">{{errorMessage 'workTime'}}</span>
         {{#each loopWorkTimes}}
           {{> workTimes}}
         {{/each}}

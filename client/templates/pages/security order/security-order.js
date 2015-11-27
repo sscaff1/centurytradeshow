@@ -6,6 +6,7 @@ Template.securityOrder.onCreated(function() {
   instance.incentiveDate = new ReactiveVar(null);
   instance.paymentMethod = new ReactiveVar(false);
   instance.loopWorkTimes = new ReactiveVar([{
+    type: '',
     personnel: '',
     booth: '',
     startTime: '',
@@ -246,7 +247,7 @@ Template.securityOrder.events({
       var today = moment().startOf('day');
       var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
       var armed; var unarmed;
-      if (daysToEvent > 21) {
+      if (daysToEvent >= 21) {
         armed = 59;
         unarmed = 25;
       } else {
