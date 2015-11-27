@@ -12,6 +12,7 @@
                 <option value="{{value}}">{{label}}</option>
               {{/each}}
             </select>
+            <span class="help-block">{{errorMessage 'eventLocation'}}</span>
           </div>
         </div>
         <div class="col-md-6">
@@ -23,6 +24,7 @@
                 <option value="newOrleans">Yes</option>
                 <option value="false">No</option>
               </select>
+              <span class="help-block">{{errorMessage 'conventionCenter'}}</span>
             </div>
           {{else}}
             {{#if conventionCenter.orlando}}
@@ -178,7 +180,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="comments">Special Instructions</label>
-            <textarea style="min-height:17.5em" class="form-control" row="6"></textarea>
+            <textarea style="min-height:12em" class="form-control" row="6"></textarea>
           </div>
         </div>
         <div class="col-md-6">
@@ -194,10 +196,10 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <strong>Total Armed Hours: </strong>{{totalArmed}}
+          <strong>Total Armed Hours: </strong>{{displayCurrency totalArmed}}
         </div>
         <div class="col-md-4">
-          <strong>Total Unarmed Hours: </strong>{{totalUnarmed}}
+          <strong>Total Unarmed Hours: </strong>{{displayCurrency totalUnarmed}}
         </div>
       </div>
       <div class="row">

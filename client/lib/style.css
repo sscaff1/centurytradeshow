@@ -1,6 +1,19 @@
 * {
   font-family: 'Montserrat', sans-serif;
 }
+.intro-header {
+  background: rgba(255,255,255,1);
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.6)
+      ), url('../img/new orleans.jpeg');
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 300px;
+  color: darkblue;
+  padding-top:75px;
+}
 .navbar-brand img {
   height: 35px;
   position: relative;
@@ -89,4 +102,16 @@ form > .row {
 }
 .intro-header {
   margin-bottom: 0;
+  margin-top:40px;
+}
+#main-logo {
+  height:100px;
+  width:auto;
+  transition: all 0.4s ease;
+}
+#main-logo.sticky {
+  height:40px;
+  width: auto;
+  position: relative;
+  top: -10px;
 }

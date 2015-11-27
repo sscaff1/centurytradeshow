@@ -49,10 +49,10 @@ Template.securityOrder.helpers({
     return Template.instance().incentiveDate.get();
   },
   totalArmed: function() {
-    return (Template.instance().totalArmed.get()).toFixed(2);
+    return Template.instance().totalArmed.get();
   },
   totalUnarmed: function() {
-    return (Template.instance().totalUnarmed.get()).toFixed(2);
+    return Template.instance().totalUnarmed.get();
   },
   noncredit: function() {
     var paymentMethod = Template.instance().paymentMethod.get();
@@ -293,7 +293,7 @@ Template.securityOrder.events({
   'submit form': function(event, template) {
     event.preventDefault();
 
-    securityForm = {
+    var securityForm = {
       eventLocation: template.$('[name=eventLocation]').val(),
       conventionCenter: template.$('[name=conventionCenter]').val(),
       eventName: template.$('[name=eventName]').val(),
@@ -305,6 +305,21 @@ Template.securityOrder.events({
       lastName1: template.$('[name=lastName1]').val(),
       phone1: template.$('[name=phone1]').val(),
       workTimes: template.loopWorkTimes.get(),
+      paymentMethod: template.$('[name=paymentMethod]').val(),
+      firstName: template.$('[name=firstName]').val(),
+      lastName: template.$('[name=lastName]').val(),
+      email: template.$('[name=email]').val(),
+      address: template.$('[name=address]').val(),
+      city: template.$('[name=city]').val(),
+      state: template.$('[name=state]').val(),
+      zip: template.$('[name=zip]').val(),
     }
+
+    var errors = validateSecurityForm(securityForm);
+
+    if (!$.isEmptyObject(errors)) {
+      return Session.set('postSubmitErrors', errors)
+    }
+
   }
 });
