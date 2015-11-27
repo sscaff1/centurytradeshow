@@ -289,5 +289,22 @@ Template.securityOrder.events({
   },
   'change [name=conventionCenter]': function(event, template) {
     template.conventionCenter.set($(event.target).val());
+  },
+  'submit form': function(event, template) {
+    event.preventDefault();
+
+    securityForm = {
+      eventLocation: template.$('[name=eventLocation]').val(),
+      conventionCenter: template.$('[name=conventionCenter]').val(),
+      eventName: template.$('[name=eventName]').val(),
+      boothNumber: template.$('[name=boothNumber]').val(),
+      eventDate: template.$('[name=eventDate]').val(),
+      exhibitorName: template.$('[name=exhibitorName]').val(),
+      contactNumber: template.$('[name=contactNumber]').val(),
+      firstName1: template.$('[name=firstName1]').val(),
+      lastName1: template.$('[name=lastName1]').val(),
+      phone1: template.$('[name=phone1]').val(),
+      workTimes: template.loopWorkTimes.get(),
+    }
   }
 });
