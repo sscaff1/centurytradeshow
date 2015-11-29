@@ -1,0 +1,108 @@
+<template name="experience">
+  <div class="container" style="margin-bottom:15px;">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group {{errorClass 'employerName{{value}}'}}">
+        <label for="employerName{{value}}" class="required">Employer Name</label>
+        <input type="text" class="form-control" name="employerName{{value}}">
+        <span class="help-block">{{errorMessage 'employerName{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group {{errorClass 'startDate{{value}}'}}">
+        <label for="startDate{{value}}" class="required">Start Date</label>
+        <div class="input-group">
+          <input type="text" class="form-control datepicker" name="startDate{{value}}">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <span class="help-block">Approximate if not known exactly.<br/>{{errorMessage 'startDate{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <div class="input-group">
+          <input type="text" class="form-control datepicker" name="endDate{{value}}">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <span class="help-block">Leave blank if currently employed.</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="form-group {{errorClass 'lastSupervisor{{value}}'}}">
+        <label for="lastSupervisor{{value}}" class="required">Last Supervisor's Name</label>
+        <input type="text" class="form-control" name="lastSupervisor{{value}}">
+        <span class="help-block">{{errorMessage 'lastSupervisor{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group {{errorClass 'lastTitle{{value}}'}}">
+        <label for="lastTitle{{value}}" class="required">Last Job Title</label>
+        <input type="text" class="form-control" name="lastTitle{{value}}">
+        <span class="help-block">{{errorMessage 'lastTitle{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group {{errorClass 'startPay{{value}}'}}">
+        <label for="startPay{{value}}" class="required">Start Pay</label>
+        <input type="text" class="form-control" name="startPay{{value}}" placeholder="$XX/hour or $XX/year">
+        <span class="help-block">{{errorMessage 'startPay{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group {{errorClass 'endPay{{value}}'}}">
+        <label for="endPay{{value}}" class="required">End Pay</label>
+        <input type="text" class="form-control" name="endPay{{value}}" placeholder="$XX/hour or $XX/year">
+        <span class="help-block">{{errorMessage 'endPay{{value}}'}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group {{errorClass 'address{{value}}'}}">
+        <label for="address{{value}}" class="required">Address</label>
+        <input type="text" class="form-control" name="address{{value}}">
+        <span class="help-block">{{errorMessage 'address{{value}}'}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group {{errorClass 'city{{value}}'}}">
+        <label for="city{{value}}" class="required">City</label>
+        <input type="text" class="form-control" name="city{{value}}">
+        <span class="help-block">{{errorMessage 'city{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <div class="form-group {{errorClass 'state{{value}}'}}">
+        <label for="state{{value}}" class="required">State</label>
+        <select class="form-control" name="state{{value}}">
+          <option value="">--</option>
+          {{#each state}}
+            <option value="{{abbreviation}}">{{abbreviation}}</option>
+          {{/each}}
+        </select>
+        <span class="help-block">{{errorMessage 'state{{value}}'}}</span>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="form-group {{errorClass 'zipCode{{value}}'}}">
+        <label for="zipCode{{value}}" class="required">Zip Code</label>
+        <input type="text" class="form-control" name="zipCode{{value}}">
+        <span class="help-block">{{errorMessage 'zipCode{{value}}'}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="leaving{{value}}">Reason for Leaving (be specific)</label>
+        <textarea name="leaving{{value}}" class="form-control" row="6"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+</template>

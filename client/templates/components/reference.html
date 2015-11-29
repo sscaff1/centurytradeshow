@@ -1,0 +1,37 @@
+<template name="reference">
+  <div class="col-xs-12">
+    <div class="form-group {{errorClass 'firstNameR{{index}}'}}">
+      <label for="firstName{{index}}" class="required">First Name</label>
+      <input type="text" class="form-control" name="firstName{{index}}">
+      <span class="help-block">{{errorMessage 'firstName{{index}}'}}</span>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="form-group {{errorClass 'lastNameR{{index}}'}}">
+      <label for="lastNameR{{index}}" class="required">Last Name</label>
+      <input type="text" class="form-control" name="lastNameR{{index}}">
+      <span class="help-block">{{errorMessage 'lastNameR{{index}}'}}</span>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="form-group {{errorClass 'positionR{{index}}'}}">
+      <label for="positionR{{index}}" class="required">Position</label>
+      <input type="text" class="form-control" name="positionR{{index}}">
+      <span class="help-block">{{errorMessage 'positionR{{index}}'}}</span>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="form-group {{errorClass 'companyR{{index}}'}}">
+      <label for="companyR{{index}}" class="required">Company</label>
+      <input type="text" class="form-control" name="companyR{{index}}">
+      <span class="help-block">{{errorMessage 'companyR{{index}}'}}</span>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="form-group {{errorClass 'phoneR{{index}}'}}">
+      <label for="phoneR{{index}}" class="required">Phone</label>
+      <input type="tel" class="form-control" name="phoneR{{index}}" placeholder="XXX-XXX-XXXX">
+      <span class="help-block">{{errorMessage 'phoneR{{index}}'}}</span>
+    </div>
+  </div>
+</template>

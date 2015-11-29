@@ -1,2 +1,326 @@
 <template name="careers">
+  <div class="container">
+    <form>
+      <div class="row">
+        <h3>General Information</h3>
+      </div>
+      {{> billingAddress}}
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'homePhone'}}">
+            <label for="homePhone" class="required">Home Phone</label>
+            <input type="tel" class="form-control" name="homePhone" placeholder="XXX-XXX-XXXX">
+            <span class="help-block">{{errorMessage 'homePhone'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'cellPhone'}}">
+            <label for="cellPhone">Cell Phone</label>
+            <input type="tel" class="form-control" name="cellPhone" placeholder="XXX-XXX-XXXX">
+            <span class="help-block">{{errorMessage 'cellPhone'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'birthDate'}}">
+            <label for="birthDate" class="required">Date of Birth</label>
+            <div class="input-group">
+              <input type="text" class="form-control datepicker" name="birthDate">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            <span class="help-block">{{errorMessage 'birthDate'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'ssn'}}">
+            <label for="ssn" class="required">Social Security Number</label>
+            <input type="text" class="form-control" name="ssn" placeholder="XXX-XX-XXXX">
+            <span class="help-block">{{errorMessage 'ssn'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Availability and Transportation</h3>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'startDate'}}">
+            <label for="startDate" class="required">Available to Start Work</label>
+            <div class="input-group">
+              <input type="text" class="form-control datepicker" name="startDate">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+            <span class="help-block">{{errorMessage 'startDate'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'hoursWeek'}}">
+            <label for="hoursWeek" class="required">Hours per Week Available to Work</label>
+            <input type="text" class="form-control" name="hoursWeek" >
+            <span class="help-block">{{errorMessage 'hoursWeek'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'nights'}}">
+            <label for="hoursWeek" class="required">Can you work nights?</label>
+            <select class="form-control" name="hoursWeek">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'nights'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'ged'}}">
+            <label for="ged" class="required">Do you have a High School Diploma/GED?</label>
+            <select class="form-control" name="ged">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'ged'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'license'}}">
+            <label for="license" class="required">Do you have a driver's license?</label>
+            <select class="form-control" name="license" >
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'license'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'transportation'}}">
+            <label for="ged" class="required">What is your means of transportation?</label>
+            <select class="form-control" name="transportation">
+                <option value="">--</option>
+                <option value="car">Personnal Vehicle</option>
+                <option value="public">Public (Bus or Rail)</option>
+                <option value="walking">Walking or Bicycle</option>
+            </select>
+            <span class="help-block">{{errorMessage 'ged'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Certifications & Experience</h3>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'guardCard'}}">
+            <label for="guardCard" class="required">Do you have a Guard Card?</label>
+            <select class="form-control" name="guardCard">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'guardCard'}}</span>
+          </div>
+        </div>
+        {{#if guardCard}}
+          <div class="col-sm-4">
+            <div class="form-group {{errorClass 'guardLicense'}}">
+              <label for="guardLicense" class="required">Guard Card License Number</label>
+              <input type="text" class="form-control" name="guardLicense">
+              <span class="help-block">{{errorMessage 'guardLicense'}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group {{errorClass 'expirationDate'}}">
+              <label for="expirationDate" class="required">Expiration Date</label>
+              <div class="input-group">
+                <input type="text" class="form-control datepicker" name="expirationDate">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <span class="help-block">{{errorMessage 'expirationDate'}}</span>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'armedForces'}}">
+            <label for="armedForces" class="required">Have you ever been in the armed forces?</label>
+            <select class="form-control" name="armedForces">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'armedForces'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group {{errorClass 'nationalGuard'}}">
+            <label for="nationalGuard" class="required">Are you in the National Guard?</label>
+            <select class="form-control" name="nationalGuard">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'nationalGuard'}}</span>
+          </div>
+        </div>
+        {{#if nationalGuard}}
+          <div class="col-sm-3">
+            <div class="form-group {{errorClass 'specialty'}}">
+              <label for="specialty" class="required">Specialty</label>
+              <input type="text" class="form-control" name="specialty">
+              <span class="help-block">{{errorMessage 'specialty'}}</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group {{errorClass 'enterDate'}}">
+              <label for="enterDate" class="required">Date Entered</label>
+              <div class="input-group">
+                <input type="text" class="form-control datepicker" name="enterDate">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <span class="help-block">{{errorMessage 'enterDate'}}</span>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="dischargeDate">Discharge Date</label>
+              <div class="input-group">
+                <input type="text" class="form-control datepicker" name="dischargeDate">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <span class="help-block">Leave blank if currently enrolled.</span>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'law'}}">
+            <label for="law" class="required">Have you ever served in law enforcement?</label>
+            <select class="form-control" name="law">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'law'}}</span>
+          </div>
+        </div>
+        {{#if law}}
+          <div class="col-sm-4">
+            <div class="form-group {{errorClass 'enterDateLaw'}}">
+              <label for="enterDateLaw" class="required">Date Entered</label>
+              <div class="input-group">
+                <input type="text" class="form-control datepicker" name="enterDateLaw">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <span class="help-block">{{errorMessage 'enterDateLaw'}}</span>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="dischargeDateLaw">Discharge Date</label>
+              <div class="input-group">
+                <input type="text" class="form-control datepicker" name="dischargeDateLaw">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+              <span class="help-block">Leave blank if current.</span>
+            </div>
+          </div>
+        {{/if}}
+        </div>
+        {{#if law}}
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="form-group {{errorClass 'departmentLaw'}}">
+                <label for="departmentLaw" class="required">Department</label>
+                <input type="text" class="form-control" name="departmentLaw">
+                <span class="help-block">{{errorMessage 'departmentLaw'}}</span>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group {{errorClass 'cityLaw'}}">
+                <label for="cityLaw" class="required">City</label>
+                <input type="text" class="form-control" name="cityLaw">
+                <span class="help-block">{{errorMessage 'cityLaw'}}</span>
+              </div>
+            </div>
+            <div class="col-xs-2">
+              <div class="form-group {{errorClass 'stateLaw'}}">
+                <label for="stateLaw" class="required">State</label>
+                <select class="form-control" name="stateLaw">
+                  <option value="">--</option>
+                  {{#each state}}
+                    <option value="{{abbreviation}}">{{abbreviation}}</option>
+                  {{/each}}
+                </select>
+                <span class="help-block">{{errorMessage 'stateLaw'}}</span>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      <div class="row">
+        <h3>References & Past Work Experiences</h3>
+        {{#each referenceCount}}
+          <div class="col-sm-6">
+            <h4>{{{header}}}</h4>
+            {{> reference}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Please list work experience for the past five years beginning with the most recent
+          job held. If you were self-employed, give firm name.</h4>
+        </div>
+      </div>
+      {{#each workExperience}}
+        {{> experience}}
+      {{/each}}
+      <div class="row" style="margin-bottom:15px;">
+        <div class="col-sm-offset-9 col-sm-3">
+          <button type="button" class="btn btn-info" id="moreEmployment">Add Another Employer</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'currentEmployer'}}">
+            <label for="currentEmployer" class="required">May we contact your current employer?</label>
+            <select class="form-control" name="currentEmployer">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'currentEmployer'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'fillOut'}}">
+            <label for="fillOut" class="required">Did you fill out this application yourself?</label>
+            <select class="form-control" name="fillOut">
+                <option value="">--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            <span class="help-block">{{errorMessage 'fillOut'}}</span>
+          </div>
+        </div>
+        {{#if fillOut}}
+          <div class="col-sm-4">
+            <div class="form-group {{errorClass 'fillOutWho'}}">
+              <label for="fillOutWho" class="required">Who filled it out?</label>
+              <input type="text" class="form-control" name="fillOutWho">
+              <span class="help-block">{{errorMessage 'fillOutWho'}}</span>
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="row">
+        <center>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </center>
+      </div>
+    </form>
+  </div>
 </template>

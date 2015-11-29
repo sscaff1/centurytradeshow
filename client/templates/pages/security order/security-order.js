@@ -5,13 +5,7 @@ Template.securityOrder.onCreated(function() {
   instance.totalUnarmed = new ReactiveVar(0);
   instance.incentiveDate = new ReactiveVar(null);
   instance.paymentMethod = new ReactiveVar(false);
-  instance.loopWorkTimes = new ReactiveVar([{
-    type: '',
-    personnel: '',
-    booth: '',
-    startTime: '',
-    endTime: ''
-  }]);
+  instance.loopWorkTimes = new ReactiveVar([{}]);
   instance.eventLocation = new ReactiveVar(null);
   instance.conventionCenter = new ReactiveVar(null);
   Session.set('postSubmitErrors', {});
