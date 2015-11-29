@@ -1,25 +1,23 @@
 <template name="centuryTeam">
-  <div class="regular-page">
-    <div class="container-fluid yellow-container">
-      <center>
-        <h1>Century Team of Orlando</h1>
-      </center>
-    </div>
-    <div class="container">
-      {{#each employeeOrlando}}
-        {{> centuryTeamMember}}
-      {{/each}}
-    </div>
-    <div class="container-fluid yellow-container">
-      <center>
-        <h1>Century Team of Orlando</h1>
-      </center>
-    </div>
-    <div class="container">
-      {{#each employeeVegas}}
-        {{> centuryTeamMember}}
-      {{/each}}
-    </div>
+  <div class="container-fluid yellow-container">
+    <center>
+      <h1>Century Team of Orlando</h1>
+    </center>
+  </div>
+  <div class="container">
+    {{#each employeeOrlando}}
+      {{> centuryTeamMember}}
+    {{/each}}
+  </div>
+  <div class="container-fluid yellow-container">
+    <center>
+      <h1>Century Team of Las Vegas</h1>
+    </center>
+  </div>
+  <div class="container">
+    {{#each employeeVegas}}
+      {{> centuryTeamMember}}
+    {{/each}}
   </div>
 </template>
 

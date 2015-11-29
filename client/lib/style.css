@@ -31,7 +31,7 @@
   min-height: 3em;
 }
 .yellow-container {
-  background-color: #FFB600;
+  background-color: #f9dd00;
   padding: 20px 0px 30px 0px;
 }
 h3.person-name {
@@ -114,4 +114,21 @@ form > .row {
   width: auto;
   position: relative;
   top: -10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Montserrat;
+}
+.people-container {
+  background-color: #f9dd00;
+}
+.people-container h1 {
+  font-size: 24px;
+  color: #000000;
+  font-weight: 300;
+}
+.events-container h1 {
+  font-size: 24px;
+  color: #000000;
+  font-weight: 300;
 }
