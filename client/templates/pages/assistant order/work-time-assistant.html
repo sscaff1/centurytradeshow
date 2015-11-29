@@ -1,0 +1,46 @@
+<template name="workTimesAssistant">
+  <div class="row" name="workTime">
+    <div class="col-sm-2">
+      <div class="form-group {{errorClass 'type'}}">
+        <label for="type" class="required">Type of Assistant</label>
+        <select class="form-control" name="type">
+          <option value="">Select a Monitor Type</option>
+          <option value="host">Host</option>
+          <option value="hostess">Hostess</option>
+          <option value="hostB">Host Bilingual</option>
+          <option value="hostessB">Hostess Bilingual</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label for="personnel" class="required"># of Personnel</label>
+        <input type="number" class="form-control" name="personnel">
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label for="booth" class="required">Booth Number</label>
+        <input type="text" class="form-control" name="booth">
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="startTime" class="required">Start Time</label>
+        <div class="input-group">
+          <input type="text" class="form-control datetimepicker startTime" name="startTime">
+          <span class="input-group-addon startTime"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="endTime" class="required">End Time</label>
+        <div class="input-group">
+          <input type="text" class="form-control datetimepicker endTime" name="endTime">
+          <span class="input-group-addon endTime"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

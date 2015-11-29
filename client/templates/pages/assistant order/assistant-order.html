@@ -1,8 +1,8 @@
-<template name="securityOrder">
+<template name="assistantOrder">
   <div class="container">
     <form>
       <div class="row">
-        <h2>Security Order Form</h2>
+        <h2>Booth Assistant Order Form</h2>
         <h3>Event Information</h3>
         <div class="col-md-2">
           <div class="form-group {{errorClass 'eventLocation'}}">
@@ -15,38 +15,6 @@
             </select>
             <span class="help-block">{{errorMessage 'eventLocation'}}</span>
           </div>
-        </div>
-        <div class="col-md-6">
-          {{#if conventionCenter.newOrleans}}
-            <div class="form-group {{errorClass 'conventionCenter'}}">
-              <label for="type" class="required">Does the event take place at the Ernest N. Morial Convention Center?</label>
-              <select class="form-control" name="conventionCenter">
-                <option value="">--</option>
-                <option value="newOrleans">Yes</option>
-                <option value="false">No</option>
-              </select>
-              <span class="help-block">{{errorMessage 'conventionCenter'}}</span>
-            </div>
-          {{else}}
-            {{#if conventionCenter.orlando}}
-              <div class="form-group {{errorClass 'conventionCenter'}}">
-                <label for="type" class="required">Does the event take place at the Orange County Convention Center?</label>
-                <select class="form-control" name="conventionCenter">
-                  <option value="">--</option>
-                  <option value="orlando">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </div>
-            {{/if}}
-          {{/if}}
-        </div>
-        <div class="col-md-4 text-center">
-          {{#if eventLocation}}
-            <strong>Century Office Location</strong><br/>
-            {{eventLocation.address}}<br/>
-            {{eventLocation.cityState}}<br/>
-            License #: {{eventLocation.lic}}
-          {{/if}}
         </div>
       </div>
       <div class="row">
@@ -140,19 +108,29 @@
         <div class="col-md-6">
           <table class="table text-center">
             <tr>
-              <th class="text-center lead">Monitor Type/Rates</th>
+              <th class="text-center lead">Assistants/Rates</th>
+              <th class="text-center">Host/Hostess</th>
+              <th class="text-center">Bilingual Host/Hostess</th>
+            </tr>
+            <tr>
               <th class="text-center">Pre-Order</th>
-              <th class="text-center">On-Site</th>
-            </tr>
-            <tr>
-              <th class="text-center">Unarmed Monitor</th>
               <td>$25.00</td>
-              <td>$31.00</td>
+              <td>$30.00</td>
             </tr>
             <tr>
-              <th class="text-center">Armed Monitor</th>
-              <td>$59.00</td>
-              <td>$63.50</td>
+              <th class="text-center">On-Site</th>
+              <td>$31.00</td>
+              <td>$36.00</td>
+            </tr>
+            <tr>
+              <th class="text-center">Pre-Order Overtime</th>
+              <td>$37.50</td>
+              <td>$45.00</td>
+            </tr>
+            <tr>
+              <th class="text-center">On-Site Overtime</th>
+              <td>$46.50</td>
+              <td>$54.00</td>
             </tr>
           </table>
         </div>
@@ -167,10 +145,10 @@
         </div>
       </div>
       <div class="row">
-        <h3>Security Required</h3>
+        <h3>Assistants Required</h3>
         <span class="help-block lead" style="color:red;">{{errorMessage 'workTime'}}</span>
-        {{#each loopWorkTimes}}
-          {{> workTimes}}
+        {{#each workTime}}
+          {{> workTimesAssistant}}
         {{/each}}
       </div>
       <div class="row">
@@ -179,29 +157,37 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-xs-6">
           <div class="form-group">
-            <label for="comments">Special Instructions</label>
-            <textarea style="min-height:12em" class="form-control" row="6"></textarea>
+            <label for="comments">Special Instructions for Assistants</label>
+            <textarea class="form-control" row="6"></textarea>
           </div>
         </div>
-        <div class="col-md-6">
-          <h3>Rules & Regulations</h3>
-          <ol>
-            <li>All booth monitoring personnel must be provided through Century Security.</li>
-            <li>Booth monitoring personnel will remain on duty until released.</li>
-            <li>There is a minimum of four (4) hours per person per shift.</li>
-            <li>Armed monitor must be placed a minimum of 24 hours in advance.</li>
-            <li>Booth Monitoring orders placed less than 24 hours in advance are not guaranteed</li>
-          </ol>
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="clothes">Type of Apparel to be Worn</label>
+            <select class="form-control" name="clothes">
+              <option value="">--</option>
+              <option value="business casual">Business Casual</option>
+              <option value="professional attire">Professional Attire</option>
+              <option value="client">Client to Provide</option>
+              <option value="tbd">To be Determined</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <strong>Total Armed Hours: </strong>{{displayCurrency totalArmed}}
+        <div class="col-md-3">
+          <strong>Host/Hostess Hours: </strong>{{displayCurrency totalNormal}}
         </div>
-        <div class="col-md-4">
-          <strong>Total Unarmed Hours: </strong>{{displayCurrency totalUnarmed}}
+        <div class="col-md-3">
+          <strong>Bilingual Host/Hostess Hours: </strong>{{displayCurrency totalBil}}
+        </div>
+        <div class="col-md-3">
+          <strong>Host/Hostess Overtime: </strong>{{displayCurrency totalNormalOvertime}}
+        </div>
+        <div class="col-md-3">
+          <strong>Bilingual Host/Hostess Overtime: </strong>{{displayCurrency totalBilOvertime}}
         </div>
       </div>
       <div class="row">
@@ -217,24 +203,21 @@
           </div>
         </div>
         <div class="col-sm-9 text-right">
-          <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency totalPrice}}<br/>
-          {{#if noncredit.selected}}
-            {{#each eventLocation.fee}}
-              {{#if value}}
-                <strong>{{name}}:</strong> <i class="fa fa-usd"></i>{{displayCurrency value}}<br/>
-              {{/if}}
-            {{/each}}
-            {{#unless noncredit.noncredit}}
-              {{#each eventLocation.ccFee}}
-                <strong>{{name}}</strong> <i class="fa fa-usd"></i>{{displayCurrency value}}<br/>
-              {{/each}}
-            {{/unless}}
-            <strong>Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency eventLocation.totalPrice}}<br/>
+          {{#if paymentMethod.credit}}
+            <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency totalPrice}}<br/>
+            <strong>Credit Card Fee (3%):</strong> <i class="fa fa-usd"></i>{{displayCurrency paymentMethod.ccFee}}<br/>
+            <strong>Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency paymentMethod.finalPrice}}
+          {{/if}}
+          {{#unless paymentMethod}}
+            <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency totalPrice}}<br/>
+          {{/unless}}
+          {{#if paymentMethod.noncredit}}
+            <strong>Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency totalPrice}}<br/>
           {{/if}}
         </div>
       </div>
-      {{#if noncredit.selected}}
-        {{#if noncredit.noncredit}}
+      {{#if paymentMethod.selected}}
+        {{#if paymentMethod.noncredit}}
           <div class="row">
             {{> billingAddress}}
             <center>

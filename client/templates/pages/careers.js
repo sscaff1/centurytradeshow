@@ -8,6 +8,13 @@ Template.careers.onCreated(function() {
   Session.set('postSubmitErrors', {});
 });
 
+Template.careers.onRendered(function() {
+  var instance = this;
+  instance.$('.datepicker').datetimepicker({
+    format: 'MM/DD/YYYY'
+  });
+});
+
 Template.careers.helpers({
   referenceCount: function() {
     return [
