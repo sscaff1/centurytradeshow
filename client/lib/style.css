@@ -2,17 +2,20 @@
   font-family: 'Montserrat', sans-serif;
 }
 .intro-header {
-  background: rgba(255,255,255,1);
+  background: rgba(255,255,255,0);
   background-image: linear-gradient(
-      rgba(255, 255, 255, 0.6),
-      rgba(255, 255, 255, 0.6)
-      ), url('../img/new orleans.jpeg');
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+      ), url('../img/newest century.jpg');
   background-size: cover, cover;
   background-repeat: no-repeat;
   background-position: center;
   min-height: 300px;
-  color: darkblue;
-  padding-top:75px;
+  color: #fff;
+  padding-top:50px;
+}
+.subheading {
+  font-size: 20px;
 }
 .navbar-brand img {
   height: 35px;
@@ -131,4 +134,31 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 24px;
   color: #000000;
   font-weight: 300;
+}
+.mission-paragraph {
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-bottom: 3%;
+}
+.about-us-container {
+  background-color: #1d4281;
+  padding-top: 1%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 2%;
+  margin-right: 3em;
+  margin-left: 3em;
+  color: white;
+  font-weight: lighter;
+}
+.about-title {
+  color: #fff;
+}
+.about-bottom {
+  padding: 20px 0px 20px 0px;
+  background-color: #fff;
+}
+.about-bottom-yellow {
+  padding: 25px 0px 25px 0px;
+  background-color: #f9dd00;
 }
