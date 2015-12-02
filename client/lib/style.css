@@ -135,11 +135,15 @@ h1, h2, h3, h4, h5, h6 {
   color: #000000;
   font-weight: 300;
 }
+.mission-container {
+  margin-top: 5%;
+}
 .mission-paragraph {
   margin-left: 12%;
   margin-right: 12%;
   margin-bottom: 3%;
 }
+
 .about-us-container {
   background-color: #1d4281;
   padding-top: 1%;
@@ -161,4 +165,24 @@ h1, h2, h3, h4, h5, h6 {
 .about-bottom-yellow {
   padding: 25px 0px 25px 0px;
   background-color: #f9dd00;
+}
+.row-william {
+  margin-top: 10%;
+}
+.col-md-4 {
+  margin-top: 3%;
+}
+.col-md-8 {
+  margin-bottom: 4%;
+}
+.service-image {
+  max-height: 350px;
+  max-width: 400px;
+  margin-top: 10px;
+}
+.services-title {
+  background-color: #c7d0df;
+  padding: 20px 0px 20px 0px;
+  margin-top: 7%;
+  margin-bottom: 5%;
 }

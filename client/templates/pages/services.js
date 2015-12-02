@@ -6,7 +6,6 @@ Template.services.helpers({
     return Services.find({type: 'staffing'});
   },
   namePretty: function() {
-    console.log(this.name);
     return s.capitalize(this.name);
   }
 });
