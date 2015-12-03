@@ -216,3 +216,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: 20px;
   background-color: #4f5359;
 }
+
+#owl-demo .item{
+  margin: 3px;
+}
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+#owl-demo .owl-dots {
+  display:none;
+}
