@@ -108,10 +108,16 @@ form > .row {
   margin-top:40px;
 }
 #main-logo {
-  height:100px;
-  width:auto;
-  transition: all 0.4s ease;
+  height:40px;
 }
+@media only screen and (min-width: 768px) {
+  #main-logo {
+    height:100px;
+    width:auto;
+    transition: all 0.4s ease;
+  }
+}
+
 #main-logo.sticky {
   height:40px;
   width: auto;
@@ -169,10 +175,10 @@ h1, h2, h3, h4, h5, h6 {
 .row-william {
   margin-top: 10%;
 }
-.col-md-4 {
+.row-william .col-md-4 {
   margin-top: 3%;
 }
-.col-md-8 {
+.row-william .col-md-8 {
   margin-bottom: 4%;
 }
 .service-image {
@@ -183,14 +189,8 @@ h1, h2, h3, h4, h5, h6 {
 .services-title {
   background-color: #fff;
   padding: 0px 0px 35px 0px;
-  margin-top: 7%;
+  margin-top: 1em;
   margin-bottom: 0%;
-}
-.resource-image {
-  position:relative;
-}
-.column-sm-1 {
-  position: absolute;
 }
 .services-body {
   background-color: #c2c9cd;
@@ -227,4 +227,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 #owl-demo .owl-dots {
   display:none;
+}
+
+.hovereffect img {
+  height: 227px;
+  width: 303px;
+}
+.portfolio .col-md-3 {
+  padding:0;
 }

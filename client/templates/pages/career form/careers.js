@@ -10,12 +10,12 @@ Template.careers.onCreated(function() {
 
 Template.careers.onRendered(function() {
   var instance = this;
-  instance.autorun(function() {
-    Meteor.setTimeout(function() {
-      instance.$('.datepicker').datetimepicker({
-        format: 'MM/DD/YYYY'
-      });
-    },250);
+  instance.$('.datepicker').datetimepicker({
+    format: 'MM/DD/YYYY',
+    widgetPositioning: {
+      horizontal: 'left',
+      vertical: 'bottom'
+    }
   });
 });
 

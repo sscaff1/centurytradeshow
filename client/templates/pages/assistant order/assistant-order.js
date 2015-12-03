@@ -16,10 +16,6 @@ Template.assistantOrder.onRendered(function() {
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY'
   });
-  instance.$('.datetimepicker').datetimepicker({
-    sideBySide: true,
-    showClose: true
-  });
 });
 
 Template.assistantOrder.helpers({
@@ -83,23 +79,14 @@ Template.assistantOrder.events({
       }
       currentWorkTimes.push(defaultValues);
     });
+    if ($(event.target).attr('id') === 'moreWorkTimes') {
+      currentWorkTimes.push({});
+    }
     template.workTime.set(currentWorkTimes);
-    Meteor.setTimeout(function() {
-      template.$('.datetimepicker').datetimepicker({
-        sideBySide: true,
-        showClose: true
-      });
-    }, 250);
   },
   'blur [name=eventDate]': function(event, template) {
     var eventDate = moment(template.$('[name=eventDate]').val(),'MM/DD/YYYY');
     template.incentiveDate.set(eventDate.subtract(21, 'days').format('MM/DD/YYYY'));
-  },
-  'click #moreWorkTimes': function(event, template) {
-    event.preventDefault();
-    var workTimes = template.workTime.get();
-    workTimes.push({});
-    template.workTime.set(workTimes);
   },
   'change [name=paymentMethod]': function(event,template) {
     event.preventDefault();

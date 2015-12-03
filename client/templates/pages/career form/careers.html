@@ -2,6 +2,9 @@
   <div class="container">
     <form>
       <div class="row">
+        <h2 class="text-center">Employment Form</h2>
+      </div>
+      <div class="row">
         <h3>General Information</h3>
       </div>
       {{> billingAddress}}
@@ -121,23 +124,7 @@
           </div>
         </div>
         {{#if guardCard}}
-          <div class="col-sm-4">
-            <div class="form-group {{errorClass 'guardLicense'}}">
-              <label for="guardLicense" class="required">Guard Card License Number</label>
-              <input type="text" class="form-control" name="guardLicense">
-              <span class="help-block">{{errorMessage 'guardLicense'}}</span>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="form-group {{errorClass 'expirationDate'}}">
-              <label for="expirationDate" class="required">Expiration Date</label>
-              <div class="input-group">
-                <input type="text" class="form-control datepicker" name="expirationDate">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              <span class="help-block">{{errorMessage 'expirationDate'}}</span>
-            </div>
-          </div>
+          {{> guardCardHelper}}
         {{/if}}
       </div>
       <div class="row">
@@ -166,33 +153,7 @@
           </div>
         </div>
         {{#if nationalGuard}}
-          <div class="col-sm-3">
-            <div class="form-group {{errorClass 'specialty'}}">
-              <label for="specialty" class="required">Specialty</label>
-              <input type="text" class="form-control" name="specialty">
-              <span class="help-block">{{errorMessage 'specialty'}}</span>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group {{errorClass 'enterDate'}}">
-              <label for="enterDate" class="required">Date Entered</label>
-              <div class="input-group">
-                <input type="text" class="form-control datepicker" name="enterDate">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              <span class="help-block">{{errorMessage 'enterDate'}}</span>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="dischargeDate">Discharge Date</label>
-              <div class="input-group">
-                <input type="text" class="form-control datepicker" name="dischargeDate">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              <span class="help-block">Leave blank if currently enrolled.</span>
-            </div>
-          </div>
+          {{> nationalGuardHelper}}
         {{/if}}
       </div>
       <div class="row">
@@ -208,57 +169,11 @@
           </div>
         </div>
         {{#if law}}
-          <div class="col-sm-4">
-            <div class="form-group {{errorClass 'enterDateLaw'}}">
-              <label for="enterDateLaw" class="required">Date Entered</label>
-              <div class="input-group">
-                <input type="text" class="form-control datepicker" name="enterDateLaw">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              <span class="help-block">{{errorMessage 'enterDateLaw'}}</span>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label for="dischargeDateLaw">Discharge Date</label>
-              <div class="input-group">
-                <input type="text" class="form-control datepicker" name="dischargeDateLaw">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-              <span class="help-block">Leave blank if current.</span>
-            </div>
-          </div>
+          {{> lawHelper}}
         {{/if}}
         </div>
         {{#if law}}
-          <div class="row">
-            <div class="col-sm-5">
-              <div class="form-group {{errorClass 'departmentLaw'}}">
-                <label for="departmentLaw" class="required">Department</label>
-                <input type="text" class="form-control" name="departmentLaw">
-                <span class="help-block">{{errorMessage 'departmentLaw'}}</span>
-              </div>
-            </div>
-            <div class="col-sm-5">
-              <div class="form-group {{errorClass 'cityLaw'}}">
-                <label for="cityLaw" class="required">City</label>
-                <input type="text" class="form-control" name="cityLaw">
-                <span class="help-block">{{errorMessage 'cityLaw'}}</span>
-              </div>
-            </div>
-            <div class="col-xs-2">
-              <div class="form-group {{errorClass 'stateLaw'}}">
-                <label for="stateLaw" class="required">State</label>
-                <select class="form-control" name="stateLaw">
-                  <option value="">--</option>
-                  {{#each state}}
-                    <option value="{{abbreviation}}">{{abbreviation}}</option>
-                  {{/each}}
-                </select>
-                <span class="help-block">{{errorMessage 'stateLaw'}}</span>
-              </div>
-            </div>
-          </div>
+          {{> lawHelper2}}
         {{/if}}
       <div class="row">
         <h3>References & Past Work Experiences</h3>

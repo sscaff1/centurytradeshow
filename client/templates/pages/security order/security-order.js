@@ -13,24 +13,18 @@ Template.securityOrder.onCreated(function() {
 
 Template.securityOrder.onRendered(function() {
   var instance = this;
-  instance.$('.datetimepicker').datetimepicker({
-    sideBySide: true,
-    showClose: true
-  });
-
   instance.$('.datepicker').datetimepicker({
-    format: 'MM/DD/YYYY'
+    format: 'MM/DD/YYYY',
+    widgetPositioning: {
+      horizontal: 'left',
+      vertical: 'bottom'
+    }
   });
   instance.totalPrice.set(0);
   instance.totalArmed.set(0);
   instance.totalUnarmed.set(0);
   instance.incentiveDate.set(null);
-  instance.loopWorkTimes.set([{
-    personnel: '',
-    booth: '',
-    startTime: '',
-    endTime: ''
-  }]);
+  instance.loopWorkTimes.set([{}]);
 });
 
 Template.securityOrder.helpers({
@@ -225,12 +219,6 @@ Template.securityOrder.events({
       currentWorkTimes.push({});
     }
     template.loopWorkTimes.set(currentWorkTimes);
-    Meteor.setTimeout(function() {
-      template.$('.datetimepicker').datetimepicker({
-        sideBySide: true,
-        showClose: true
-      });
-    }, 250);
   },
   'blur .form-control': function(event, template) {
     event.preventDefault();

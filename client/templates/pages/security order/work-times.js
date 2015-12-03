@@ -1,3 +1,15 @@
+Template.workTimes.onRendered(function() {
+  var instance = this;
+  instance.$('.datetimepicker').datetimepicker({
+    sideBySide: true,
+    showClose: true,
+    widgetPositioning: {
+      horizontal: 'left',
+      vertical: 'bottom'
+    }
+  });
+});
+
 Template.workTimes.events({
   'blur .startTime': function(event, template) {
     var startTime = template.$('[name=startTime]').val();
