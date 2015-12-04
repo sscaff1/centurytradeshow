@@ -14,11 +14,17 @@ Template.assistantOrder.onCreated(function() {
 Template.assistantOrder.onRendered(function() {
   var instance = this;
   instance.$('.datepicker').datetimepicker({
-    format: 'MM/DD/YYYY'
+    format: 'MM/DD/YYYY',
+    widgetPositioning: {
+      vertical: 'bottom'
+    }
   });
 });
 
 Template.assistantOrder.helpers({
+  eventLocations: function() {
+    return Locations.find();
+  },
   displayCurrency: function(num) {
     return (Math.round(num * 100)/100).toFixed(2);
   },

@@ -1,5 +1,5 @@
 <template name="contactUs">
-  <div class="container-fluid">
+  <div class="container-fluid" style="padding-top:60px;">
     <div class="row blue-contact">
     <h2 class="text-center">CONTACT US</h2>
     </div>
@@ -7,7 +7,24 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <p>contactformsteven</p>
+        <form style="padding:15px 0;">
+          <div class="form-group col-md-6">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" name="name">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input class="form-control" type="text" name="email">
+          </div>
+          <div class="form-group col-xs-12">
+            <label for="comments">Message</label>
+            <textarea class="form-control" row="6" name="comments">
+            </textarea>
+          </div>
+          <center>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </center>
+        </form>
       </div>
       <div class="col-md-4">
         <h5 class="text-center"><em>Company Info</em></h5>
@@ -26,7 +43,9 @@
   </div>
   <div class="container-fluid">
     <div class="row map-background">
-      <h1>map</h1>
+      <div class="container">
+        {{> googleMap name="locationsMap" options=locationsMapOptions}}
+      </div>
     </div>
     <div class="row locations-background text-center">
       <div class="col-md-2 col-md-offset-1">

@@ -16,7 +16,6 @@ Template.securityOrder.onRendered(function() {
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
-      horizontal: 'left',
       vertical: 'bottom'
     }
   });
@@ -62,15 +61,7 @@ Template.securityOrder.helpers({
     }
   },
   eventLocations: function() {
-    return [
-      {label: "Chicago", value: "chicago"},
-      {label: "Las Vegas", value: "las vegas"},
-      {label: "Miami ", value: "miami"},
-      {label: "Nashville", value: "nashville"},
-      {label: "New Orleans", value: "new orleans"},
-      {label: "Orlando", value: "orlando"},
-      {label: "Tucson", value: "tucson"},
-    ];
+    return Locations.find();
   },
   conventionCenter: function() {
     var eventLocation = Template.instance().eventLocation.get();

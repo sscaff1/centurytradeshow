@@ -3,7 +3,6 @@ Template.guardCardHelper.onRendered(function() {
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
-      horizontal: 'left',
       vertical: 'bottom'
     }
   });
@@ -14,7 +13,6 @@ Template.nationalGuardHelper.onRendered(function() {
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
-      horizontal: 'left',
       vertical: 'bottom'
     }
   });
@@ -25,7 +23,6 @@ Template.lawHelper.onRendered(function() {
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
-      horizontal: 'left',
       vertical: 'bottom'
     }
   });

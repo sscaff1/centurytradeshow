@@ -13,7 +13,6 @@ Template.careers.onRendered(function() {
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
-      horizontal: 'left',
       vertical: 'bottom'
     }
   });

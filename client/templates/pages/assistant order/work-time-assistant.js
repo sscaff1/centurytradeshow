@@ -4,7 +4,6 @@ Template.workTimesAssistant.onRendered(function() {
     sideBySide: true,
     showClose: true,
     widgetPositioning: {
-      horizontal: 'left',
       vertical: 'bottom'
     }
   });

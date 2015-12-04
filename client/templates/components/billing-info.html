@@ -18,11 +18,21 @@
   <div class="row">
     <div class="col-xs-4">
       <label class="required">Expiration Month</label>
-      <input type="text" data-stripe="expMo" class="form-control exp-month" placeholder="Exp. Mo.">
+      <select data-stripe="expMo" class="form-control">
+        <option value="">--</option>
+        {{#each expMonth}}
+          <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
     </div>
     <div class="col-xs-4">
       <label class="required">Expiration Year</label>
-      <input type="text" data-stripe="expYr" class="form-control exp-year" placeholder="Exp. Yr.">
+      <select data-stripe="expYr" class="form-control">
+        <option value="">--</option>
+        {{#each expYear}}
+          <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
     </div>
     <div class="col-xs-4">
       <label class="required">CVC</label>

@@ -181,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #f9dd00;
 }
 .row-william {
-  margin-top: 10%;
+  margin-top: 4%;
 }
 .row-william .col-md-4 {
   margin-top: 3%;
@@ -269,6 +269,13 @@ a:hover {
   background-color: black;
   padding: 50px 0px 50px 0px;
 }
+
+.row.map-background .container {
+  width: 100%;
+  max-width: 100%;
+  height: 500px;
+}
+
 .row.locations-background {
   background-color: black;
   padding: 15px 0px 15px 0px;
