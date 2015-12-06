@@ -5,6 +5,13 @@ Template.bookOrder.helpers({
     } else {
       return false;
     }
+  },
+  securityOrderType: function() {
+    if (this.orderType === 'security') {
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 

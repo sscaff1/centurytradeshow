@@ -1,6 +1,10 @@
 <template name="bookOrder">
   <div class="container">
-    {{> reviewSecurityOrder order=this noncredit=noncredit}}
+    {{#if securityOrderType}}
+      {{> reviewSecurityOrder order=this noncredit=noncredit}}
+    {{else}}
+      {{> reviewAssistantOrder order=this noncredit=noncredit}}
+    {{/if}}
     {{#if noncredit}}
       <form>
         <div class="row">

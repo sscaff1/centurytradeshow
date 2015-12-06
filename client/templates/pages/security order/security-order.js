@@ -4,7 +4,7 @@ Template.securityOrder.onCreated(function() {
   instance.totalArmed = new ReactiveVar(0);
   instance.totalUnarmed = new ReactiveVar(0);
   instance.incentiveDate = new ReactiveVar(null);
-  instance.paymentMethod = new ReactiveVar(false);
+  instance.paymentMethod = new ReactiveVar(null);
   instance.loopWorkTimes = new ReactiveVar([{}]);
   instance.eventLocation = new ReactiveVar(null);
   instance.conventionCenter = new ReactiveVar(null);
@@ -13,7 +13,6 @@ Template.securityOrder.onCreated(function() {
     var eventDate = moment(instance.$('[name=eventDate]').val(),'MM/DD/YYYY');
     var today = moment().startOf('day');
     var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
-    var armed; var unarmed;
     if (daysToEvent >= 21) {
       return {
         armed: 59,
@@ -299,6 +298,7 @@ Template.securityOrder.events({
       lastName2: template.$('[name=lastName2]').val(),
       phone2: template.$('[name=phone2]').val(),
       workTimes: template.loopWorkTimes.get(),
+      comments: template.$('[name=comments]').val(),
       paymentMethod: template.$('[name=paymentMethod]').val(),
       totalArmed: template.totalArmed.get(),
       totalUnarmed: template.totalUnarmed.get(),

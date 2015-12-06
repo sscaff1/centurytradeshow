@@ -43,6 +43,12 @@
             <strong>{{personnel}} {{type}}</strong> personnel at booth <strong>{{booth}}</strong> starting at <strong>{{startTime}}</strong> and ending at <strong>{{endTime}}</strong>
           </p>
         {{/each}}
+        {{#if order.comments}}
+          <h3 class="text-center">Special Instructions</h3>
+          <p class="text-center lead">
+            {{order.comments}}
+          </p>
+        {{/if}}
       </div>
     </div>
     <div class="col-sm-4">
