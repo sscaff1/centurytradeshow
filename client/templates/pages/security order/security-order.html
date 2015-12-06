@@ -207,53 +207,38 @@
       <div class="row">
         <h3>Billing Information</h3>
         <div class="col-sm-3">
-          <div class="form-group {{errorClass 'type'}}">
+          <div class="form-group {{errorClass 'paymentMethod'}}">
             <label for="paymentMethod" class="required">Payment Method</label>
             <select class="form-control" name="paymentMethod">
               <option value="">Select a Payment Method</option>
               <option value="noncredit">Company Check or Money Order</option>
               <option value="credit">Credit Card</option>
             </select>
+            <span class="help-block">{{errorMessage 'paymentMethod'}}</span>
           </div>
         </div>
         <div class="col-sm-9 text-right">
-          <strong>Sub-Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency totalPrice}}<br/>
+          <strong>Sub-Total:</strong> <i class="fa fa-usd"></i> {{displayCurrency totalPrice}}<br/>
           {{#if noncredit.selected}}
             {{#each eventLocation.fee}}
               {{#if value}}
-                <strong>{{name}}:</strong> <i class="fa fa-usd"></i>{{displayCurrency value}}<br/>
+                <strong>{{name}}:</strong> <i class="fa fa-usd"></i> {{displayCurrency value}}<br/>
               {{/if}}
             {{/each}}
             {{#unless noncredit.noncredit}}
               {{#each eventLocation.ccFee}}
-                <strong>{{name}}</strong> <i class="fa fa-usd"></i>{{displayCurrency value}}<br/>
+                <strong>{{name}}</strong> <i class="fa fa-usd"></i> {{displayCurrency value}}<br/>
               {{/each}}
             {{/unless}}
-            <strong>Total:</strong> <i class="fa fa-usd"></i>{{displayCurrency eventLocation.totalPrice}}<br/>
+            <strong>Total:</strong> <i class="fa fa-usd"></i> {{displayCurrency eventLocation.totalPrice}}<br/>
           {{/if}}
         </div>
       </div>
-      {{#if noncredit.selected}}
-        {{#if noncredit.noncredit}}
-          <div class="row">
-            {{> billingAddress}}
-            <center>
-              <h3>Remit Payment To:</h3>
-              <p class="lead">Century Security & Event Staffing, Inc.<br/>
-              6421 Pinecastle Blvd. (Suite 1)<br/>
-              Orlando, FL 32809</p>
-            </center>
-          </div>
-        {{else}}
-          {{> billingAddress}}
-          {{> billingInfo}}
-        {{/if}}
-        <div class="row">
-          <center>
-            <button type="submit" class="btn btn-primary">Book Order</button>
-          </center>
-        </div>
-      {{/if}}
+      <div class="row">
+        <center>
+          <button type="submit" class="btn btn-primary">Save Order and Proceed to Payment</button>
+        </center>
+      </div>
     </form>
   </div>
 </template>

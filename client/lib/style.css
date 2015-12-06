@@ -284,3 +284,12 @@ a:hover {
   color: white;
   font-weight: 300;
 }
+hr.small {
+  max-width: 50%;
+}
+.dl-custom dt {
+  white-space: normal !important;
+}
+.dl-custom dt, .dl-custom dl {
+  padding-bottom:10px;
+}

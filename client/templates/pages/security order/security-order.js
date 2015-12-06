@@ -9,6 +9,140 @@ Template.securityOrder.onCreated(function() {
   instance.eventLocation = new ReactiveVar(null);
   instance.conventionCenter = new ReactiveVar(null);
   Session.set('postSubmitErrors', {});
+  instance.priceRates = function() {
+    var eventDate = moment(instance.$('[name=eventDate]').val(),'MM/DD/YYYY');
+    var today = moment().startOf('day');
+    var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
+    var armed; var unarmed;
+    if (daysToEvent >= 21) {
+      return {
+        armed: 59,
+        unarmed: 25,
+        incentive: true
+      }
+    } else {
+      return {
+        armed: 63.5,
+        unarmed: 31,
+        incentive: false
+      }
+    }
+  };
+  instance.priceBreakDown = function() {
+    var eventLocation = instance.eventLocation.get();
+    var totalPrice = instance.totalPrice.get();
+    var paymentMethod = instance.paymentMethod.get();
+    if (paymentMethod === 'credit') {
+      var ccRate = .03;
+    } else {
+      var ccRate = 0;
+    }
+    if (eventLocation === 'chicago') {
+      var ccFee = totalPrice * ccRate;
+      return {
+        address: '6334 S Archer Ave. Suite B',
+        cityState: 'Chicago, IL 60632',
+        lic: '119.001474',
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee
+      }
+    } else if (eventLocation === 'las vegas') {
+      var ccFee = totalPrice * ccRate;
+      return {
+        address: '4945 Wilbur St.',
+        cityState: 'Las Vegas, NV 89119',
+        lic: '1315',
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee
+      }
+    } else if (eventLocation === 'miami') {
+      var salesTax = totalPrice * .07;
+      var ccFee = totalPrice * 1.07 * ccRate;
+      return {
+        address: '7901 SW 24th St.',
+        cityState: 'Miami, FL 33155',
+        lic: 'B-2000104',
+        fee: [
+          {name: 'Miami-Dade County Sales Tax (7%)', value: salesTax}
+        ],
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee + salesTax
+      }
+    } else if (eventLocation === 'nashville') {
+      var ccFee = totalPrice * ccRate;
+      return {
+        address: '6421 Pinecastle Blvd. Suite 1',
+        cityState: 'Orlando, FL  32809',
+        lic: '12996',
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee
+      }
+    } else if (eventLocation === 'new orleans') {
+      var conventionCenter = Template.instance().conventionCenter.get();
+      if (conventionCenter === 'newOrleans') {
+        var conventionFee = totalPrice * .02;
+        var ccFee = totalPrice * 1.02 * ccRate;
+      } else {
+        var conventionFee = 0;
+        var ccFee = totalPrice * ccRate;
+      }
+      return {
+        address: '2601 N. Hullen St. Suite 227E',
+        cityState: 'Metairie, LA 70002',
+        lic: '790',
+        fee: [
+          {name: 'Ernest N. Morial C.C. Administration Fee (2%)', value: conventionFee}
+        ],
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee + conventionFee
+      }
+    } else if (eventLocation === 'orlando') {
+      var conventionCenter = Template.instance().conventionCenter.get();
+      if (conventionCenter === 'orlando') {
+        var conventionFee = totalPrice * .05;
+        var salesTax = totalPrice * 1.05 * .065;
+        var ccFee = totalPrice * 1.05 * 1.065 * ccRate;
+      } else {
+        var conventionFee = 0
+        var salesTax = totalPrice * .065;
+        var ccFee = totalPrice * 1.065 * ccRate;
+      }
+      return {
+        address: '6421 Pinecastle Blvd. Suite 1',
+        cityState: 'Orlando, FL  32809',
+        lic: 'B-2000104',
+        fee: [
+          {name: 'Orange County C.C. Administration Fee (5%)', value: conventionFee},
+          {name: 'Orange County Sales Tax (6.5%)', value: salesTax}
+        ],
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee + conventionFee + salesTax
+      }
+    } else if (eventLocation === 'tucson') {
+      var ccFee = totalPrice * ccRate;
+      return {
+        address: '5425 E Broadway Blvd.',
+        cityState: 'Tucson, AZ 85711',
+        lic: '1658251',
+        ccFee: [
+          {name: 'Credit Card Fee (3%)', value: ccFee}
+        ],
+        totalPrice: totalPrice + ccFee,
+      }
+    }
+  }
 });
 
 Template.securityOrder.onRendered(function() {
@@ -70,124 +204,8 @@ Template.securityOrder.helpers({
       orlando: eventLocation === 'orlando'
     }
   },
-  displayCurrency: function(num) {
-    return (Math.round(num * 100)/100).toFixed(2);
-  },
   eventLocation: function() {
-    var eventLocation = Template.instance().eventLocation.get();
-    var totalPrice = Template.instance().totalPrice.get();
-    var paymentMethod = Template.instance().paymentMethod.get();
-    if (paymentMethod === 'credit') {
-      var ccRate = .03;
-    } else {
-      var ccRate = 0;
-    }
-
-    if (eventLocation === 'chicago') {
-      var ccFee = totalPrice * ccRate;
-      return {
-        address: '6334 S Archer Ave. Suite B',
-        cityState: 'Chicago, IL 60632',
-        lic: '119.001474',
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee
-      }
-    } else if (eventLocation === 'las vegas') {
-      var ccFee = totalPrice * ccRate;
-      return {
-        address: '4945 Wilbur St.',
-        cityState: 'Las Vegas, NV 89119',
-        lic: '1315',
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee
-      }
-    } else if (eventLocation === 'miami') {
-      var salesTax = totalPrice * .07;
-      var ccFee = totalPrice * 1.07 * ccRate;
-      return {
-        address: '7901 SW 24th St.',
-        cityState: 'Miami, FL 33155',
-        lic: 'B-2000104',
-        fee: [
-          {name: 'Miami-Dade County Sales Tax (7%)', value: salesTax}
-        ],
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee + salesTax
-      }
-    } else if (eventLocation === 'nashville') {
-      var ccFee = totalPrice * ccRate;
-      return {
-        address: '6421 Pinecastle Blvd. Suite 1',
-        cityState: 'Orlando, FL  32809',
-        lic: '12996',
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee
-      }
-    } else if (eventLocation === 'new orleans') {
-      var conventionCenter = Template.instance().conventionCenter.get();
-      if (conventionCenter === 'newOrleans') {
-        var conventionFee = totalPrice * .02;
-        var ccFee = totalPrice * 1.02 * ccRate;
-      } else {
-        var conventionFee = false;
-        var ccFee = totalPrice * ccRate;
-      }
-      return {
-        address: '2601 N. Hullen St. Suite 227E',
-        cityState: 'Metairie, LA 70002',
-        lic: '790',
-        fee: [
-          {name: 'Ernest N. Morial C.C. Administration Fee (2%)', value: conventionFee}
-        ],
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee + conventionFee
-      }
-    } else if (eventLocation === 'orlando') {
-      var conventionCenter = Template.instance().conventionCenter.get();
-      if (conventionCenter === 'orlando') {
-        var conventionFee = totalPrice * .05;
-        var salesTax = totalPrice * 1.05 * .065;
-        var ccFee = totalPrice * 1.05 * 1.065 * ccRate;
-      } else {
-        var conventionFee = 0
-        var salesTax = totalPrice * .065;
-        var ccFee = totalPrice * 1.065 * ccRate;
-      }
-      return {
-        address: '6421 Pinecastle Blvd. Suite 1',
-        cityState: 'Orlando, FL  32809',
-        lic: 'B-2000104',
-        fee: [
-          {name: 'Orange County C.C. Administration Fee (5%)', value: conventionFee},
-          {name: 'Orange County Sales Tax (6.5%)', value: salesTax}
-        ],
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee + conventionFee + salesTax
-      }
-    } else if (eventLocation === 'tucson') {
-      var ccFee = totalPrice * ccRate;
-      return {
-        address: '5425 E Broadway Blvd.',
-        cityState: 'Tucson, AZ 85711',
-        lic: '1658251',
-        ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
-        ],
-        totalPrice: totalPrice + ccFee,
-      }
-    }
+    return Template.instance().priceBreakDown();
   }
 });
 
@@ -216,17 +234,7 @@ Template.securityOrder.events({
 
     var currentWorkTimes = template.loopWorkTimes.get();
     if (currentWorkTimes.length > 0) {
-      var eventDate = moment(template.$('[name=eventDate]').val(),'MM/DD/YYYY');
-      var today = moment().startOf('day');
-      var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
-      var armed; var unarmed;
-      if (daysToEvent >= 21) {
-        armed = 59;
-        unarmed = 25;
-      } else {
-        armed = 63.5;
-        unarmed = 31;
-      }
+      var priceRates = Template.instance().priceRates();
       var totalPrice = 0;
       var totalArmed = 0;
       var totalUnarmed = 0;
@@ -237,10 +245,10 @@ Template.securityOrder.events({
         if (totalTime > 0) {
           if (workTime.type === 'armed') {
             totalArmed = totalArmed + totalTime/60 * workTime.personnel;
-            totalPrice = totalPrice + armed * workTime.personnel * totalTime/60;
+            totalPrice = totalPrice + priceRates.armed * workTime.personnel * totalTime/60;
           } else {
             totalUnarmed = totalUnarmed + totalTime/60 * workTime.personnel;
-            totalPrice = totalPrice + unarmed * workTime.personnel * totalTime/60;
+            totalPrice = totalPrice + priceRates.unarmed * workTime.personnel * totalTime/60;
           }
         }
       });
@@ -266,10 +274,19 @@ Template.securityOrder.events({
   },
   'submit form': function(event, template) {
     event.preventDefault();
-
+    var priceBreakDown = template.priceBreakDown();
+    var priceRates = template.priceRates();
+    var conventionCenter;
+    if (template.$('[name=conventionCenter]').val() === 'false') {
+      conventionCenter = false;
+    } else if (template.$('[name=conventionCenter]').val() === 'newOrleans') {
+      conventionCenter = 'Ernest N. Morial Convention Center';
+    } else if (template.$('[name=conventionCenter]').val() === 'orlando') {
+      conventionCenter = 'Orange County Convention Center';
+    }
     var securityForm = {
       eventLocation: template.$('[name=eventLocation]').val(),
-      conventionCenter: template.$('[name=conventionCenter]').val(),
+      conventionCenter: conventionCenter,
       eventName: template.$('[name=eventName]').val(),
       boothNumber: template.$('[name=boothNumber]').val(),
       eventDate: template.$('[name=eventDate]').val(),
@@ -278,15 +295,15 @@ Template.securityOrder.events({
       firstName1: template.$('[name=firstName1]').val(),
       lastName1: template.$('[name=lastName1]').val(),
       phone1: template.$('[name=phone1]').val(),
+      firstName2: template.$('[name=firstName2]').val(),
+      lastName2: template.$('[name=lastName2]').val(),
+      phone2: template.$('[name=phone2]').val(),
       workTimes: template.loopWorkTimes.get(),
       paymentMethod: template.$('[name=paymentMethod]').val(),
-      firstName: template.$('[name=firstName]').val(),
-      lastName: template.$('[name=lastName]').val(),
-      email: template.$('[name=email]').val(),
-      address: template.$('[name=address]').val(),
-      city: template.$('[name=city]').val(),
-      state: template.$('[name=state]').val(),
-      zip: template.$('[name=zip]').val(),
+      totalArmed: template.totalArmed.get(),
+      totalUnarmed: template.totalUnarmed.get(),
+      priceBreakDown: priceBreakDown,
+      priceRates: priceRates
     }
 
     var errors = validateSecurityForm(securityForm);
@@ -295,5 +312,11 @@ Template.securityOrder.events({
       return Session.set('postSubmitErrors', errors)
     }
 
+    Meteor.call('saveSecurityOrder', securityForm, function(error,result) {
+      if (error) {
+        console.log(error);
+      }
+      Router.go('bookOrder', {_id: result._id});
+    });
   }
 });
