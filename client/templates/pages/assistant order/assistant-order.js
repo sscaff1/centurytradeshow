@@ -30,6 +30,27 @@ Template.assistantOrder.onCreated(function() {
       }
     }
   }
+
+  instance.priceBreakDown = function() {
+    var paymentMethod = instance.paymentMethod.get();
+    var totalPrice = instance.totalPrice.get();
+    if (paymentMethod === 'credit') {
+      return {
+        credit: true,
+        ccFee: totalPrice * .03,
+        totalPrice: totalPrice * 1.03,
+        selected: true
+      }
+    } else if (paymentMethod === 'noncredit') {
+      return {
+        noncredit: true,
+        selected: true,
+        totalPrice: totalPrice
+      }
+    } else {
+      return false;
+    }
+  }
 });
 
 Template.assistantOrder.onRendered(function() {
@@ -68,23 +89,7 @@ Template.assistantOrder.helpers({
     return Template.instance().totalPrice.get();
   },
   paymentMethod: function() {
-    var paymentMethod = Template.instance().paymentMethod.get();
-    var totalPrice = Template.instance().totalPrice.get();
-    if (paymentMethod === 'credit') {
-      return {
-        credit: true,
-        ccFee: totalPrice * .03,
-        finalPrice: totalPrice * 1.03,
-        selected: true
-      }
-    } else if (paymentMethod === 'noncredit') {
-      return {
-        noncredit: true,
-        selected: true
-      }
-    } else {
-      return false;
-    }
+    return Template.instance().priceBreakDown();
   }
 });
 
@@ -135,7 +140,7 @@ Template.assistantOrder.events({
             if (totalTime/60 > 8) {
               totalNormal = totalNormal + 8 * workTime.personnel;
               totalNormalOvertime = totalNormalOvertime + (totalTime/60 - 8) * workTime.personnel;
-              totalPrice = totalPrice + normalOvertime * workTime.personnel * (totalTime/60 - 8)
+              totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (totalTime/60 - 8)
                 + priceRates.normal * workTime.personnel * 8;
             } else {
               totalNormal = totalNormal + 8 * workTime.personnel;
@@ -145,7 +150,7 @@ Template.assistantOrder.events({
             if (totalTime/60 > 8) {
               totalBil = totalBil + 8 * workTime.personnel;
               totalBilOvertime = totalBilOvertime + (totalTime/60 - 8) * workTime.personnel;
-              totalPrice = totalPrice + bilOvertime * workTime.personnel * (totalTime/60 - 8)
+              totalPrice = totalPrice + priceRates.bilOvertime * workTime.personnel * (totalTime/60 - 8)
                 + priceRates.bil * workTime.personnel * 8;
             } else {
               totalBil = totalBil + 8 * workTime.personnel;
@@ -167,7 +172,7 @@ Template.assistantOrder.events({
     event.preventDefault();
 
     var priceRates = template.priceRates();
-
+    var priceBreakDown = template.priceBreakDown();
     var assistantForm = {
       eventLocation: template.$('[name=eventLocation]').val(),
       eventName: template.$('[name=eventName]').val(),
@@ -189,7 +194,8 @@ Template.assistantOrder.events({
       totalNormalOvertime: template.totalNormalOvertime.get(),
       totalBil: template.totalBil.get(),
       totalBilOvertime: template.totalBilOvertime.get(),
-      totalPrice: template.totalPrice.get()
+      priceRates: priceRates,
+      priceBreakDown: priceBreakDown
     }
 
     var errors = validateAssistantForm(assistantForm);
@@ -198,7 +204,7 @@ Template.assistantOrder.events({
       return Session.set('postSubmitErrors', errors)
     }
 
-    Meteor.call('saveAssistantOrder', securityForm, function(error,result) {
+    Meteor.call('saveAssistantOrder', assistantForm, function(error,result) {
       if (error) {
         console.log(error);
       }

@@ -1,9 +1,19 @@
-UI.registerHelper('errorMessage', function (field) {
-  return Session.get('postSubmitErrors')[field];
+UI.registerHelper('errorMessage', function (field, fieldIndex) {
+  if (fieldIndex.hash.fieldIndex) {
+    field = field+fieldIndex.hash.fieldIndex;
+    return Session.get('postSubmitErrors')[field];
+  } else {
+    return Session.get('postSubmitErrors')[field];
+  }
 });
 
-UI.registerHelper('errorClass', function (field) {
-  return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+UI.registerHelper('errorClass', function (field, fieldIndex) {
+  if (fieldIndex.hash.fieldIndex) {
+    field = field+fieldIndex.hash.fieldIndex;
+    return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+  } else {
+    return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+  }
 });
 
 UI.registerHelper('displayCurrency', function(num) {

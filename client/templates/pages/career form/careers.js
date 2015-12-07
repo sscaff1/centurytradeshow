@@ -99,6 +99,7 @@ Template.careers.events({
   },
   'submit form': function(event,template) {
     event.preventDefault();
+
     var fields = template.findAll('.form-control');
     var keys = []; var values = [];
     _.each(fields, function(field) {
@@ -106,9 +107,16 @@ Template.careers.events({
       values.push($(field).val());
     });
     var employment = _.object(keys, values);
-    var errors = validateEmploymentForm(employment);
+
+    var errors = validateCareerForm(employment);
     if (!$.isEmptyObject(errors)) {
       return Session.set('postSubmitErrors', errors)
     }
+    Meteor.call('insertApplication', employment, function(error, result) {
+      if (error)
+        console.log(error);
+      Router.go('home');
+      Messages.throw('Your application has been submitted. Thank you for your interest.', 'success');
+    });
   }
 })

@@ -287,9 +287,18 @@ a:hover {
 hr.small {
   max-width: 50%;
 }
+.dl-custom {
+  line-height: 50px;
+  height: 100%;
+}
 .dl-custom dt {
   white-space: normal !important;
+  height: 50px;
+  vertical-align: middle;
+  overflow: visible;
 }
-.dl-custom dt, .dl-custom dl {
+
+.dl-custom dl {
   padding-bottom:10px;
+  border-bottom: 2px solid black;
 }

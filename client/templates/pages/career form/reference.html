@@ -1,37 +1,37 @@
 <template name="reference">
   <div class="col-xs-12">
-    <div class="form-group {{errorClass 'firstNameR{{index}}'}}">
+    <div class="form-group {{errorClass 'firstNameR' fieldIndex=index}}">
       <label for="firstName{{index}}" class="required">First Name</label>
-      <input type="text" class="form-control" name="firstName{{index}}">
-      <span class="help-block">{{errorMessage 'firstName{{index}}'}}</span>
+      <input type="text" class="form-control" name="firstNameR{{index}}">
+      <span class="help-block">{{errorMessage 'firstNameR' fieldIndex=index}}</span>
     </div>
   </div>
   <div class="col-xs-12">
-    <div class="form-group {{errorClass 'lastNameR{{index}}'}}">
+    <div class="form-group {{errorClass 'lastNameR' fieldIndex=index}}">
       <label for="lastNameR{{index}}" class="required">Last Name</label>
       <input type="text" class="form-control" name="lastNameR{{index}}">
-      <span class="help-block">{{errorMessage 'lastNameR{{index}}'}}</span>
+      <span class="help-block">{{errorMessage 'lastNameR' fieldIndex=index}}</span>
     </div>
   </div>
   <div class="col-xs-12">
-    <div class="form-group {{errorClass 'positionR{{index}}'}}">
+    <div class="form-group {{errorClass 'positionR' fieldIndex=index}}">
       <label for="positionR{{index}}" class="required">Position</label>
       <input type="text" class="form-control" name="positionR{{index}}">
-      <span class="help-block">{{errorMessage 'positionR{{index}}'}}</span>
+      <span class="help-block">{{errorMessage 'positionR' fieldIndex=index}}</span>
     </div>
   </div>
   <div class="col-xs-12">
-    <div class="form-group {{errorClass 'companyR{{index}}'}}">
+    <div class="form-group {{errorClass 'companyR' fieldIndex=index}}">
       <label for="companyR{{index}}" class="required">Company</label>
       <input type="text" class="form-control" name="companyR{{index}}">
-      <span class="help-block">{{errorMessage 'companyR{{index}}'}}</span>
+      <span class="help-block">{{errorMessage 'companyR' fieldIndex=index}}</span>
     </div>
   </div>
   <div class="col-xs-12">
-    <div class="form-group {{errorClass 'phoneR{{index}}'}}">
+    <div class="form-group {{errorClass 'phoneR' fieldIndex=index}}">
       <label for="phoneR{{index}}" class="required">Phone</label>
       <input type="tel" class="form-control" name="phoneR{{index}}" placeholder="XXX-XXX-XXXX">
-      <span class="help-block">{{errorMessage 'phoneR{{index}}'}}</span>
+      <span class="help-block">{{errorMessage 'phoneR' fieldIndex=index}}</span>
     </div>
   </div>
 </template>

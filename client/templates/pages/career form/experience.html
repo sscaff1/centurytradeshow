@@ -1,21 +1,21 @@
 <template name="experience">
-  <div class="container" style="margin-bottom:15px;">
+  <div class="container" name="experience" style="margin-bottom:15px;">
   <div class="row">
     <div class="col-sm-6">
-      <div class="form-group {{errorClass 'employerName{{value}}'}}">
+      <div class="form-group {{errorClass 'employerName' fieldIndex=value}}">
         <label for="employerName{{value}}" class="required">Employer Name</label>
         <input type="text" class="form-control" name="employerName{{value}}">
-        <span class="help-block">{{errorMessage 'employerName{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'employerName' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="form-group {{errorClass 'startDate{{value}}'}}">
+      <div class="form-group {{errorClass 'startDate' fieldIndex=value}}">
         <label for="startDate{{value}}" class="required">Start Date</label>
         <div class="input-group">
           <input type="text" class="form-control datepicker" name="startDate{{value}}">
           <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
         </div>
-        <span class="help-block">Approximate if not known exactly.<br/>{{errorMessage 'startDate{{value}}'}}</span>
+        <span class="help-block">Approximate if not known exactly.<br/>{{errorMessage 'startDate' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-sm-3">
@@ -31,53 +31,53 @@
   </div>
   <div class="row">
     <div class="col-sm-3">
-      <div class="form-group {{errorClass 'lastSupervisor{{value}}'}}">
+      <div class="form-group {{errorClass 'lastSupervisor' fieldIndex=value}}">
         <label for="lastSupervisor{{value}}" class="required">Last Supervisor's Name</label>
         <input type="text" class="form-control" name="lastSupervisor{{value}}">
-        <span class="help-block">{{errorMessage 'lastSupervisor{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'lastSupervisor' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="form-group {{errorClass 'lastTitle{{value}}'}}">
+      <div class="form-group {{errorClass 'lastTitle' fieldIndex=value}}">
         <label for="lastTitle{{value}}" class="required">Last Job Title</label>
         <input type="text" class="form-control" name="lastTitle{{value}}">
-        <span class="help-block">{{errorMessage 'lastTitle{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'lastTitle' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="form-group {{errorClass 'startPay{{value}}'}}">
+      <div class="form-group {{errorClass 'startPay' fieldIndex=value}}">
         <label for="startPay{{value}}" class="required">Start Pay</label>
         <input type="text" class="form-control" name="startPay{{value}}" placeholder="$XX/hour or $XX/year">
-        <span class="help-block">{{errorMessage 'startPay{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'startPay' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-sm-3">
-      <div class="form-group {{errorClass 'endPay{{value}}'}}">
+      <div class="form-group {{errorClass 'endPay' fieldIndex=value}}">
         <label for="endPay{{value}}" class="required">End Pay</label>
         <input type="text" class="form-control" name="endPay{{value}}" placeholder="$XX/hour or $XX/year">
-        <span class="help-block">{{errorMessage 'endPay{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'endPay' fieldIndex=value}}</span>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <div class="form-group {{errorClass 'address{{value}}'}}">
+      <div class="form-group {{errorClass 'address' fieldIndex=value}}">
         <label for="address{{value}}" class="required">Address</label>
         <input type="text" class="form-control" name="address{{value}}">
-        <span class="help-block">{{errorMessage 'address{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'address' fieldIndex=value}}</span>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-6">
-      <div class="form-group {{errorClass 'city{{value}}'}}">
+      <div class="form-group {{errorClass 'city' fieldIndex=value}}">
         <label for="city{{value}}" class="required">City</label>
         <input type="text" class="form-control" name="city{{value}}">
-        <span class="help-block">{{errorMessage 'city{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'city' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-xs-2">
-      <div class="form-group {{errorClass 'state{{value}}'}}">
+      <div class="form-group {{errorClass 'state' fieldIndex=value}}">
         <label for="state{{value}}" class="required">State</label>
         <select class="form-control" name="state{{value}}">
           <option value="">--</option>
@@ -85,14 +85,14 @@
             <option value="{{abbreviation}}">{{abbreviation}}</option>
           {{/each}}
         </select>
-        <span class="help-block">{{errorMessage 'state{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'state' fieldIndex=value}}</span>
       </div>
     </div>
     <div class="col-xs-4">
-      <div class="form-group {{errorClass 'zipCode{{value}}'}}">
+      <div class="form-group {{errorClass 'zipCode' fieldIndex=value}}">
         <label for="zipCode{{value}}" class="required">Zip Code</label>
         <input type="text" class="form-control" name="zipCode{{value}}">
-        <span class="help-block">{{errorMessage 'zipCode{{value}}'}}</span>
+        <span class="help-block">{{errorMessage 'zipCode' fieldIndex=value}}</span>
       </div>
     </div>
   </div>
