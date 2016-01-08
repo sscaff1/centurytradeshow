@@ -1,6 +1,6 @@
 <template name="careers">
   <div class="container">
-    <form>
+    <form novalidate="true">
       <div class="row">
         <h2 class="text-center">Employment Form</h2>
         <h3>General Information</h3>
@@ -10,14 +10,14 @@
         <div class="col-sm-6">
           <div class="form-group {{errorClass 'homePhone'}}">
             <label for="homePhone" class="required">Home Phone</label>
-            <input type="tel" class="form-control" name="homePhone" placeholder="XXX-XXX-XXXX">
+            <input type="tel" class="form-control" name="homePhone" placeholder="XXX-XXX-XXXX" required="true">
             <span class="help-block">{{errorMessage 'homePhone'}}</span>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group {{errorClass 'cellPhone'}}">
             <label for="cellPhone">Cell Phone</label>
-            <input type="tel" class="form-control" name="cellPhone" placeholder="XXX-XXX-XXXX">
+            <input type="tel" class="form-control" name="cellPhone" placeholder="XXX-XXX-XXXX" required="true">
             <span class="help-block">{{errorMessage 'cellPhone'}}</span>
           </div>
         </div>
@@ -27,7 +27,7 @@
           <div class="form-group {{errorClass 'birthDate'}}">
             <label for="birthDate" class="required">Date of Birth</label>
             <div class="input-group">
-              <input type="text" class="form-control datepicker" name="birthDate">
+              <input type="text" class="form-control datepicker" name="birthDate" required="true">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             <span class="help-block">{{errorMessage 'birthDate'}}</span>
@@ -36,18 +36,18 @@
         <div class="col-sm-6">
           <div class="form-group {{errorClass 'ssn'}}">
             <label for="ssn" class="required">Social Security Number</label>
-            <input type="text" class="form-control" name="ssn" placeholder="XXX-XX-XXXX">
+            <input type="password" class="form-control" name="ssn" placeholder="XXX-XX-XXXX" required="true">
             <span class="help-block">{{errorMessage 'ssn'}}</span>
           </div>
         </div>
       </div>
       <div class="row">
-        <h3>Availability and Transportation</h3>
+        <h3>Availability and Transportation <small>All work is part-time on call and not guaranteed week to week</small></h3>
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'startDate'}}">
             <label for="startDate" class="required">Available to Start Work</label>
             <div class="input-group">
-              <input type="text" class="form-control datepicker" name="startDate">
+              <input type="text" class="form-control datepicker" name="startDate" required="true">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
             <span class="help-block">{{errorMessage 'startDate'}}</span>
@@ -56,14 +56,14 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'hoursWeek'}}">
             <label for="hoursWeek" class="required">Hours per Week Available to Work</label>
-            <input type="text" class="form-control" name="hoursWeek" >
+            <input type="text" class="form-control" name="hoursWeek" required="true">
             <span class="help-block">{{errorMessage 'hoursWeek'}}</span>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'nights'}}">
             <label for="nights" class="required">Can you work nights?</label>
-            <select class="form-control" name="nights">
+            <select class="form-control" name="nights" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -76,7 +76,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'ged'}}">
             <label for="ged" class="required">Do you have a High School Diploma/GED?</label>
-            <select class="form-control" name="ged">
+            <select class="form-control" name="ged" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -87,7 +87,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'license'}}">
             <label for="license" class="required">Do you have a driver's license?</label>
-            <select class="form-control" name="license" >
+            <select class="form-control" name="license" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -98,7 +98,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'transportation'}}">
             <label for="ged" class="required">What is your means of transportation?</label>
-            <select class="form-control" name="transportation">
+            <select class="form-control" name="transportation" required="true">
                 <option value="">--</option>
                 <option value="car">Personnal Vehicle</option>
                 <option value="public">Public (Bus or Rail)</option>
@@ -113,7 +113,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'guardCard'}}">
             <label for="guardCard" class="required">Do you have a Guard Card?</label>
-            <select class="form-control" name="guardCard">
+            <select class="form-control" name="guardCard" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -129,7 +129,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'armedForces'}}">
             <label for="armedForces" class="required">Have you ever been in the armed forces?</label>
-            <select class="form-control" name="armedForces">
+            <select class="form-control" name="armedForces" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -137,12 +137,28 @@
             <span class="help-block">{{errorMessage 'armedForces'}}</span>
           </div>
         </div>
+        {{#if armedForces}}
+          <div class="col-sm-4">
+            <div class="form-group {{errorClass 'armedBranch'}}">
+              <label for="armedBranch" class="required">What branch of the military?</label>
+              <select class="form-control" name="armedBranch" required="true">
+                  <option value="">--</option>
+                  <option value="airforce">Air Force</option>
+                  <option value="army">Army</option>
+                  <option value="coastguard">Coast Guard</option>
+                  <option value="marine">Marine Corps</option>
+                  <option value="navy">Navy</option>
+              </select>
+              <span class="help-block">{{errorMessage 'armedBranch'}}</span>
+            </div>
+          </div>
+        {{/if}}
       </div>
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group {{errorClass 'nationalGuard'}}">
             <label for="nationalGuard" class="required">Are you in the National Guard?</label>
-            <select class="form-control" name="nationalGuard">
+            <select class="form-control" name="nationalGuard" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -158,7 +174,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'law'}}">
             <label for="law" class="required">Have you ever served in law enforcement?</label>
-            <select class="form-control" name="law">
+            <select class="form-control" name="law" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -169,7 +185,7 @@
         {{#if law}}
           {{> lawHelper}}
         {{/if}}
-        </div>
+      </div>
         {{#if law}}
           {{> lawHelper2}}
         {{/if}}
@@ -200,7 +216,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'currentEmployer'}}">
             <label for="currentEmployer" class="required">May we contact your current employer?</label>
-            <select class="form-control" name="currentEmployer">
+            <select class="form-control" name="currentEmployer" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -211,7 +227,7 @@
         <div class="col-sm-4">
           <div class="form-group {{errorClass 'fillOut'}}">
             <label for="fillOut" class="required">Did you fill out this application yourself?</label>
-            <select class="form-control" name="fillOut">
+            <select class="form-control" name="fillOut" required="true">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
@@ -223,11 +239,35 @@
           <div class="col-sm-4">
             <div class="form-group {{errorClass 'fillOutWho'}}">
               <label for="fillOutWho" class="required">Who filled it out?</label>
-              <input type="text" class="form-control" name="fillOutWho">
+              <input type="text" class="form-control" name="fillOutWho" required="true">
               <span class="help-block">{{errorMessage 'fillOutWho'}}</span>
             </div>
           </div>
         {{/if}}
+      </div>
+      <div class="row">
+        <h3>Emergency Contact</h3>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'emergencyName'}}">
+            <label for="emergencyName" class="required">Emergency Contact name</label>
+            <input type="text" class="form-control" name="emergencyName" required="true">
+            <span class="help-block">{{errorMessage 'emergencyName'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'emergencyRelationship'}}">
+            <label for="emergencyRelationship" class="required">Relationship</label>
+            <input type="text" class="form-control" name="emergencyRelationship" required="true">
+            <span class="help-block">{{errorMessage 'emergencyRelationship'}}</span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group {{errorClass 'emergencyPhone'}}">
+            <label for="emergencyPhone" class="required">Phone Number</label>
+            <input type="text" class="form-control" name="emergencyPhone" required="true">
+            <span class="help-block">{{errorMessage 'emergencyPhone'}}</span>
+          </div>
+        </div>
       </div>
       <div class="row">
         <center>

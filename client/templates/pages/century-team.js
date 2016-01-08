@@ -1,8 +1,5 @@
 Template.centuryTeam.helpers({
-  employeeOrlando: function() {
-    return Employees.find({company: 'orlando'});
-  },
-  employeeVegas: function() {
-    return Employees.find({company: 'vegas'});
+  employees: function() {
+    return Employees.find({},{sort:{order:1}});
   }
 })

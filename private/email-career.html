@@ -1,0 +1,160 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>New Application to Century Security & Event Staffing</title>
+    <!-- <link href="styles.css" media="all" rel="stylesheet" type="text/css" /> -->
+  </head>
+  <body itemscope itemtype="http://schema.org/EmailMessage">
+    <h1>Please See Applicant Details Below</h1>
+    <table>
+      <tr>
+        <td>First Name</td>
+        <td>{{firstName}}</td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>{{lastName}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{email}}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>
+          {{address}}<br/>
+          {{city}}, {{state}} {{zipCode}}
+        </td>
+      </tr>
+      <tr>
+        <td>Home Phone</td>
+        <td>{{homePhone}}</td>
+      </tr>
+      <tr>
+        <td>Cell Phone</td>
+        <td>{{cellPhone}}</td>
+      </tr>
+      <tr>
+        <td>Birth Date</td>
+        <td>{{birthDate}}</td>
+      </tr>
+      <tr>
+        <td>SSN</td>
+        <td>{{ssn}}</td>
+      </tr>
+      <tr>
+        <td>Avialable to Start</td>
+        <td>{{startDate}}</td>
+      </tr>
+      <tr>
+        <td>Hours per Week Available</td>
+        <td>{{hoursWeek}}</td>
+      </tr>
+      <tr>
+        <td>Able to Work Nights</td>
+        <td>{{nights}}</td>
+      </tr>
+      <tr>
+        <td>GED</td>
+        <td>{{ged}}</td>
+      </tr>
+      <tr>
+        <td>Driver License</td>
+        <td>{{license}}</td>
+      </tr>
+      <tr>
+        <td>Transportation Means</td>
+        <td>{{transportation}}</td>
+      </tr>
+      <tr>
+        <td>Guard Card</td>
+        <td>
+          {{guardCard}}<br/>
+          License #: {{guardLicense}}<br/>
+          Exp. Date: {{expirationDate}}
+        </td>
+      </tr>
+      <tr>
+        <td>Military Experience</td>
+        <td>
+          {{armedForces}}<br/>
+          Branch: {{armedBranch}}
+        </td>
+      </tr>
+      <tr>
+        <td>National Guard Experience</td>
+        <td>
+          {{nationalGuard}}<br/>
+          Specialty: {{specialty}}<br/>
+          Date Entered: {{enterDate}}
+          Date Discharged: {{dischargeDate}}
+        </td>
+      </tr>
+      <tr>
+        <td>Law Enforcement Experience</td>
+        <td>
+          {{law}}<br/>
+          Specialty: {{specialty}}<br/>
+          Date Entered: {{enterDateLaw}}<br/>
+          Date Discharged: {{dischargeDateLaw}}<br/>
+          Department: {{departmentLaw}}<br/>
+          Location: {{cityLaw}}, {{stateLaw}}
+        </td>
+      </tr>
+      <tr>
+        <td>Reference 1</td>
+        <td>
+          {{firstNameR1}} {{lastNameR1}}<br/>
+          Position: {{positionR1}}<br/>
+          Company: {{companyR}}<br/>
+          Phone: {{phoneR1}}<br/>
+        </td>
+      </tr>
+      <tr>
+        <td>Reference 2</td>
+        <td>
+          {{firstNameR2}} {{lastNameR2}}<br/>
+          Position: {{positionR2}}<br/>
+          Company: {{companyR2}}<br/>
+          Phone: {{phoneR2}}<br/>
+        </td>
+      </tr>
+      {{#each employer in employers}}
+        <tr>
+          <td>Employment History {{value}}</td>
+          <td>
+            {{employer.employerName}}<br/>
+            Start Date: {{employer.startDate}}<br/>
+            End Date: {{employer.endDate}}<br/>
+            Last Supervisor: {{employer.lastSupervisor}}<br/>
+            Last Title: {{employer.lastTitle}}<br/>
+            Starting Pay: {{employer.startPay}}<br/>
+            Ending Pay: {{employer.endPay}}<br/>
+            Address: {{employer.address}} {{employer.city}}, {{employer.state}} {{employer.zipCode}}<br/>
+            Reason for Leaving: {{employer.leaving}}
+          </td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td>Contact Current Employer</td>
+        <td>{{currentEmployer}}</td>
+      </tr>
+      <tr>
+        <td>Self Filled Application</td>
+        <td>
+          {{fillOut}}<br/>
+          If Applicaable, person who filled it out: {{fillOutWho}}
+        </td>
+      </tr>
+      <tr>
+        <td>Emergency Contact</td>
+        <td>
+          {{emergencyName}}<br/>
+          Relationship: {{emergencyRelationship}}<br/>
+          Phone Number: {{emergencyPhone}}
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

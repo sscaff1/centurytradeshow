@@ -112,11 +112,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <strong>Total Armed Hours: </strong>{{displayCurrency totalArmed}}
+        <div class="col-md-5">
+          <strong>Total Armed Hours: </strong>{{displayCurrency totalArmed}} (@ <i class="fa fa-usd"></i>{{displayCurrency priceRates.armed}}/hour)
         </div>
-        <div class="col-md-4">
-          <strong>Total Unarmed Hours: </strong>{{displayCurrency totalUnarmed}}
+        <div class="col-md-5">
+          <strong>Total Unarmed Hours: </strong>{{displayCurrency totalUnarmed}} (@ <i class="fa fa-usd"></i>{{displayCurrency priceRates.unarmed}}/hour)
         </div>
       </div>
       <div class="row">
@@ -132,7 +132,7 @@
             {{/each}}
             {{#unless noncredit.noncredit}}
               {{#each eventLocation.ccFee}}
-                <strong>{{name}}</strong> <i class="fa fa-usd"></i> {{displayCurrency value}}<br/>
+                <strong>{{name}}:</strong> <i class="fa fa-usd"></i> {{displayCurrency value}}<br/>
               {{/each}}
             {{/unless}}
             <strong>Total:</strong> <i class="fa fa-usd"></i> {{displayCurrency eventLocation.totalPrice}}<br/>

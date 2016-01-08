@@ -5,6 +5,7 @@ Template.careers.onCreated(function() {
   instance.law = new ReactiveVar(null);
   instance.workExperience = new ReactiveVar([{value: 1}]);
   instance.fillOut = new ReactiveVar(null);
+  instance.armedForces = new ReactiveVar(null);
   Session.set('postSubmitErrors', {});
 });
 
@@ -33,6 +34,14 @@ Template.careers.helpers({
   },
   guardCard: function() {
     var reactiveVal = Template.instance().guardCard.get();
+    if (reactiveVal === 'yes') {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  armedForces: function() {
+    var reactiveVal = Template.instance().armedForces.get();
     if (reactiveVal === 'yes') {
       return true;
     } else {
@@ -89,6 +98,11 @@ Template.careers.events({
     var targetVal = $(event.target).val();
     template.fillOut.set(targetVal);
   },
+  'change [name=armedForces]': function(event,template) {
+    event.preventDefault();
+    var targetVal = $(event.target).val();
+    template.armedForces.set(targetVal);
+  },
   'click #moreEmployment': function(event,template) {
     event.preventDefault();
     var workExperience = template.workExperience.get();
@@ -101,22 +115,24 @@ Template.careers.events({
     event.preventDefault();
 
     var fields = template.findAll('.form-control');
-    var keys = []; var values = [];
-    _.each(fields, function(field) {
-      keys.push($(field).attr('name'));
-      values.push($(field).val());
+    var employment = fields.map((field) => {
+      var field = $(field)
+      return {
+        name: field.attr('name'),
+        value: field.val(),
+        required: field.attr('required')
+      }
     });
-    var employment = _.object(keys, values);
 
     var errors = validateCareerForm(employment);
     if (!$.isEmptyObject(errors)) {
       return Session.set('postSubmitErrors', errors)
     }
-    Meteor.call('insertApplication', employment, function(error, result) {
-      if (error)
-        console.log(error);
-      Router.go('home');
-      Messages.throw('Your application has been submitted. Thank you for your interest.', 'success');
-    });
+    // Meteor.call('insertApplication', employment, function(error, result) {
+    //   if (error)
+    //     console.log(error);
+    //   Router.go('home');
+    //   Messages.throw('Your application has been submitted. Thank you for your interest.', 'success');
+    // });
   }
 })

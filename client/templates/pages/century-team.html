@@ -1,35 +1,23 @@
 <template name="centuryTeam">
   <div class="container-fluid">
     <div class="row text-center yellow-container">
-      <h2>Century Team of Orlando</h2>
+      <h2>Century Team</h2>
     </div>
   </div>
   <div class="container">
     <div class="row text-center">
-      {{#each employeeOrlando}}
-        {{> centuryTeamMember}}
-      {{/each}}
-    </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row text-center yellow-container">
-      <h2>Century Team of Las Vegas</h2>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row text-center">
-      {{#each employeeVegas}}
-        {{> centuryTeamMember}}
+      {{#each employee in employees}}
+        {{> centuryTeamMember employee}}
       {{/each}}
     </div>
   </div>
   <div class="container">
     <div class="row text-center">
-      <h4><a href="{{pathFor 'inMemoriam'}}">
-        <button type="button" class="btn btn-default">
-          William Callaghan <br/>In Memoriam
+      <a href="{{pathFor 'inMemoriam'}}">
+        <button type="button" class="btn btn-primary" style="margin-bottom:15px;padding:5px;">
+          <h3 class="person-name" style="padding:0; margin:0;"><i class="fa fa-user"></i> William Callaghan <br/>In Memoriam</h3>
         </button>
-      </a></h4>
+      </a>
     </div>
   </div>
 </template>

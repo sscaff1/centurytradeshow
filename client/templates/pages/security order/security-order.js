@@ -8,6 +8,10 @@ Template.securityOrder.onCreated(function() {
   instance.loopWorkTimes = new ReactiveVar([{}]);
   instance.eventLocation = new ReactiveVar(null);
   instance.conventionCenter = new ReactiveVar(null);
+  instance.priceRatesDetails = new ReactiveVar({
+    armed: 0,
+    unarmed: 0
+  });
   Session.set('postSubmitErrors', {});
   instance.priceRates = function() {
     var eventDate = moment(instance.$('[name=eventDate]').val(),'MM/DD/YYYY');
@@ -157,6 +161,10 @@ Template.securityOrder.onRendered(function() {
   instance.totalUnarmed.set(0);
   instance.incentiveDate.set(null);
   instance.loopWorkTimes.set([{}]);
+  instance.priceRatesDetails.set({
+    armed: 0,
+    unarmed: 0
+  });
 });
 
 Template.securityOrder.helpers({
@@ -205,6 +213,9 @@ Template.securityOrder.helpers({
   },
   eventLocation: function() {
     return Template.instance().priceBreakDown();
+  },
+  priceRates: function() {
+    return Template.instance().priceRatesDetails.get();
   }
 });
 
@@ -255,6 +266,7 @@ Template.securityOrder.events({
         template.totalArmed.set(totalArmed);
         template.totalUnarmed.set(totalUnarmed);
         template.totalPrice.set(totalPrice);
+        template.priceRatesDetails.set(priceRates);
       }
     }
   },
