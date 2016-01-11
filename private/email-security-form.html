@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>New Application to Century Security & Event Staffing</title>
+    <!-- <link href="styles.css" media="all" rel="stylesheet" type="text/css" /> -->
+  </head>
+  <body itemscope itemtype="http://schema.org/EmailMessage">
+    <div class="row">
+      <h2 class="text-center">Security Order Review</h2>
+      <div class="col-sm-8">
+        <div class="row text-center">
+          <h3>Order Details</h3>
+          <hr class="small"/>
+        </div>
+        <div class="row">
+          <p>
+            Century Security and Event Staffing will provide security to <strong>{{order.exhibitorName}}</strong> at <strong>{{order.eventName}}</strong>
+            in booth number <strong>{{order.boothNumber}}</strong>
+            {{#if order.conventionCenter}}at the <strong>{{order.conventionCenter}}</strong>{{/if}}.
+            The first event date will take place on <strong>{{order.eventDate}}</strong>.
+            {{#if order.priceRates.incentive}}
+              This order qualifies for incentive pricing if payment is received by <strong>{{incentiveDate}}</strong>.
+            {{/if}}
+            The contact names and work times for the event are listed below.
+            The price breakdown for the event is also listed on this page.
+            Please direct any question to the office location below.
+          </p>
+          <h3 class="text-center">Century Office Location</h3>
+          <p class="text-center">
+            {{order.priceBreakDown.address}}<br/>
+            {{order.priceBreakDown.cityState}}<br/>
+            License #: {{order.priceBreakDown.lic}}<br/>
+            <a href="mailto:events@centurytradeshow.com">events@centurytradeshow.com</a>
+          </p>
+          <h3 class="text-center">Contact Person(s)</h3>
+          <p class="text-center lead">
+            Name: {{order.firstName1}} {{order.lastName1}}
+            Phone: {{order.phone1}}
+          </p>
+          <p class="text-center lead">
+            {{#if order.firstName2}}
+              Name: {{order.firstName2}} {{order.lastName2}}
+              Phone: {{order.phone2}}
+            {{/if}}
+          </p>
+          <h3 class="text-center">Work Times Required</h3>
+          {{#each order.workTimes}}
+            <p class="text-center">
+              <strong>{{personnel}} {{type}}</strong> personnel at booth <strong>{{booth}}</strong> starting at <strong>{{startTime}}</strong> and ending at <strong>{{endTime}}</strong>
+            </p>
+          {{/each}}
+          {{#if order.comments}}
+            <h3 class="text-center">Special Instructions</h3>
+            <p class="text-center lead">
+              {{order.comments}}
+            </p>
+          {{/if}}
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="row text-center">
+          <h3>Price Breakdown</h3>
+          <hr class="small"/>
+        </div>
+        <div class="row text-right">
+          <dl class="dl-horizontal dl-custom">
+            <dt>
+              {{displayCurrency order.totalArmed}} armed security hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.armed}}/hour
+            </dt>
+            <dl><i class="fa fa-usd"></i> {{subTotalPriceBreakdown.armed}}</dl>
+            <dt>
+              {{displayCurrency order.totalUnarmed}} unarmed security hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.unarmed}}/hour
+            </dt>
+            <dl><i class="fa fa-usd"></i> {{subTotalPriceBreakdown.unarmed}}</dl>
+            {{#each order.priceBreakDown.fee}}
+              {{#if feeExists}}
+                <dt>{{name}}</dt>
+                <dl><i class="fa fa-usd"></i> {{displayCurrency value}}</dl>
+              {{/if}}
+            {{/each}}
+            {{#each order.priceBreakDown.ccFee}}
+              {{#if feeExists}}
+                <dt>{{name}}</dt>
+                <dl><i class="fa fa-usd"></i> {{displayCurrency value}}</dl>
+              {{/if}}
+            {{/each}}
+            <dt><strong>Total Price</strong></dt>
+            <dl><i class="fa fa-usd"></i> {{displayCurrency order.priceBreakDown.totalPrice}}</dl>
+          </dl>
+        </div>
+        {{#unless noncredit}}
+          <div class="row text-right">
+            <button type="submit" class="btn btn-primary" id="creditCard">Click Here to Pay</button>
+          </div>
+        {{/unless}}
+      </div>
+    </div>
+  </body>
+</html>

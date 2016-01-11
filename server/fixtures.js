@@ -26,7 +26,7 @@ if (Employees.find().count() === 0) {
 
 if (Services.find().count() === 0) {
   var services = [
-    {name:"qualifications",description:"Consulting team, full building security, booth security, armed security, executive protection, and video surveillance.",type:"security",img:"/img/security services/DSC_0202.JPG"},
+    {name:"qualifications",description:"Consulting team, full building security, booth security, armed security, executive protection, and video surveillance.",type:"security",img:"/img/home page pics/DSC_0202.JPG"},
     {name:"licensing",description:"Century Security & Event Staffing, Inc. complies with all security licensing requirements stipulated by the state. These licenses are monitored and checked before every event. Century only hires individuals who have met all of the fundamental requirements, as well as our own interview criteria.",type:"security", img:"/img/security services/s_license.jpg"},
     {name:"communications",description:"Century owns 240 Motorola HT1250-LS radios that we use for on-site communication. All of our show-site supervisory personnel are also equipped with Nextel radios to communicate with our staff, show management, and other contractors.",type:"security",img:"/img/security services/s_radio.jpg"},
     {name:"video surveillance",description:"Century owns 45 portable video surveillance systems, with 280 individual cameras. The cameras transfer video over Ethernet and are powered from that single Ethernet line. These units are self-contained, and include one DVR with a 24 hour recording cycle and 1 terabyte of memory. The systems are internet capable for remote monitoring.",type:"security",img:"/img/security services/DSC_0138.JPG"},

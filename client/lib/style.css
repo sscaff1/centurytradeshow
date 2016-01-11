@@ -302,3 +302,11 @@ hr.small {
   padding-bottom:10px;
   border-bottom: 2px solid black;
 }
+
+.carousel .item img {
+  max-height: 455px;
+  width:100%;
+}
+.carousel {
+  max-width:332px;
+}
