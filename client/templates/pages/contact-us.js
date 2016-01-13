@@ -21,12 +21,12 @@ Template.contactUs.onCreated(function() {
       content: '<center><h3>Miami Office</h3><p>7901 SW 24th St.<br/>Miami, FL 33155<br/>LIC # B-2000104</p></center>'
     },
     {
-      lat: 25.74844, lng: -80.32393, title: 'Arizona',
+      lat: 32.222665, lng: -110.876547, title: 'Arizona',
       content: '<center><h3>Arizona Office</h3><p>5425 E Broadway Blvd.<br/>Tucson, AZ 85711<br/></p></center>'
     },
     {
-      lat: 25.74844, lng: -80.32393, title: 'Nashville',
-      content: '<center><h3>Nashville Office</h3><p>LIC # 12996</p></center>'
+      lat: 36.162664, lng: -86.781602, title: 'Nashville',
+      content: '<center><h3>Nashville Office</h3><p>LIC # 12996</p></center>',
     },
   ]
   GoogleMaps.ready('locationsMap', function(map) {
