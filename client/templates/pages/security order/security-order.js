@@ -47,7 +47,7 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Chicago, IL 60632',
         lic: '119.001474',
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee
       }
@@ -58,7 +58,7 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Las Vegas, NV 89119',
         lic: '1315',
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee
       }
@@ -70,10 +70,10 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Miami, FL 33155',
         lic: 'B-2000104',
         fee: [
-          {name: 'Miami-Dade County Sales Tax (7%)', value: salesTax}
+          {name: 'Florida State Sales Tax (Miami-Dade County) - 7%', value: salesTax}
         ],
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee + salesTax
       }
@@ -84,7 +84,7 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Orlando, FL  32809',
         lic: '12996',
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee
       }
@@ -102,10 +102,10 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Metairie, LA 70002',
         lic: '790',
         fee: [
-          {name: 'Ernest N. Morial C.C. Administration Fee (2%)', value: conventionFee}
+          {name: 'Ernest N. Morial C.C. Administration Fee - 2%', value: conventionFee}
         ],
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee + conventionFee
       }
@@ -125,11 +125,11 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Orlando, FL  32809',
         lic: 'B-2000104',
         fee: [
-          {name: 'Orange County C.C. Administration Fee (5%)', value: conventionFee},
-          {name: 'Orange County Sales Tax (6.5%)', value: salesTax}
+          {name: 'Orange County C.C. Administration Fee - 5%', value: conventionFee},
+          {name: 'Florida State Sales Tax (Orange County) - 6.5%', value: salesTax}
         ],
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee + conventionFee + salesTax
       }
@@ -140,7 +140,7 @@ Template.securityOrder.onCreated(function() {
         cityState: 'Tucson, AZ 85711',
         lic: '1658251',
         ccFee: [
-          {name: 'Credit Card Fee (3%)', value: ccFee}
+          {name: 'Credit Card Fee - 3%', value: ccFee}
         ],
         totalPrice: totalPrice + ccFee,
       }

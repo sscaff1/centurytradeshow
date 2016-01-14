@@ -136,7 +136,7 @@ Template.assistantOrder.events({
         var endTime = moment(workTime.endTime, 'MM-DD-YYYY H:mm A');
         var totalTime = endTime.diff(startTime, 'minutes');
         if (totalTime > 0) {
-          if (workTime.type === 'host' || workTime.type === 'hostess') {
+          if (workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta') {
             if (totalTime/60 > 8) {
               totalNormal = totalNormal + 8 * workTime.personnel;
               totalNormalOvertime = totalNormalOvertime + (totalTime/60 - 8) * workTime.personnel;
