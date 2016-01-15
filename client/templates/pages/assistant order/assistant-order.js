@@ -8,6 +8,7 @@ Template.assistantOrder.onCreated(function() {
   instance.totalBilOvertime = new ReactiveVar(0);
   instance.totalPrice = new ReactiveVar(0);
   instance.paymentMethod = new ReactiveVar(null);
+  instance.eventLocation = new ReactiveVar(null);
   Session.set('postSubmitErrors', {});
 
   instance.priceRates = function() {
@@ -126,6 +127,7 @@ Template.assistantOrder.events({
     var currentWorkTimes = template.workTime.get();
     if (currentWorkTimes.length > 0) {
       var priceRates = template.priceRates();
+      var eventLocation = template.eventLocation.get();
       var totalPrice = 0;
       var totalNormal = 0;
       var totalNormalOvertime = 0;
@@ -136,26 +138,38 @@ Template.assistantOrder.events({
         var endTime = moment(workTime.endTime, 'MM-DD-YYYY H:mm A');
         var totalTime = endTime.diff(startTime, 'minutes');
         if (totalTime > 0) {
-          if (workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta') {
+          if ((workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta') && eventLocation === 'las vegas') {
             if (totalTime/60 > 8) {
               totalNormal = totalNormal + 8 * workTime.personnel;
               totalNormalOvertime = totalNormalOvertime + (totalTime/60 - 8) * workTime.personnel;
               totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (totalTime/60 - 8)
                 + priceRates.normal * workTime.personnel * 8;
             } else {
-              totalNormal = totalNormal + 8 * workTime.personnel;
+              totalNormal = totalNormal + totalTime/60 * workTime.personnel;
               totalPrice = totalPrice + priceRates.normal * workTime.personnel * totalTime/60;
             }
-          } else {
+          } else if ((workTime.type === 'hostB' || workTime.type === 'hostessB' || workTime.type === 'hostaB') && eventLocation === 'las vegas') {
             if (totalTime/60 > 8) {
               totalBil = totalBil + 8 * workTime.personnel;
               totalBilOvertime = totalBilOvertime + (totalTime/60 - 8) * workTime.personnel;
               totalPrice = totalPrice + priceRates.bilOvertime * workTime.personnel * (totalTime/60 - 8)
                 + priceRates.bil * workTime.personnel * 8;
             } else {
-              totalBil = totalBil + 8 * workTime.personnel;
+              totalBil = totalBil + totalTime/60 * workTime.personnel;
               totalPrice = totalPrice + priceRates.bil * workTime.personnel * totalTime/60;
             }
+          } else if ((workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta')) {
+            if (totalNormal > 40) {
+              totalNormal = totalNormal + 40 * workTime.personnel;
+              totalNormalOvertime = totalNormalOvertime + (totalTime/60*7 - 40) * workTime.personnel;
+              totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (totalTime/60*7 - 40)
+                + priceRates.normal * workTime.personnel * 8;
+            } else {
+              totalNormal = totalNormal + totalTime/60 * workTime.personnel;
+              totalPrice = totalPrice + priceRates.normal * workTime.personnel * totalTime/60;
+            }
+          } else {
+
           }
         }
       });

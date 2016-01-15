@@ -116,23 +116,28 @@ Template.careers.events({
 
     var fields = template.findAll('.form-control');
     var employment = fields.map((field) => {
-      var field = $(field)
+      field = $(field)
       return {
         name: field.attr('name'),
         value: field.val(),
         required: field.attr('required')
       }
     });
-
     var errors = validateCareerForm(employment);
     if (!$.isEmptyObject(errors)) {
       return Session.set('postSubmitErrors', errors)
     }
-    // Meteor.call('insertApplication', employment, function(error, result) {
-    //   if (error)
-    //     console.log(error);
-    //   Router.go('home');
-    //   Messages.throw('Your application has been submitted. Thank you for your interest.', 'success');
-    // });
+    var employmentDoc = {};
+    for (var i = 0; i < employment.length; i++) {
+      employmentDoc[employment[i].name] = employment[i].value;
+    }
+    Meteor.call('insertApplication', employmentDoc, function(error, result) {
+      if (error) {
+        console.log(error);
+      } else {
+        Router.go('home');
+        Messages.throw('Your application has been submitted. Thank you for your interest.', 'success');
+      }
+    });
   }
 })
