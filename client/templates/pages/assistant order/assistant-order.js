@@ -133,11 +133,18 @@ Template.assistantOrder.events({
       var totalNormalOvertime = 0;
       var totalBil = 0;
       var totalBilOvertime = 0;
+      var timeByWeek = {};
       _.each(currentWorkTimes, function(workTime) {
         var startTime = moment(workTime.startTime, 'MM-DD-YYYY H:mm A');
         var endTime = moment(workTime.endTime, 'MM-DD-YYYY H:mm A');
         var totalTime = endTime.diff(startTime, 'minutes');
+        var objectKey = moment(workTime.startTime, 'MM-DD-YYYY H:mm A').week();
         if (totalTime > 0) {
+          if (isNaN(timeByWeek[objectKey])) {
+            timeByWeek[objectKey] = totalTime/60;
+          } else {
+            timeByWeek[objectKey] += totalTime/60;
+          }
           if ((workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta') && eventLocation === 'las vegas') {
             if (totalTime/60 > 8) {
               totalNormal = totalNormal + 8 * workTime.personnel;
@@ -159,20 +166,29 @@ Template.assistantOrder.events({
               totalPrice = totalPrice + priceRates.bil * workTime.personnel * totalTime/60;
             }
           } else if ((workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta')) {
-            if (totalNormal > 40) {
-              totalNormal = totalNormal + 40 * workTime.personnel;
-              totalNormalOvertime = totalNormalOvertime + (totalTime/60*7 - 40) * workTime.personnel;
-              totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (totalTime/60*7 - 40)
-                + priceRates.normal * workTime.personnel * 8;
+            if (timeByWeek[objectKey] > 40) {
+              totalNormal = 40 * workTime.personnel;
+              totalNormalOvertime = totalNormalOvertime + (timeByWeek[objectKey] - 40) * workTime.personnel;
+              totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (timeByWeek[objectKey] - 40)
+                + priceRates.normal * workTime.personnel * 40;
             } else {
               totalNormal = totalNormal + totalTime/60 * workTime.personnel;
               totalPrice = totalPrice + priceRates.normal * workTime.personnel * totalTime/60;
             }
           } else {
-
+            if (timeByWeek[objectKey] > 40) {
+              totalBil = 40 * workTime.personnel;
+              totalBilOvertime = totalBilOvertime + (timeByWeek[objectKey] - 40) * workTime.personnel;
+              totalPrice = totalPrice + priceRates.bilOvertime * workTime.personnel * (timeByWeek[objectKey] - 40)
+                + priceRates.bil * workTime.personnel * 40;
+            } else {
+              totalBil = totalBil + totalTime/60 * workTime.personnel;
+              totalPrice = totalPrice + priceRates.bil * workTime.personnel * totalTime/60;
+            }
           }
         }
       });
+      console.log(timeByWeek);
       if (totalPrice > 0) {
         template.totalNormal.set(totalNormal);
         template.totalNormalOvertime.set(totalNormalOvertime);
@@ -221,8 +237,9 @@ Template.assistantOrder.events({
     Meteor.call('saveAssistantOrder', assistantForm, function(error,result) {
       if (error) {
         console.log(error);
+      } else {
+        Router.go('bookOrder', {_id: result._id});
       }
-      Router.go('bookOrder', {_id: result._id});
     });
 
   }
