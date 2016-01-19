@@ -17,16 +17,18 @@ Template.securityOrder.onCreated(function() {
     var eventDate = moment(instance.$('[name=eventDate]').val(),'MM/DD/YYYY');
     var today = moment().startOf('day');
     var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
+    var eventLocation = instance.eventLocation.get();
+    var priceRates = PriceRates.find({location: eventLocation});
     if (daysToEvent >= 21) {
       return {
-        armed: 59,
-        unarmed: 25,
+        armed: priceRates.armedD,
+        unarmed: priceRates.unarmedD,
         incentive: true
       }
     } else {
       return {
-        armed: 63.5,
-        unarmed: 31,
+        armed: priceRates.armed,
+        unarmed: priceRates.unarmed,
         incentive: false
       }
     }

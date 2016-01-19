@@ -134,61 +134,32 @@ Template.assistantOrder.events({
       var totalBil = 0;
       var totalBilOvertime = 0;
       var timeByWeek = {};
+      var timeByDay = {};
       _.each(currentWorkTimes, function(workTime) {
         var startTime = moment(workTime.startTime, 'MM-DD-YYYY H:mm A');
         var endTime = moment(workTime.endTime, 'MM-DD-YYYY H:mm A');
         var totalTime = endTime.diff(startTime, 'minutes');
-        var objectKey = moment(workTime.startTime, 'MM-DD-YYYY H:mm A').week();
+        var objectKeyWeek = moment(workTime.startTime, 'MM-DD-YYYY H:mm A').week();
+        var objectKeyDay = moment(workTime.startTime, 'MM-DD-YYYY H:mm A').dayOfYear();
+        timeByWeek[objectKeyWeek] = {
+          totalTime: 0
+        }
+        timeByDay[objectKeyDay] = {
+          totalTime: 0
+        }
         if (totalTime > 0) {
-          if (isNaN(timeByWeek[objectKey])) {
-            timeByWeek[objectKey] = totalTime/60;
-          } else {
-            timeByWeek[objectKey] += totalTime/60;
+          timeByWeek[objectKeyWeek] = {
+            totalTime: timeByWeek[objectKeyWeek].totalTime + totalTime / 60,
+            personnel: workTime.personnel
           }
-          if ((workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta') && eventLocation === 'las vegas') {
-            if (totalTime/60 > 8) {
-              totalNormal = totalNormal + 8 * workTime.personnel;
-              totalNormalOvertime = totalNormalOvertime + (totalTime/60 - 8) * workTime.personnel;
-              totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (totalTime/60 - 8)
-                + priceRates.normal * workTime.personnel * 8;
-            } else {
-              totalNormal = totalNormal + totalTime/60 * workTime.personnel;
-              totalPrice = totalPrice + priceRates.normal * workTime.personnel * totalTime/60;
-            }
-          } else if ((workTime.type === 'hostB' || workTime.type === 'hostessB' || workTime.type === 'hostaB') && eventLocation === 'las vegas') {
-            if (totalTime/60 > 8) {
-              totalBil = totalBil + 8 * workTime.personnel;
-              totalBilOvertime = totalBilOvertime + (totalTime/60 - 8) * workTime.personnel;
-              totalPrice = totalPrice + priceRates.bilOvertime * workTime.personnel * (totalTime/60 - 8)
-                + priceRates.bil * workTime.personnel * 8;
-            } else {
-              totalBil = totalBil + totalTime/60 * workTime.personnel;
-              totalPrice = totalPrice + priceRates.bil * workTime.personnel * totalTime/60;
-            }
-          } else if ((workTime.type === 'host' || workTime.type === 'hostess' || workTime.type === 'hosta')) {
-            if (timeByWeek[objectKey] > 40) {
-              totalNormal = 40 * workTime.personnel;
-              totalNormalOvertime = totalNormalOvertime + (timeByWeek[objectKey] - 40) * workTime.personnel;
-              totalPrice = totalPrice + priceRates.normalOvertime * workTime.personnel * (timeByWeek[objectKey] - 40)
-                + priceRates.normal * workTime.personnel * 40;
-            } else {
-              totalNormal = totalNormal + totalTime/60 * workTime.personnel;
-              totalPrice = totalPrice + priceRates.normal * workTime.personnel * totalTime/60;
-            }
-          } else {
-            if (timeByWeek[objectKey] > 40) {
-              totalBil = 40 * workTime.personnel;
-              totalBilOvertime = totalBilOvertime + (timeByWeek[objectKey] - 40) * workTime.personnel;
-              totalPrice = totalPrice + priceRates.bilOvertime * workTime.personnel * (timeByWeek[objectKey] - 40)
-                + priceRates.bil * workTime.personnel * 40;
-            } else {
-              totalBil = totalBil + totalTime/60 * workTime.personnel;
-              totalPrice = totalPrice + priceRates.bil * workTime.personnel * totalTime/60;
-            }
+          timeByDay[objectKeyDay] = {
+            totalTime: timeByDay[objectKeyDay].totalTime + totalTime / 60,
+            personnel: workTime.personnel
           }
         }
       });
       console.log(timeByWeek);
+      console.log(timeByDay);
       if (totalPrice > 0) {
         template.totalNormal.set(totalNormal);
         template.totalNormalOvertime.set(totalNormalOvertime);
