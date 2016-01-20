@@ -5,16 +5,24 @@
     {{else}}
       {{> reviewAssistantOrder order=this noncredit=noncredit}}
     {{/if}}
-    {{#if noncredit}}
+
       <form>
         <div class="row">
           {{> billingAddress}}
-          <center>
-            <h3>Remit Payment To:</h3>
-            <p class="lead">Century Security & Event Staffing, Inc.<br/>
-            6421 Pinecastle Blvd. (Suite 1)<br/>
-            Orlando, FL 32809</p>
-          </center>
+          {{#if noncredit}}
+            <center>
+              <h3>Remit Payment To:</h3>
+              <p class="lead">Century Security & Event Staffing, Inc.<br/>
+              6421 Pinecastle Blvd. (Suite 1)<br/>
+              Orlando, FL 32809</p>
+            </center>
+          {{else}}
+            <center>
+              <a href="/doc/credit-card form.pdf">
+                <h3>Download this Form to Pay</h3>
+              </a>
+            </center>
+          {{/if}}
         </div>
         <div class="row">
           <center>
@@ -22,6 +30,5 @@
           </center>
         </div>
       </form>
-    {{/if}}
   </div>
 </template>

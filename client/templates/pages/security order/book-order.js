@@ -20,29 +20,29 @@ Template.bookOrder.helpers({
 });
 
 Template.bookOrder.events({
-  'click #creditCard': function(event,template) {
-    event.preventDefault();
-    var orderId = template.data._id;
-    var totalPrice = Math.round(parseFloat(template.data.priceBreakDown.totalPrice)*100);
-
-    StripeCheckout.open({
-      key: Meteor.settings.public.stripe.testPublishableKey,
-      amount: totalPrice,
-      name: 'Security Order',
-      description: 'Security Order',
-      panelLabel: 'Book Order',
-      billingAddress: true,
-      token: function(result) {
-        stripeToken = result.id;
-        Meteor.call('chargeCard', stripeToken, totalPrice, orderId, result.email, function(error, result) {
-          if (error)
-            console.log(error);
-          Router.go('home');
-          Messages.throw('Your payment was successful. You should get a confirmation email with order details.', 'success');
-        });
-      }
-    });
-  },
+  // 'click #creditCard': function(event,template) {
+  //   event.preventDefault();
+  //   var orderId = template.data._id;
+  //   var totalPrice = Math.round(parseFloat(template.data.priceBreakDown.totalPrice)*100);
+  //
+  //   StripeCheckout.open({
+  //     key: Meteor.settings.public.stripe.testPublishableKey,
+  //     amount: totalPrice,
+  //     name: 'Security Order',
+  //     description: 'Security Order',
+  //     panelLabel: 'Book Order',
+  //     billingAddress: true,
+  //     token: function(result) {
+  //       stripeToken = result.id;
+  //       Meteor.call('chargeCard', stripeToken, totalPrice, orderId, result.email, function(error, result) {
+  //         if (error)
+  //           console.log(error);
+  //         Router.go('home');
+  //         Messages.throw('Your payment was successful. You should get a confirmation email with order details.', 'success');
+  //       });
+  //     }
+  //   });
+  // },
   'submit form': function(event,template) {
     event.preventDefault();
     var orderId = template.data._id;
@@ -60,10 +60,12 @@ Template.bookOrder.events({
       return Session.set('postSubmitErrors', errors)
     }
     Meteor.call('updateOrder', orderId, address, function(error, result) {
-      if (error)
+      if (error) {
         console.log(error);
-      Router.go('home');
-      Messages.throw('Your order has been booked. You should get a confirmation email with order details.', 'success');
+      } else {
+        Router.go('home');
+        Messages.throw('Your order has been booked. You should get a confirmation email with order details.', 'success');
+      }
     })
   }
-})
+});
