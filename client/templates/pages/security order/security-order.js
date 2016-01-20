@@ -18,7 +18,7 @@ Template.securityOrder.onCreated(function() {
     var today = moment().startOf('day');
     var daysToEvent = Math.round(moment.duration(eventDate-today).asDays());
     var eventLocation = instance.eventLocation.get();
-    var priceRates = PriceRates.find({location: eventLocation});
+    var priceRates = PriceRates.findOne({location: eventLocation});
     if (daysToEvent >= 21) {
       return {
         armed: priceRates.armedD,
@@ -152,24 +152,43 @@ Template.securityOrder.onCreated(function() {
 
 Template.securityOrder.onRendered(function() {
   var instance = this;
+  const currentData = instance.data;
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
       vertical: 'bottom'
     }
   });
-  instance.totalPrice.set(0);
-  instance.totalArmed.set(0);
-  instance.totalUnarmed.set(0);
-  instance.incentiveDate.set(null);
-  instance.loopWorkTimes.set([{}]);
-  instance.priceRatesDetails.set({
-    armed: 0,
-    unarmed: 0
-  });
+  if (Router.current().route.getName() === 'securityOrder') {
+    instance.totalPrice.set(0);
+    instance.totalArmed.set(0);
+    instance.totalUnarmed.set(0);
+    instance.incentiveDate.set(null);
+    instance.loopWorkTimes.set([{}]);
+    instance.priceRatesDetails.set({
+      armed: 0,
+      unarmed: 0
+    });
+    instance.paymentMethod.set(null);
+    instance.eventLocation.set(null);
+    instance.conventionCenter.set(null);
+  } else {
+    instance.eventLocation.set(currentData.eventLocation);
+    instance.paymentMethod.set(currentData.paymentMethod);
+    instance.loopWorkTimes.set(currentData.workTimes);
+    instance.totalArmed.set(currentData.totalArmed);
+    instance.totalUnarmed.set(currentData.totalUnarmed);
+    instance.totalPrice.set(currentData.priceBreakDown.totalPrice);
+  }
 });
 
 Template.securityOrder.helpers({
+  matchesCurrentLocation(location) {
+    return Template.instance().eventLocation.get() === location;
+  },
+  eventLocations() {
+    return Locations.find();
+  },
   loopWorkTimes: function() {
     return Template.instance().loopWorkTimes.get();
   },
@@ -202,9 +221,6 @@ Template.securityOrder.helpers({
         selected: false
       }
     }
-  },
-  eventLocations: function() {
-    return Locations.find();
   },
   conventionCenter: function() {
     var eventLocation = Template.instance().eventLocation.get();
@@ -246,7 +262,7 @@ Template.securityOrder.events({
 
     var currentWorkTimes = template.loopWorkTimes.get();
     if (currentWorkTimes.length > 0) {
-      var priceRates = Template.instance().priceRates();
+      var priceRates = template.priceRates();
       var totalPrice = 0;
       var totalArmed = 0;
       var totalUnarmed = 0;

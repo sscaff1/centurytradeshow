@@ -5,8 +5,13 @@
         <label for="type" class="required">Type of Monitor</label>
         <select class="form-control" name="type">
           <option value="">Select a Monitor Type</option>
-          <option value="armed">Armed Monitor</option>
-          <option value="unarmed">Unarmed Monitor</option>
+          {{#each securityType in securityTypes}}
+            {{#if typeSelected securityType.value}}
+              <option value="{{securityType.value}}" selected="true">{{securityType.label}}</option>
+            {{else}}
+              <option value="{{securityType.value}}">{{securityType.label}}</option>
+            {{/if}}
+          {{/each}}
         </select>
       </div>
     </div>

@@ -9,8 +9,12 @@
             <label for="type" class="required">Century Location</label>
             <select class="form-control" name="eventLocation">
               <option value="">Select a City</option>
-              {{#each eventLocations}}
-                <option value="{{value}}">{{label}}</option>
+              {{#each loc in eventLocations}}
+                {{#if matchesCurrentLocation loc.value}}
+                  <option value="{{loc.value}}" selected="true">{{loc.label}}</option>
+                {{else}}
+                  <option value="{{loc.value}}">{{loc.label}}</option>
+                {{/if}}
               {{/each}}
             </select>
             <span class="help-block">{{errorMessage 'eventLocation'}}</span>
@@ -84,8 +88,8 @@
       <div class="row">
         <h3>Security Required</h3>
         <span class="help-block lead" style="color:red;">{{errorMessage 'workTime'}}</span>
-        {{#each loopWorkTimes}}
-          {{> workTimes}}
+        {{#each loopWorkTime in loopWorkTimes}}
+          {{> workTimes loopWorkTime}}
         {{/each}}
       </div>
       <div class="row">
@@ -97,7 +101,7 @@
         <div class="col-md-6">
           <div class="form-group">
             <label for="comments">Special Instructions</label>
-            <textarea name="comments" style="min-height:12em" class="form-control" row="6"></textarea>
+            <textarea name="comments" style="min-height:12em" class="form-control" row="6">{{comments}}</textarea>
           </div>
         </div>
         <div class="col-md-6">
@@ -121,7 +125,7 @@
       </div>
       <div class="row">
         <h3>Billing Information</h3>
-        {{> paymentMethodForm}}
+        {{> paymentMethodForm noncredit}}
         <div class="col-sm-9 text-right">
           <strong>Sub-Total:</strong> <i class="fa fa-usd"></i> {{displayCurrency totalPrice}}<br/>
           {{#if noncredit.selected}}

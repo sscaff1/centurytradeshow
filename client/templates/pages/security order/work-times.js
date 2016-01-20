@@ -17,3 +17,15 @@ Template.workTimes.events({
     }
   }
 });
+
+Template.workTimes.helpers({
+  securityTypes() {
+    return [
+      {label: 'Unarmed', value: 'unarmed'},
+      {label: 'Armed', value: 'armed'}
+    ]
+  },
+  typeSelected(type) {
+    return type === this.type
+  }
+})

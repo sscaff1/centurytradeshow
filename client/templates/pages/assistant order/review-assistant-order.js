@@ -29,3 +29,9 @@ Template.reviewAssistantOrder.helpers({
     }
   }
 });
+
+Template.reviewAssistantOrder.events({
+  'click #edit-button': function(event, template) {
+    Router.go('editAssistantOrder');
+  }
+})

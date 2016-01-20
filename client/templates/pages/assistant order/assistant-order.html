@@ -9,8 +9,12 @@
             <label for="type" class="required">Century Location</label>
             <select class="form-control" name="eventLocation">
               <option value="">Select a City</option>
-              {{#each eventLocations}}
-                <option value="{{value}}">{{label}}</option>
+              {{#each loc in eventLocations}}
+                {{#if matchesCurrentLocation loc.value}}
+                  <option value="{{loc.value}}" selected="true">{{loc.label}}</option>
+                {{else}}
+                  <option value="{{loc.value}}">{{loc.label}}</option>
+                {{/if}}
               {{/each}}
             </select>
             <span class="help-block">{{errorMessage 'eventLocation'}}</span>
@@ -115,7 +119,7 @@
       </div>
       <div class="row">
         <h3>Billing Information</h3>
-        {{> paymentMethodForm}}
+        {{> paymentMethodForm paymentMethod}}
         <div class="col-sm-9 text-right">
           {{#if paymentMethod.credit}}
             <strong>Sub-Total:</strong> <i class="fa fa-usd"></i> {{displayCurrency totalPrice}}<br/>

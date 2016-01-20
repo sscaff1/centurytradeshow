@@ -23,3 +23,9 @@ Template.reviewSecurityOrder.helpers({
     return eventDate.subtract(21, 'days').format('MM/DD/YYYY');
   }
 });
+
+Template.reviewSecurityOrder.events({
+  'click #edit-button': function(event, template) {
+    Router.go('editSecurityOrder', {_id: this.order._id});
+  }
+});
