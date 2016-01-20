@@ -32,6 +32,6 @@ Template.reviewAssistantOrder.helpers({
 
 Template.reviewAssistantOrder.events({
   'click #edit-button': function(event, template) {
-    Router.go('editAssistantOrder');
+    Router.go('editAssistantOrder', {_id: this.order._id});
   }
 })

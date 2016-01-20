@@ -55,20 +55,30 @@ Template.assistantOrder.onCreated(function() {
 });
 
 Template.assistantOrder.onRendered(function() {
-  var instance = this;
+  let instance = this;
+  const currentData = instance.data;
   instance.$('.datepicker').datetimepicker({
     format: 'MM/DD/YYYY',
     widgetPositioning: {
       vertical: 'bottom'
     }
   });
+  if (Router.current().route.getName() !== 'securityOrder') {
+    instance.workTime.set(currentData.workTimes);
+    instance.totalNormal.set(currentData.totalNormal);
+    instance.totalNormalOvertime.set(currentData.totalNormalOvertime);
+    instance.totalBil.set(currentData.totalBil);
+    instance.totalBilOvertime.set(currentData.totalBilOvertime);
+    instance.paymentMethod.set(currentData.paymentMethod);
+    instance.eventLocation.set(currentData.eventLocation);
+  }
 });
 
 Template.assistantOrder.helpers({
   eventLocations: function() {
     return Locations.find();
   },
-  workTime: function() {
+  workTimes: function() {
     return Template.instance().workTime.get();
   },
   dateMinus21: function() {
@@ -91,6 +101,20 @@ Template.assistantOrder.helpers({
   },
   paymentMethod: function() {
     return Template.instance().priceBreakDown();
+  },
+  dressTypes() {
+    return [
+      {value: 'Business Casual', label: 'Business Casual'},
+      {value: 'Professional Attire', label: 'Professional Attire'},
+      {value: 'Client to Provide', label: 'Client to Provide'},
+      {value: 'To be Determined', label: 'To be Determined'}
+    ]
+  },
+  matchesDressType(value, setType) {
+    return value === setType;
+  },
+  matchesCurrentLocation(location) {
+    return Template.instance().eventLocation.get() === location;
   }
 });
 
@@ -158,8 +182,6 @@ Template.assistantOrder.events({
           }
         }
       });
-      console.log(timeByWeek);
-      console.log(timeByDay);
       if (totalPrice > 0) {
         template.totalNormal.set(totalNormal);
         template.totalNormalOvertime.set(totalNormalOvertime);

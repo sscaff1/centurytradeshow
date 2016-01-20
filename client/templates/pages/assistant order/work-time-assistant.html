@@ -5,32 +5,33 @@
         <label for="type" class="required">Type of Assistant</label>
         <select class="form-control" name="type">
           <option value="">Select a Monitor Type</option>
-          <option value="host">Host</option>
-          <option value="hostess">Hostess</option>
-          <option value="hostB">Host Bilingual</option>
-          <option value="hostessB">Hostess Bilingual</option>
-          <option value="hosta">Host or Hostess</option>
-          <option value="hostaB">Host or Hostess Bilingual</option>
+          {{#each assistantType in assistantTypes}}
+            {{#if matchesType assistantType.value}}
+              <option value="{{assistantType.value}}" selected="true">{{assistantType.label}}</option>
+            {{else}}
+              <option value="{{assistantType.value}}">{{assistantType.label}}</option>
+            {{/if}}
+          {{/each}}
         </select>
       </div>
     </div>
     <div class="col-sm-2">
       <div class="form-group">
         <label for="personnel" class="required"># of Personnel</label>
-        <input type="number" class="form-control" name="personnel" min="0" step="1">
+        <input type="number" class="form-control" name="personnel" min="0" step="1" value="{{personnel}}">
       </div>
     </div>
     <div class="col-sm-2">
       <div class="form-group">
         <label for="booth" class="required">Booth Number</label>
-        <input type="text" class="form-control" name="booth">
+        <input type="text" class="form-control" name="booth" value="{{booth}}">
       </div>
     </div>
     <div class="col-sm-3">
       <div class="form-group">
         <label for="startTime" class="required">Start Time</label>
         <div class="input-group">
-          <input type="text" class="form-control datetimepicker startTime" name="startTime">
+          <input type="text" class="form-control datetimepicker startTime" name="startTime" value="{{startTime}}">
           <span class="input-group-addon startTime"><i class="glyphicon glyphicon-calendar"></i></span>
         </div>
       </div>
@@ -39,7 +40,7 @@
       <div class="form-group">
         <label for="endTime" class="required">End Time</label>
         <div class="input-group">
-          <input type="text" class="form-control datetimepicker endTime" name="endTime">
+          <input type="text" class="form-control datetimepicker endTime" name="endTime" value="{{endTime}}">
           <span class="input-group-addon endTime"><i class="glyphicon glyphicon-calendar"></i></span>
         </div>
       </div>
