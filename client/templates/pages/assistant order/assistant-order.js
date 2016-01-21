@@ -49,7 +49,9 @@ Template.assistantOrder.onCreated(function() {
         totalPrice: totalPrice
       }
     } else {
-      return false;
+      return {
+        selected: false
+      }
     }
   }
 });
@@ -63,7 +65,7 @@ Template.assistantOrder.onRendered(function() {
       vertical: 'bottom'
     }
   });
-  if (Router.current().route.getName() !== 'securityOrder') {
+  if (Router.current().route.getName() !== 'assistantOrder') {
     instance.workTime.set(currentData.workTimes);
     instance.totalNormal.set(currentData.totalNormal);
     instance.totalNormalOvertime.set(currentData.totalNormalOvertime);
@@ -142,6 +144,9 @@ Template.assistantOrder.events({
     var eventDate = moment(template.$('[name=eventDate]').val(),'MM/DD/YYYY');
     template.incentiveDate.set(eventDate.subtract(21, 'days').format('MM/DD/YYYY'));
   },
+  'change [name=eventLocation]': function(event, template) {
+    template.eventLocation.set($(event.target).val());
+  },
   'change [name=paymentMethod]': function(event,template) {
     event.preventDefault();
     template.paymentMethod.set($(event.target).val());
@@ -157,31 +162,96 @@ Template.assistantOrder.events({
       var totalNormalOvertime = 0;
       var totalBil = 0;
       var totalBilOvertime = 0;
-      var timeByWeek = {};
-      var timeByDay = {};
+      var newWorkTimes = [];
       _.each(currentWorkTimes, function(workTime) {
         var startTime = moment(workTime.startTime, 'MM-DD-YYYY H:mm A');
         var endTime = moment(workTime.endTime, 'MM-DD-YYYY H:mm A');
         var totalTime = endTime.diff(startTime, 'minutes');
-        var objectKeyWeek = moment(workTime.startTime, 'MM-DD-YYYY H:mm A').week();
-        var objectKeyDay = moment(workTime.startTime, 'MM-DD-YYYY H:mm A').dayOfYear();
-        timeByWeek[objectKeyWeek] = {
-          totalTime: 0
-        }
-        timeByDay[objectKeyDay] = {
-          totalTime: 0
-        }
-        if (totalTime > 0) {
-          timeByWeek[objectKeyWeek] = {
-            totalTime: timeByWeek[objectKeyWeek].totalTime + totalTime / 60,
-            personnel: workTime.personnel
-          }
-          timeByDay[objectKeyDay] = {
-            totalTime: timeByDay[objectKeyDay].totalTime + totalTime / 60,
-            personnel: workTime.personnel
-          }
-        }
+        newWorkTimes.push(_.extend(workTime, {
+          week: startTime.week(),
+          dayOfYear: endTime.dayOfYear(),
+          totalTime: totalTime
+        }));
       });
+      var groupByDay = _.groupBy(newWorkTimes,(workTime) => { return workTime.dayOfYear });
+      var groupByWeek = _.groupBy(newWorkTimes,(workTime) => { return workTime.week });
+      if (eventLocation === 'las vegas') {
+        _.map(groupByDay, (days, key) => {
+          var totalTimeDay = 0;
+          var totalTimeDayB = 0;
+          _.each(days, (day) => {
+            if (day.totalTime) {
+              if (day.type === 'host' || day.type === 'hostess' || day.type === 'hosta') {
+                totalTimeDay = totalTimeDay + day.totalTime / 60
+                if (totalTimeDay > 8) {
+                  totalNormal = totalNormal + 8 * day.personnel;
+                  totalNormalOvertime = totalNormalOvertime + (totalTimeDay - 8) * day.personnel;
+                } else {
+                  totalNormal = totalNormal + day.totalTime / 60 * day.personnel;
+                }
+              } else {
+                totalTimeDayB = totalTimeDayB + day.totalTime / 60
+                if (totalTimeDayB > 8) {
+                  totalBil = totalBil + 8 * day.personnel;
+                  totalBilOvertime = totalBilOvertime + (totalTimeDayB - 8) * day.personnel;
+                } else {
+                  totalBil = totalBil + day.totalTime / 60 * day.personnel;
+                }
+              }
+            }
+          })
+        });
+        _.map(groupByWeek, (weeks, key) => {
+          var totalTimeWeek = 0;
+          var totalTimeWeekB = 0;
+          _.each(weeks, (week) => {
+            if (week.totalTime) {
+              if (week.type === 'host' || week.type === 'hostess' || week.type === 'hosta') {
+                totalTimeWeek = totalTimeWeek + week.totalTime / 60
+                if (totalTimeWeek > 40) {
+                  totalNormal = totalNormal - (totalTimeWeek - 40) * week.personnel;
+                  totalNormalOvertime = totalNormalOvertime + (totalTimeWeek - 40) * week.personnel;
+                }
+              } else {
+                totalTimeWeekB = totalTimeWeekB + week.totalTime / 60
+                if (totalTimeWeekB > 40) {
+                  totalBil = totalBil - (totalTimeWeekB - 40) * week.personnel;
+                  totalBilOvertime = totalBilOvertime + (totalTimeWeekB - 40) * week.personnel;
+                }
+              }
+            }
+          })
+        });
+      } else {
+        _.map(groupByWeek, (weeks, key) => {
+          var totalTimeWeek = 0;
+          var totalTimeWeekB = 0;
+          _.each(weeks, (week) => {
+            if (week.totalTime) {
+              if (week.type === 'host' || week.type === 'hostess' || week.type === 'hosta') {
+                totalTimeWeek = totalTimeWeek + week.totalTime / 60
+                if (totalTimeWeek > 40) {
+                  totalNormal = totalNormal + 40 * week.personnel;
+                  totalNormalOvertime = totalNormalOvertime + (totalTimeWeek - 40) * week.personnel;
+                } else {
+                  totalNormal = totalNormal + week.totalTime / 60 * week.personnel;
+                }
+              } else {
+                totalTimeWeekB = totalTimeWeekB + week.totalTime / 60
+                if (totalTimeWeekB > 40) {
+                  totalBil = totalBil + 40 * week.personnel;
+                  totalBilOvertime = totalBilOvertime + (totalTimeWeekB - 40) * week.personnel;
+                } else {
+                  totalBil = totalBil + week.totalTime / 60 * week.personnel;
+                }
+              }
+            }
+          })
+        });
+      }
+      totalPrice = totalNormal * priceRates.normal + totalNormalOvertime * priceRates.normalOvertime +
+        totalBil * priceRates.bil + totalBilOvertime * priceRates.bilOvertime;
+        console.log(totalPrice);
       if (totalPrice > 0) {
         template.totalNormal.set(totalNormal);
         template.totalNormalOvertime.set(totalNormalOvertime);

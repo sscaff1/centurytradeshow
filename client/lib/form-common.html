@@ -93,12 +93,17 @@
       <label for="paymentMethod" class="required">Payment Method</label>
       <select class="form-control" name="paymentMethod">
         <option value="">Select a Payment Method</option>
-        {{#if noncredit}}
-          <option value="noncredit" selected="true">Company Check or Money Order</option>
-          <option value="credit">Credit Card</option>
+        {{#if selected}}
+          {{#if noncredit}}
+            <option value="noncredit" selected="true">Company Check or Money Order</option>
+            <option value="credit">Credit Card</option>
+          {{else}}
+            <option value="noncredit">Company Check or Money Order</option>
+            <option value="credit" selected="true">Credit Card</option>
+          {{/if}}
         {{else}}
           <option value="noncredit">Company Check or Money Order</option>
-          <option value="credit" selected="true">Credit Card</option>
+          <option value="credit">Credit Card</option>
         {{/if}}
       </select>
       <span class="help-block">{{errorMessage 'paymentMethod'}}</span>

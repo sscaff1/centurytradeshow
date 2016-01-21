@@ -62,11 +62,11 @@
           <dt>
             {{displayCurrency order.totalArmed}} armed security hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.armed}}/hour
           </dt>
-          <dl><i class="fa fa-usd"></i> {{subTotalPriceBreakdown.armed}}</dl>
+          <dl><i class="fa fa-usd"></i> {{displayCurrency subTotalPriceBreakdown.armed}}</dl>
           <dt>
             {{displayCurrency order.totalUnarmed}} unarmed security hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.unarmed}}/hour
           </dt>
-          <dl><i class="fa fa-usd"></i> {{subTotalPriceBreakdown.unarmed}}</dl>
+          <dl><i class="fa fa-usd"></i> {{displayCurrency subTotalPriceBreakdown.unarmed}}</dl>
           {{#each order.priceBreakDown.fee}}
             {{#if feeExists}}
               <dt>{{name}}</dt>
