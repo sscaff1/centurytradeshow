@@ -60,4 +60,20 @@ Template.contactUs.helpers({
       }
     }
   }
+});
+
+Template.contactUs.events({
+  'submit form': function(event,template) {
+    event.preventDefault();
+    let contactInfo = {
+      name: template.$('[name=name]').val(),
+      email: template.$('[name=email]').val(),
+      message: template.$('[name=comments]').val(),
+    }
+    Meteor.call('sendContactUsEmail', contactInfo, function(error) {
+      if (error) {
+        console.log(error);
+      }
+    })
+  }
 })
