@@ -1,7 +1,45 @@
+SSR.compileTemplate('careerHtml', Assets.getText('email-career.html'));
+SSR.compileTemplate('securityEmail', Assets.getText('email-security-form.html'));
+SSR.compileTemplate('staffingEmail', Assets.getText('email-staffing-form.html'));
+SSR.compileTemplate('contactusEmail', Assets.getText('email-contactus.html'));
+
+Template.securityEmail.helpers({
+  displayCurrency(num) {
+    return (Math.round(num * 100)/100).toFixed(2);
+  },
+  subTotalPriceBreakdown: function(id) {
+    var order = Order.findOne(id);
+    var armedHours = parseFloat(order.totalArmed);
+    var unarmedHours = parseFloat(order.totalUnarmed);
+    var armedPrice = parseFloat(order.priceRates.armed);
+    var unarmedPrice = parseFloat(order.priceRates.unarmed);
+    return {
+      armed: armedHours*armedPrice,
+      unarmed: unarmedHours*unarmedPrice
+    }
+  },
+});
+
+Template.staffingEmail.helpers({
+  displayCurrency(num) {
+    return (Math.round(num * 100)/100).toFixed(2);
+  },
+  subTotalPriceBreakdown: function(id) {
+    var order = Order.findOne(id);
+    var armedHours = parseFloat(order.totalArmed);
+    var unarmedHours = parseFloat(order.totalUnarmed);
+    var armedPrice = parseFloat(order.priceRates.armed);
+    var unarmedPrice = parseFloat(order.priceRates.unarmed);
+    return {
+      armed: armedHours*armedPrice,
+      unarmed: unarmedHours*unarmedPrice
+    }
+  },
+});
+
 Meteor.methods({
   sendCareerEmail(doc) {
     this.unblock();
-    SSR.compileTemplate('careerHtml', Assets.getText('email-career.html'));
     Email.send({
       to: "sscaff1@gmail.com",
       from: "no-reply@centurytradeshow.com",
@@ -11,7 +49,6 @@ Meteor.methods({
   },
   sendSecurityEmail(doc) {
     this.unblock();
-    SSR.compileTemplate('securityEmail', Assets.getText('email-security-form.html'));
     Email.send({
       to: "sscaff1@gmail.com",
       from: "no-reply@centurytradeshow.com",
@@ -21,7 +58,6 @@ Meteor.methods({
   },
   sendStaffingEmail(doc) {
     this.unblock();
-    SSR.compileTemplate('staffingEmail', Assets.getText('email-staffing-form.html'));
     Email.send({
       to: "sscaff1@gmail.com",
       from: "no-reply@centurytradeshow.com",
@@ -31,7 +67,6 @@ Meteor.methods({
   },
   sendContactUsEmail(doc) {
     this.unblock();
-    SSR.compileTemplate('contactusEmail', Assets.getText('email-contactus.html'));
     Email.send({
       to: "sscaff1@gmail.com",
       from: "no-reply@centurytradeshow.com",

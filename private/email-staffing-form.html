@@ -15,9 +15,9 @@
         </div>
         <div class="row">
           <p>
-            Century Security and Event Staffing will provide assistants to <strong>{{order.exhibitorName}}</strong> at <strong>{{order.eventName}}</strong>
-            in booth number <strong>{{order.boothNumber}}</strong>.
-            The first event date will take place on <strong>{{order.eventDate}}</strong>.
+            Century Security and Event Staffing will provide assistants to <strong>{{exhibitorName}}</strong> at <strong>{{eventName}}</strong>
+            in booth number <strong>{{boothNumber}}</strong>.
+            The first event date will take place on <strong>{{eventDate}}</strong>.
             {{#if order.priceRates.incentive}}
               This order qualifies for incentive pricing if payment is received by <strong>{{incentiveDate}}</strong>.
             {{/if}}
@@ -27,26 +27,26 @@
           </p>
           <h3 class="text-center">Contact Person(s)</h3>
           <p class="text-center lead">
-            Name: {{order.firstName1}} {{order.lastName1}}
-            Phone: {{order.phone1}}
+            Name: {{firstName1}} {{lastName1}}
+            Phone: {{phone1}}
           </p>
           <p class="text-center lead">
             {{#if order.firstName2}}
-              Name: {{order.firstName2}} {{order.lastName2}}
-              Phone: {{order.phone2}}
+              Name: {{firstName2}} {{lastName2}}
+              Phone: {{phone2}}
             {{/if}}
           </p>
           <h3 class="text-center">Work Times Required</h3>
-          {{#each order.workTimes}}
+          {{#each workTime in workTimes}}
             <p class="text-center">
-              <strong>{{personnel}} {{hostType}}</strong> at booth <strong>{{booth}}</strong> starting at <strong>{{startTime}}</strong> and ending at <strong>{{endTime}}</strong>
+              <strong>{{workTime.personnel}} {{workTime.hostType}}</strong> at booth <strong>{{workTime.booth}}</strong> starting at <strong>{{workTime.startTime}}</strong> and ending at <strong>{{workTime.endTime}}</strong>
             </p>
           {{/each}}
-          <p class="text-center lead">All assistants will be dressed in {{order.clothes}}.</p>
-          {{#if order.comments}}
+          <p class="text-center lead">All assistants will be dressed in {{clothes}}.</p>
+          {{#if comments}}
             <h3 class="text-center">Special Instructions</h3>
             <p class="text-center lead">
-              {{order.comments}}
+              {{comments}}
             </p>
           {{/if}}
         </div>
@@ -59,34 +59,29 @@
         <div class="row text-right">
           <dl class="dl-horizontal dl-custom">
             <dt>
-              {{displayCurrency order.totalNormal}} non-billingual assistant hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.normal}}/hour
+              {{displayCurrency totalNormal}} non-billingual assistant hours @ <i class="fa fa-usd"></i>{{displayCurrency priceRates.normal}}/hour
             </dt>
             <dl><i class="fa fa-usd"></i> {{displayCurrency subTotalPriceBreakdown.normal}}</dl>
             <dt>
-              {{displayCurrency order.totalNormalOvertime}} non-billingual assistant overtime hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.normalOvertime}}/hour
+              {{displayCurrency totalNormalOvertime}} non-billingual assistant overtime hours @ <i class="fa fa-usd"></i>{{displayCurrency priceRates.normalOvertime}}/hour
             </dt>
             <dl><i class="fa fa-usd"></i> {{displayCurrency subTotalPriceBreakdown.normalOvertime}}</dl>
             <dt>
-              {{displayCurrency order.totalBil}} billingual assistant hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.bil}}/hour
+              {{displayCurrency totalBil}} billingual assistant hours @ <i class="fa fa-usd"></i>{{displayCurrency priceRates.bil}}/hour
             </dt>
             <dl><i class="fa fa-usd"></i> {{displayCurrency subTotalPriceBreakdown.bil}}</dl>
             <dt>
-              {{displayCurrency order.totalBilOvertime}} billingual assistant overtime hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.bilOvertime}}/hour
+              {{displayCurrency totalBilOvertime}} billingual assistant overtime hours @ <i class="fa fa-usd"></i>{{displayCurrency priceRates.bilOvertime}}/hour
             </dt>
             <dl><i class="fa fa-usd"></i> {{displayCurrency subTotalPriceBreakdown.bilOvertime}}</dl>
-            {{#if order.priceBreakDown.credit}}
+            {{#if priceBreakDown.credit}}
               <dt>Credit Card Fee (3%)</dt>
-              <dl><i class="fa fa-usd"></i> {{displayCurrency order.priceBreakDown.ccFee}}</dl>
+              <dl><i class="fa fa-usd"></i> {{displayCurrency priceBreakDown.ccFee}}</dl>
             {{/if}}
             <dt><strong>Total Price</strong></dt>
-            <dl><i class="fa fa-usd"></i> {{displayCurrency order.priceBreakDown.totalPrice}}</dl>
+            <dl><i class="fa fa-usd"></i> {{displayCurrency priceBreakDown.totalPrice}}</dl>
           </dl>
         </div>
-        {{#if order.priceBreakDown.credit}}
-          <div class="row text-right">
-            <button type="submit" class="btn btn-primary" id="creditCard">Click Here to Pay</button>
-          </div>
-        {{/if}}
       </div>
     </div>
   </body>

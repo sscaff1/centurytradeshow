@@ -15,11 +15,11 @@
         </div>
         <div class="row">
           <p>
-            Century Security and Event Staffing will provide security to <strong>{{order.exhibitorName}}</strong> at <strong>{{order.eventName}}</strong>
-            in booth number <strong>{{order.boothNumber}}</strong>
-            {{#if order.conventionCenter}}at the <strong>{{order.conventionCenter}}</strong>{{/if}}.
-            The first event date will take place on <strong>{{order.eventDate}}</strong>.
-            {{#if order.priceRates.incentive}}
+            Century Security and Event Staffing will provide security to <strong>{{exhibitorName}}</strong> at <strong>{{eventName}}</strong>
+            in booth number <strong>{{boothNumber}}</strong>
+            {{#if order.conventionCenter}}at the <strong>{{conventionCenter}}</strong>{{/if}}.
+            The first event date will take place on <strong>{{eventDate}}</strong>.
+            {{#if priceRates.incentive}}
               This order qualifies for incentive pricing if payment is received by <strong>{{incentiveDate}}</strong>.
             {{/if}}
             The contact names and work times for the event are listed below.
@@ -28,32 +28,32 @@
           </p>
           <h3 class="text-center">Century Office Location</h3>
           <p class="text-center">
-            {{order.priceBreakDown.address}}<br/>
-            {{order.priceBreakDown.cityState}}<br/>
-            License #: {{order.priceBreakDown.lic}}<br/>
+            {{priceBreakDown.address}}<br/>
+            {{priceBreakDown.cityState}}<br/>
+            License #: {{priceBreakDown.lic}}<br/>
             <a href="mailto:events@centurytradeshow.com">events@centurytradeshow.com</a>
           </p>
           <h3 class="text-center">Contact Person(s)</h3>
           <p class="text-center lead">
-            Name: {{order.firstName1}} {{order.lastName1}}
-            Phone: {{order.phone1}}
+            Name: {{firstName1}} {{lastName1}}
+            Phone: {{phone1}}
           </p>
           <p class="text-center lead">
-            {{#if order.firstName2}}
-              Name: {{order.firstName2}} {{order.lastName2}}
-              Phone: {{order.phone2}}
+            {{#if firstName2}}
+              Name: {{firstName2}} {{lastName2}}
+              Phone: {{phone2}}
             {{/if}}
           </p>
           <h3 class="text-center">Work Times Required</h3>
-          {{#each order.workTimes}}
+          {{#each workTime in workTimes}}
             <p class="text-center">
-              <strong>{{personnel}} {{type}}</strong> personnel at booth <strong>{{booth}}</strong> starting at <strong>{{startTime}}</strong> and ending at <strong>{{endTime}}</strong>
+              <strong>{{workTime.personnel}} {{workTime.type}}</strong> personnel at booth <strong>{{workTime.booth}}</strong> starting at <strong>{{workTime.startTime}}</strong> and ending at <strong>{{workTime.endTime}}</strong>
             </p>
           {{/each}}
-          {{#if order.comments}}
+          {{#if comments}}
             <h3 class="text-center">Special Instructions</h3>
             <p class="text-center lead">
-              {{order.comments}}
+              {{comments}}
             </p>
           {{/if}}
         </div>
@@ -66,34 +66,25 @@
         <div class="row text-right">
           <dl class="dl-horizontal dl-custom">
             <dt>
-              {{displayCurrency order.totalArmed}} armed security hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.armed}}/hour
+              {{displayCurrency totalArmed}} armed security hours @ <i class="fa fa-usd"></i>{{displayCurrency priceRates.armed}}/hour
             </dt>
-            <dl><i class="fa fa-usd"></i> {{subTotalPriceBreakdown.armed}}</dl>
+            <dl><i class="fa fa-usd"></i> {{displayCurrency (subTotalPriceBreakdown.armed _id)}}</dl>
             <dt>
-              {{displayCurrency order.totalUnarmed}} unarmed security hours @ <i class="fa fa-usd"></i>{{displayCurrency order.priceRates.unarmed}}/hour
+              {{displayCurrency totalUnarmed}} unarmed security hours @ <i class="fa fa-usd"></i>{{displayCurrency priceRates.unarmed}}/hour
             </dt>
-            <dl><i class="fa fa-usd"></i> {{subTotalPriceBreakdown.unarmed}}</dl>
-            {{#each order.priceBreakDown.fee}}
-              {{#if feeExists}}
-                <dt>{{name}}</dt>
-                <dl><i class="fa fa-usd"></i> {{displayCurrency value}}</dl>
-              {{/if}}
+            <dl><i class="fa fa-usd"></i> {{displayCurrency (subTotalPriceBreakdown.unarmed _id)}}</dl>
+            {{#each fee in priceBreakDown.fee}}
+              <dt>{{fee.name}}</dt>
+              <dl><i class="fa fa-usd"></i> {{displayCurrency fee.value}}</dl>
             {{/each}}
-            {{#each order.priceBreakDown.ccFee}}
-              {{#if feeExists}}
-                <dt>{{name}}</dt>
-                <dl><i class="fa fa-usd"></i> {{displayCurrency value}}</dl>
-              {{/if}}
+            {{#each creditFee in priceBreakDown.ccFee}}
+              <dt>{{creditFee.name}}</dt>
+              <dl><i class="fa fa-usd"></i> {{displayCurrency creditFee.value}}</dl>
             {{/each}}
             <dt><strong>Total Price</strong></dt>
-            <dl><i class="fa fa-usd"></i> {{displayCurrency order.priceBreakDown.totalPrice}}</dl>
+            <dl><i class="fa fa-usd"></i> {{displayCurrency priceBreakDown.totalPrice}}</dl>
           </dl>
         </div>
-        {{#unless noncredit}}
-          <div class="row text-right">
-            <button type="submit" class="btn btn-primary" id="creditCard">Click Here to Pay</button>
-          </div>
-        {{/unless}}
       </div>
     </div>
   </body>
