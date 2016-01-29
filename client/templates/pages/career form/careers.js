@@ -120,17 +120,40 @@ Template.careers.events({
       return {
         name: field.attr('name'),
         value: field.val(),
-        required: field.attr('required')
+        required: field.attr('required'),
+        type: field.attr('data-employer') || 'document',
       }
     });
     var errors = validateCareerForm(employment);
     if (!$.isEmptyObject(errors)) {
       return Session.set('postSubmitErrors', errors)
     }
+    var employers = [];
+    var employHistories = template.findAll('[name=experience]');
+    _.each(employHistories, function(history) {
+      var employValues = {
+        employerName: $(history).find('[name^=employerName]').val(),
+        startDate: $(history).find('[name^=startDate]').val(),
+        endDate: $(history).find('[name^=endDate]').val(),
+        lastSupervisor: $(history).find('[name^=lastSupervisor]').val(),
+        lastTitle: $(history).find('[name^=lastTitle]').val(),
+        startPay: $(history).find('[name^=startPay]').val(),
+        endPay: $(history).find('[name^=endPay]').val(),
+        address: $(history).find('[name^=address]').val(),
+        city: $(history).find('[name^=city]').val(),
+        state: $(history).find('[name^=state]').val(),
+        zipCode: $(history).find('[name^=zipCode]').val(),
+        leaving: $(history).find('[name^=leaving]').val(),
+      }
+      employers.push(employValues);
+    });
     var employmentDoc = {};
-    for (var i = 0; i < employment.length; i++) {
-      employmentDoc[employment[i].name] = employment[i].value;
+    for (let i = 0; i < employment.length; i++) {
+      if (employment[i].type != 'employ') {
+        employmentDoc[employment[i].name] = employment[i].value;
+      }
     }
+    employmentDoc.employers = employers;
     Meteor.call('insertApplication', employmentDoc, function(error, result) {
       if (error) {
         console.log(error);

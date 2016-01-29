@@ -1,3 +1,9 @@
+Employees = new Mongo.Collection(null);
+Services = new Mongo.Collection(null);
+States = new Mongo.Collection(null);
+Locations = new Mongo.Collection(null);
+PriceRates = new Mongo.Collection(null);
+
 if (Employees.find().count() === 0) {
   var employees = [
     {name:"Michelle Baillargeon",title:"Schedule Coordinator",email:"mbaillargeon@centurytradeshow.com",company:"orlando",order:120},

@@ -73,6 +73,9 @@ Template.contactUs.events({
     Meteor.call('sendContactUsEmail', contactInfo, function(error) {
       if (error) {
         console.log(error);
+      } else {
+        Router.go('home');
+        Messages.throw('Thank you for your inquiry. We will respond to you shortly.', 'success');
       }
     })
   }
