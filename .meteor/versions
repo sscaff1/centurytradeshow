@@ -42,9 +42,12 @@ iron:url@1.0.11
 jquery@1.11.4
 launch-screen@1.0.4
 livedata@1.0.15
+localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
+meteorhacks:kadira@2.27.3
+meteorhacks:meteorx@1.4.1
 meteorhacks:ssr@2.2.0
 minifiers@1.1.7
 minimongo@1.0.10
