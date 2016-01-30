@@ -173,6 +173,8 @@ Template.securityOrder.onRendered(function() {
     instance.eventLocation.set(null);
     instance.conventionCenter.set(null);
   } else {
+    var eventDate = moment(currentData.eventDate,'MM/DD/YYYY');
+    template.incentiveDate.set(eventDate.subtract(21, 'days').format('MM/DD/YYYY'));
     instance.eventLocation.set(currentData.eventLocation);
     instance.paymentMethod.set(currentData.paymentMethod);
     instance.loopWorkTimes.set(currentData.workTimes);
@@ -234,6 +236,15 @@ Template.securityOrder.helpers({
   },
   priceRates: function() {
     return Template.instance().priceRatesDetails.get();
+  },
+  priceTable: function() {
+    var eventLocation = Template.instance().eventLocation.get();
+    if (eventLocation) {
+      console.log(PriceRates.findOne({location: eventLocation}));
+      return PriceRates.findOne({location: eventLocation});
+    } else {
+      return false;
+    }
   }
 });
 
@@ -291,12 +302,14 @@ Template.securityOrder.events({
   'blur [name=eventDate]': function(event, template) {
     var eventDate = moment(template.$('[name=eventDate]').val(),'MM/DD/YYYY');
     template.incentiveDate.set(eventDate.subtract(21, 'days').format('MM/DD/YYYY'));
+    template.priceRatesDetails.set(template.priceRates());
   },
   'change [name=paymentMethod]': function(event,template) {
     template.paymentMethod.set(template.$(event.target).val());
   },
   'change [name=eventLocation]': function(event, template) {
     template.eventLocation.set($(event.target).val());
+    template.priceRatesDetails.set(template.priceRates());
   },
   'change [name=conventionCenter]': function(event, template) {
     template.conventionCenter.set($(event.target).val());

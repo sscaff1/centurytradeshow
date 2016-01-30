@@ -7,16 +7,8 @@ Template.securityEmail.helpers({
   displayCurrency(num) {
     return (Math.round(num * 100)/100).toFixed(2);
   },
-  subTotalPriceBreakdown: function(id) {
-    var order = Order.findOne(id);
-    var armedHours = parseFloat(order.totalArmed);
-    var unarmedHours = parseFloat(order.totalUnarmed);
-    var armedPrice = parseFloat(order.priceRates.armed);
-    var unarmedPrice = parseFloat(order.priceRates.unarmed);
-    return {
-      armed: armedHours*armedPrice,
-      unarmed: unarmedHours*unarmedPrice
-    }
+  multiplyHelper(param1, param2) {
+    return parseFloat(param1)*parseFloat(param2);
   },
 });
 
@@ -24,16 +16,8 @@ Template.staffingEmail.helpers({
   displayCurrency(num) {
     return (Math.round(num * 100)/100).toFixed(2);
   },
-  subTotalPriceBreakdown: function(id) {
-    var order = Order.findOne(id);
-    var armedHours = parseFloat(order.totalArmed);
-    var unarmedHours = parseFloat(order.totalUnarmed);
-    var armedPrice = parseFloat(order.priceRates.armed);
-    var unarmedPrice = parseFloat(order.priceRates.unarmed);
-    return {
-      armed: armedHours*armedPrice,
-      unarmed: unarmedHours*unarmedPrice
-    }
+  multiplyHelper(param1, param2) {
+    return parseFloat(param1)*parseFloat(param2);
   },
 });
 
@@ -41,7 +25,7 @@ Meteor.methods({
   sendCareerEmail(doc) {
     this.unblock();
     Email.send({
-      to: "sscaff1@gmail.com",
+      to: "info@centurytradeshow.com",
       from: "no-reply@centurytradeshow.com",
       subject: "New Career Application",
       html: SSR.render('careerHtml', doc),
@@ -49,8 +33,9 @@ Meteor.methods({
   },
   sendSecurityEmail(doc) {
     this.unblock();
+    var toAddress = [doc.email, 'info@centurytradeshow.com'];
     Email.send({
-      to: "sscaff1@gmail.com",
+      to: _.flatten(toAddress),
       from: "no-reply@centurytradeshow.com",
       subject: "New Security Request",
       html: SSR.render('securityEmail', doc),
@@ -58,8 +43,9 @@ Meteor.methods({
   },
   sendStaffingEmail(doc) {
     this.unblock();
+    var toAddress = [doc.email, 'info@centurytradeshow.com'];
     Email.send({
-      to: "sscaff1@gmail.com",
+      to: _.flatten(toAddress),
       from: "no-reply@centurytradeshow.com",
       subject: "New Staffing Request",
       html: SSR.render('staffingEmail', doc),
@@ -68,7 +54,7 @@ Meteor.methods({
   sendContactUsEmail(doc) {
     this.unblock();
     Email.send({
-      to: "sscaff1@gmail.com",
+      to: "info@centurytradeshow.com",
       from: "no-reply@centurytradeshow.com",
       subject: "New Contact Us Inquiry",
       html: SSR.render('contactusEmail', doc),

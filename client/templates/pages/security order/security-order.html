@@ -55,26 +55,28 @@
       </div>
       {{> formCommon}}
       <div class="row">
-        <h3>Pricing Information</h3>
-        <div class="col-md-6">
-          <table class="table text-center">
-            <tr>
-              <th class="text-center lead">Monitor Type/Rates</th>
-              <th class="text-center">Pre-Order</th>
-              <th class="text-center">On-Site</th>
-            </tr>
-            <tr>
-              <th class="text-center">Unarmed Monitor</th>
-              <td>$25.00</td>
-              <td>$31.00</td>
-            </tr>
-            <tr>
-              <th class="text-center">Armed Monitor</th>
-              <td>$59.00</td>
-              <td>$63.50</td>
-            </tr>
-          </table>
-        </div>
+        {{#if priceTable}}
+          <h3>Pricing Information</h3>
+          <div class="col-md-6">
+            <table class="table text-center">
+              <tr>
+                <th class="text-center lead">Monitor Type/Rates</th>
+                <th class="text-center">Pre-Order</th>
+                <th class="text-center">On-Site</th>
+              </tr>
+              <tr>
+                <th class="text-center">Unarmed Monitor</th>
+                <td>${{displayCurrency priceTable.unarmedD}}</td>
+                <td>${{displayCurrency priceTable.unarmed}}</td>
+              </tr>
+              <tr>
+                <th class="text-center">Armed Monitor</th>
+                <td>${{displayCurrency priceTable.armedD}}</td>
+                <td>${{displayCurrency priceTable.armed}}</td>
+              </tr>
+            </table>
+          </div>
+        {{/if}}
         <div class="col-md-6">
           {{#if dateMinus21}}
             Advance payment must be received by <strong>{{dateMinus21}}</strong> to qualify for
