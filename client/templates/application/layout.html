@@ -1,9 +1,13 @@
 <template name="layout">
   {{> messageList}}
   {{> mainMenu}}
-  {{#if notHome}}
-    {{> headerRegularPage}}
-  {{/if}}
+  {{> headerRegularPage}}
+  {{> yield}}
+  {{> footer}}
+</template>
+<template name="layoutHome">
+  {{> messageList}}
+  {{> mainMenu}}
   {{> yield}}
   {{> footer}}
 </template>
