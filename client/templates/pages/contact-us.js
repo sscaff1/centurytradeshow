@@ -10,7 +10,7 @@ Template.contactUs.onCreated(function() {
     },
     {
       lat: 41.79301, lng: -87.77957, title: 'Chicago',
-      content: '<center><h3>Chicago Office</h3><p> 6334 S Archer Ave. Suite B<br/>Chicago, IL 60632<br/>LIC # 119.001474</p></center>'
+      content: '<center><h3>Chicago Office</h3><p> 5334 S Archer Ave. Suite B<br/>Chicago, IL 60632<br/>LIC # 119.001474</p></center>'
     },
     {
       lat: 29.99649, lng: -90.15848, title: 'New Orleans',

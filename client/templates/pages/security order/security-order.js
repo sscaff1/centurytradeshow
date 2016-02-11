@@ -45,7 +45,7 @@ Template.securityOrder.onCreated(function() {
     if (eventLocation === 'chicago') {
       var ccFee = totalPrice * ccRate;
       return {
-        address: '6334 S Archer Ave. Suite B',
+        address: '5334 S Archer Ave. Suite B',
         cityState: 'Chicago, IL 60632',
         lic: '119.001474',
         ccFee: [

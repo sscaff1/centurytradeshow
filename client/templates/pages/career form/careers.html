@@ -8,18 +8,15 @@
       {{> billingAddress}}
       <div class="row">
         <div class="col-sm-6">
-          <div class="form-group {{errorClass 'homePhone'}}">
-            <label for="homePhone" class="required">Home Phone</label>
-            <input type="tel" class="form-control" name="homePhone" placeholder="XXX-XXX-XXXX" required="true">
-            <span class="help-block">{{errorMessage 'homePhone'}}</span>
-          </div>
-        </div>
-        <div class="col-sm-6">
           <div class="form-group {{errorClass 'cellPhone'}}">
-            <label for="cellPhone">Cell Phone</label>
+            <label for="cellPhone" class="required">Cell Phone</label>
             <input type="tel" class="form-control" name="cellPhone" placeholder="XXX-XXX-XXXX" required="true">
             <span class="help-block">{{errorMessage 'cellPhone'}}</span>
           </div>
+        </div>
+        <div class="col-sm-6">
+          <label for="homePhone">Home Phone</label>
+          <input type="tel" class="form-control" name="homePhone" placeholder="XXX-XXX-XXXX">
         </div>
       </div>
       <div class="row">
@@ -34,12 +31,33 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <div class="form-group {{errorClass 'ssn'}}">
-            <label for="ssn" class="required">Social Security Number</label>
-            <input type="password" class="form-control" name="ssn" placeholder="XXX-XX-XXXX" required="true">
-            <span class="help-block">{{errorMessage 'ssn'}}</span>
+          <label for="ssn">Social Security Number</label>
+          <input type="password" class="form-control" name="ssn" placeholder="XXX-XX-XXXX">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group {{errorClass 'jobSource'}}">
+            <label for="jobSource" class="required">Where did you see our job posting?</label>
+            <select class="form-control" name="jobSource" required="true">
+                <option value="">--</option>
+                <option value="website">Century's Website</option>
+                <option value="facebook">Facebook</option>
+                <option value="craigslist">Craigslist</option>
+                <option value="other">Other</option>
+            </select>
+            <span class="help-block">{{errorMessage 'jobSource'}}</span>
           </div>
         </div>
+        {{#if otherSource}}
+          <div class="col-sm-6">
+            <div class="form-group {{errorClass 'otherSource'}}">
+              <label for="otherSource" class="required">Other Source</label>
+              <input type="text" class="form-control" name="otherSource" required="true">
+              <span class="help-block">{{errorMessage 'otherSource'}}</span>
+            </div>
+          </div>
+        {{/if}}
       </div>
       <div class="row">
         <h3>Availability and Transportation <small>All work is part-time on call and not guaranteed week to week</small></h3>
@@ -191,12 +209,18 @@
         {{/if}}
       <div class="row">
         <h3>References & Past Work Experiences</h3>
-        {{#each referenceCount}}
-          <div class="col-sm-6">
-            <h4>{{{header}}}</h4>
-            {{> reference}}
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Please list two references other than relatives or previous employers.</h4>
           </div>
-        {{/each}}
+        </div>
+        <div class="row">
+          {{#each referenceCount}}
+            <div class="col-sm-6">
+              {{> reference}}
+            </div>
+          {{/each}}
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-12">

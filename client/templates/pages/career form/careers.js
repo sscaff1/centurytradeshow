@@ -6,6 +6,7 @@ Template.careers.onCreated(function() {
   instance.workExperience = new ReactiveVar([{value: 1}]);
   instance.fillOut = new ReactiveVar(null);
   instance.armedForces = new ReactiveVar(null);
+  instance.otherSource = new ReactiveVar(false);
   Session.set('postSubmitErrors', {});
 });
 
@@ -20,6 +21,9 @@ Template.careers.onRendered(function() {
 });
 
 Template.careers.helpers({
+  otherSource() {
+    return Template.instance().otherSource.get();
+  },
   referenceCount: function() {
     return [
       {
@@ -78,6 +82,15 @@ Template.careers.helpers({
 });
 
 Template.careers.events({
+  'change [name=jobSource]': function(event,template) {
+    event.preventDefault();
+    const targetVal = $(event.target).val();
+    if (targetVal === 'other') {
+      template.otherSource.set(true);
+    } else {
+      template.otherSource.set(false);
+    }
+  },
   'change [name=guardCard]': function(event,template) {
     event.preventDefault();
     var targetVal = $(event.target).val();
