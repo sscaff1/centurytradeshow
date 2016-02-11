@@ -1,108 +1,98 @@
 <template name="experience">
   <div class="container" name="experience" style="margin-bottom:15px;">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group {{errorClass 'employerName' fieldIndex=value}}">
-        <label for="employerName{{value}}" class="required">Employer Name</label>
-        <input type="text" data-employer="employ" class="form-control" name="employerName{{value}}" required="true">
-        <span class="help-block">{{errorMessage 'employerName' fieldIndex=value}}</span>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'startDate' fieldIndex=value}}">
-        <label for="startDate{{value}}" class="required">Start Date</label>
-        <div class="input-group">
-          <input type="text" data-employer="employ" class="form-control datepicker" name="startDate{{value}}" required="true">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="employerName{{value}}">Employer Name</label>
+          <input type="text" data-employer="employ" class="form-control" name="employerName{{value}}">
         </div>
-        <span class="help-block">Approximate if not known exactly.<br/>{{errorMessage 'startDate' fieldIndex=value}}</span>
       </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="endDate">End Date</label>
-        <div class="input-group">
-          <input type="text" data-employer="employ" class="form-control datepicker" name="endDate{{value}}" required="true">
-          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="startDate{{value}}">Start Date</label>
+          <div class="input-group">
+            <input type="text" data-employer="employ" class="form-control datepicker" name="startDate{{value}}">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
         </div>
-        <span class="help-block">Leave blank if currently employed.</span>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <div class="input-group">
+            <input type="text" data-employer="employ" class="form-control datepicker" name="endDate{{value}}">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
+          <span class="help-block">Leave blank if currently employed.</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="lastSupervisor{{value}}">Last Supervisor's Name</label>
+          <input type="text" data-employer="employ" class="form-control" name="lastSupervisor{{value}}">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="lastTitle{{value}}">Last Job Title</label>
+          <input type="text" data-employer="employ" class="form-control" name="lastTitle{{value}}">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="startPay{{value}}">Start Pay</label>
+          <input type="text" data-employer="employ" class="form-control" name="startPay{{value}}" placeholder="$XX/hour or $XX/year">
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label for="endPay{{value}}">End Pay</label>
+          <input type="text" data-employer="employ" class="form-control" name="endPay{{value}}" placeholder="$XX/hour or $XX/year">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="address{{value}}">Address</label>
+          <input type="text" data-employer="employ" class="form-control" name="address{{value}}">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <label for="city{{value}}">City</label>
+          <input type="text" data-employer="employ" class="form-control" name="city{{value}}">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+          <label for="state{{value}}">State</label>
+          <select data-employer="employ" class="form-control" name="state{{value}}">
+            <option value="">--</option>
+            {{#each state}}
+              <option value="{{abbreviation}}">{{abbreviation}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-group">
+          <label for="zipCode{{value}}">Zip Code</label>
+          <input type="text" data-employer="employ" class="form-control" name="zipCode{{value}}">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="leaving{{value}}">Reason for Leaving (be specific)</label>
+          <textarea data-employer="employ" name="leaving{{value}}" class="form-control" row="6"></textarea>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'lastSupervisor' fieldIndex=value}}">
-        <label for="lastSupervisor{{value}}" class="required">Last Supervisor's Name</label>
-        <input type="text" data-employer="employ" class="form-control" name="lastSupervisor{{value}}" required="true">
-        <span class="help-block">{{errorMessage 'lastSupervisor' fieldIndex=value}}</span>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'lastTitle' fieldIndex=value}}">
-        <label for="lastTitle{{value}}" class="required">Last Job Title</label>
-        <input type="text" data-employer="employ" class="form-control" name="lastTitle{{value}}" required="true">
-        <span class="help-block">{{errorMessage 'lastTitle' fieldIndex=value}}</span>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'startPay' fieldIndex=value}}">
-        <label for="startPay{{value}}" class="required">Start Pay</label>
-        <input type="text" data-employer="employ" class="form-control" name="startPay{{value}}" placeholder="$XX/hour or $XX/year" required="true">
-        <span class="help-block">{{errorMessage 'startPay' fieldIndex=value}}</span>
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group {{errorClass 'endPay' fieldIndex=value}}">
-        <label for="endPay{{value}}" class="required">End Pay</label>
-        <input type="text" data-employer="employ" class="form-control" name="endPay{{value}}" placeholder="$XX/hour or $XX/year" required="true">
-        <span class="help-block">{{errorMessage 'endPay' fieldIndex=value}}</span>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group {{errorClass 'address' fieldIndex=value}}">
-        <label for="address{{value}}" class="required">Address</label>
-        <input type="text" data-employer="employ" class="form-control" name="address{{value}}" required="true">
-        <span class="help-block">{{errorMessage 'address' fieldIndex=value}}</span>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-6">
-      <div class="form-group {{errorClass 'city' fieldIndex=value}}">
-        <label for="city{{value}}" class="required">City</label>
-        <input type="text" data-employer="employ" class="form-control" name="city{{value}}" required="true">
-        <span class="help-block">{{errorMessage 'city' fieldIndex=value}}</span>
-      </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group {{errorClass 'state' fieldIndex=value}}">
-        <label for="state{{value}}" class="required">State</label>
-        <select data-employer="employ" class="form-control" name="state{{value}}" required="true">
-          <option value="">--</option>
-          {{#each state}}
-            <option value="{{abbreviation}}">{{abbreviation}}</option>
-          {{/each}}
-        </select>
-        <span class="help-block">{{errorMessage 'state' fieldIndex=value}}</span>
-      </div>
-    </div>
-    <div class="col-xs-4">
-      <div class="form-group {{errorClass 'zipCode' fieldIndex=value}}">
-        <label for="zipCode{{value}}" class="required">Zip Code</label>
-        <input type="text" data-employer="employ" class="form-control" name="zipCode{{value}}" required="true">
-        <span class="help-block">{{errorMessage 'zipCode' fieldIndex=value}}</span>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="leaving{{value}}">Reason for Leaving (be specific)</label>
-        <textarea data-employer="employ" name="leaving{{value}}" class="form-control" row="6"></textarea>
-      </div>
-    </div>
-  </div>
-</div>
 </template>

@@ -1,39 +1,35 @@
 <template name="guardCardHelper">
   <div class="col-sm-4">
-    <div class="form-group {{errorClass 'guardLicense'}}">
-      <label for="guardLicense" class="required">Guard Card License Number</label>
-      <input type="text" class="form-control" name="guardLicense" required="true">
-      <span class="help-block">{{errorMessage 'guardLicense'}}</span>
+    <div class="form-group">
+      <label for="guardLicense">Guard Card License Number</label>
+      <input type="text" class="form-control" name="guardLicense">
     </div>
   </div>
   <div class="col-sm-4">
-    <div class="form-group {{errorClass 'expirationDate'}}">
-      <label for="expirationDate" class="required">Expiration Date</label>
+    <div class="form-group">
+      <label for="expirationDate">Expiration Date</label>
       <div class="input-group">
-        <input type="text" class="form-control datepicker" name="expirationDate" required="true">
+        <input type="text" class="form-control datepicker" name="expirationDate">
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
-      <span class="help-block">{{errorMessage 'expirationDate'}}</span>
     </div>
   </div>
 </template>
 
 <template name="nationalGuardHelper">
   <div class="col-sm-3">
-    <div class="form-group {{errorClass 'specialty'}}">
-      <label for="specialty" class="required">Specialty</label>
-      <input type="text" class="form-control" name="specialty" required="true">
-      <span class="help-block">{{errorMessage 'specialty'}}</span>
+    <div class="form-group">
+      <label for="specialty">Specialty</label>
+      <input type="text" class="form-control" name="specialty">
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="form-group {{errorClass 'enterDate'}}">
-      <label for="enterDate" class="required">Date Entered</label>
+    <div class="form-group">
+      <label for="enterDate">Date Entered</label>
       <div class="input-group">
-        <input type="text" class="form-control datepicker" name="enterDate" required="true">
+        <input type="text" class="form-control datepicker" name="enterDate">
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
-      <span class="help-block">{{errorMessage 'enterDate'}}</span>
     </div>
   </div>
   <div class="col-sm-3">
@@ -50,13 +46,12 @@
 
 <template name="lawHelper">
   <div class="col-sm-4">
-    <div class="form-group {{errorClass 'enterDateLaw'}}">
-      <label for="enterDateLaw" class="required">Date Entered</label>
+    <div class="form-group">
+      <label for="enterDateLaw">Date Entered</label>
       <div class="input-group">
-        <input type="text" class="form-control datepicker" name="enterDateLaw" required="true">
+        <input type="text" class="form-control datepicker" name="enterDateLaw">
         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
       </div>
-      <span class="help-block">{{errorMessage 'enterDateLaw'}}</span>
     </div>
   </div>
   <div class="col-sm-4">
@@ -74,29 +69,26 @@
 <template name="lawHelper2">
   <div class="row">
     <div class="col-sm-5">
-      <div class="form-group {{errorClass 'departmentLaw'}}">
-        <label for="departmentLaw" class="required">Department</label>
-        <input type="text" class="form-control" name="departmentLaw" required="true">
-        <span class="help-block">{{errorMessage 'departmentLaw'}}</span>
+      <div class="form-group">
+        <label for="departmentLaw">Department</label>
+        <input type="text" class="form-control" name="departmentLaw">
       </div>
     </div>
     <div class="col-sm-5">
-      <div class="form-group {{errorClass 'cityLaw'}}">
-        <label for="cityLaw" class="required">City</label>
-        <input type="text" class="form-control" name="cityLaw" required="true">
-        <span class="help-block">{{errorMessage 'cityLaw'}}</span>
+      <div class="form-group">
+        <label for="cityLaw">City</label>
+        <input type="text" class="form-control" name="cityLaw">
       </div>
     </div>
     <div class="col-xs-2">
-      <div class="form-group {{errorClass 'stateLaw'}}">
-        <label for="stateLaw" class="required">State</label>
-        <select class="form-control" name="stateLaw" required="true">
+      <div class="form-group">
+        <label for="stateLaw">State</label>
+        <select class="form-control" name="stateLaw">
           <option value="">--</option>
           {{#each state}}
             <option value="{{abbreviation}}">{{abbreviation}}</option>
           {{/each}}
         </select>
-        <span class="help-block">{{errorMessage 'stateLaw'}}</span>
       </div>
     </div>
   </div>

@@ -62,81 +62,74 @@
       <div class="row">
         <h3>Availability and Transportation <small>All work is part-time on call and not guaranteed week to week</small></h3>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'startDate'}}">
-            <label for="startDate" class="required">Available to Start Work</label>
+          <div class="form-group">
+            <label for="startDate">Available to Start Work</label>
             <div class="input-group">
-              <input type="text" class="form-control datepicker" name="startDate" required="true">
+              <input type="text" class="form-control datepicker" name="startDate">
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
-            <span class="help-block">{{errorMessage 'startDate'}}</span>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'hoursWeek'}}">
-            <label for="hoursWeek" class="required">Hours per Week Available to Work</label>
-            <input type="text" class="form-control" name="hoursWeek" required="true">
-            <span class="help-block">{{errorMessage 'hoursWeek'}}</span>
+          <div class="form-group">
+            <label for="hoursWeek">Hours per Week Available to Work</label>
+            <input type="text" class="form-control" name="hoursWeek">
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'nights'}}">
-            <label for="nights" class="required">Can you work nights?</label>
-            <select class="form-control" name="nights" required="true">
+          <div class="form-group">
+            <label for="nights">Can you work nights?</label>
+            <select class="form-control" name="nights">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'nights'}}</span>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'ged'}}">
-            <label for="ged" class="required">Do you have a High School Diploma/GED?</label>
-            <select class="form-control" name="ged" required="true">
+          <div class="form-group">
+            <label for="ged">Do you have a High School Diploma/GED?</label>
+            <select class="form-control" name="ged">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'ged'}}</span>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'license'}}">
-            <label for="license" class="required">Do you have a driver's license?</label>
-            <select class="form-control" name="license" required="true">
+          <div class="form-group">
+            <label for="license">Do you have a driver's license?</label>
+            <select class="form-control" name="license">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'license'}}</span>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'transportation'}}">
-            <label for="ged" class="required">What is your means of transportation?</label>
-            <select class="form-control" name="transportation" required="true">
+          <div class="form-group">
+            <label for="ged">What is your means of transportation?</label>
+            <select class="form-control" name="transportation">
                 <option value="">--</option>
                 <option value="car">Personnal Vehicle</option>
                 <option value="public">Public (Bus or Rail)</option>
                 <option value="walking">Walking or Bicycle</option>
             </select>
-            <span class="help-block">{{errorMessage 'ged'}}</span>
           </div>
         </div>
       </div>
       <div class="row">
         <h3>Certifications & Experience</h3>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'guardCard'}}">
-            <label for="guardCard" class="required">Do you have a Guard Card?</label>
-            <select class="form-control" name="guardCard" required="true">
+          <div class="form-group">
+            <label for="guardCard">Do you have a Guard Card?</label>
+            <select class="form-control" name="guardCard">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'guardCard'}}</span>
           </div>
         </div>
         {{#if guardCard}}
@@ -145,21 +138,20 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'armedForces'}}">
-            <label for="armedForces" class="required">Have you ever been in the armed forces?</label>
-            <select class="form-control" name="armedForces" required="true">
+          <div class="form-group">
+            <label for="armedForces">Have you ever been in the armed forces?</label>
+            <select class="form-control" name="armedForces">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'armedForces'}}</span>
           </div>
         </div>
         {{#if armedForces}}
           <div class="col-sm-4">
-            <div class="form-group {{errorClass 'armedBranch'}}">
-              <label for="armedBranch" class="required">What branch of the military?</label>
-              <select class="form-control" name="armedBranch" required="true">
+            <div class="form-group">
+              <label for="armedBranch">What branch of the military?</label>
+              <select class="form-control" name="armedBranch">
                   <option value="">--</option>
                   <option value="airforce">Air Force</option>
                   <option value="army">Army</option>
@@ -167,21 +159,19 @@
                   <option value="marine">Marine Corps</option>
                   <option value="navy">Navy</option>
               </select>
-              <span class="help-block">{{errorMessage 'armedBranch'}}</span>
             </div>
           </div>
         {{/if}}
       </div>
       <div class="row">
         <div class="col-sm-3">
-          <div class="form-group {{errorClass 'nationalGuard'}}">
-            <label for="nationalGuard" class="required">Are you in the National Guard?</label>
-            <select class="form-control" name="nationalGuard" required="true">
+          <div class="form-group">
+            <label for="nationalGuard">Are you in the National Guard?</label>
+            <select class="form-control" name="nationalGuard">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'nationalGuard'}}</span>
           </div>
         </div>
         {{#if nationalGuard}}
@@ -190,14 +180,13 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'law'}}">
-            <label for="law" class="required">Have you ever served in law enforcement?</label>
-            <select class="form-control" name="law" required="true">
+          <div class="form-group">
+            <label for="law">Have you ever served in law enforcement?</label>
+            <select class="form-control" name="law">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'law'}}</span>
           </div>
         </div>
         {{#if law}}
@@ -238,33 +227,30 @@
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'currentEmployer'}}">
-            <label for="currentEmployer" class="required">May we contact your current employer?</label>
-            <select class="form-control" name="currentEmployer" required="true">
+          <div class="form-group">
+            <label for="currentEmployer">May we contact your current employer?</label>
+            <select class="form-control" name="currentEmployer">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'currentEmployer'}}</span>
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'fillOut'}}">
-            <label for="fillOut" class="required">Did you fill out this application yourself?</label>
-            <select class="form-control" name="fillOut" required="true">
+          <div class="form-group">
+            <label for="fillOut">Did you fill out this application yourself?</label>
+            <select class="form-control" name="fillOut">
                 <option value="">--</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
-            <span class="help-block">{{errorMessage 'fillOut'}}</span>
           </div>
         </div>
         {{#if fillOut}}
           <div class="col-sm-4">
-            <div class="form-group {{errorClass 'fillOutWho'}}">
-              <label for="fillOutWho" class="required">Who filled it out?</label>
-              <input type="text" class="form-control" name="fillOutWho" required="true">
-              <span class="help-block">{{errorMessage 'fillOutWho'}}</span>
+            <div class="form-group">
+              <label for="fillOutWho">Who filled it out?</label>
+              <input type="text" class="form-control" name="fillOutWho">
             </div>
           </div>
         {{/if}}
@@ -272,24 +258,21 @@
       <div class="row">
         <h3>Emergency Contact</h3>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'emergencyName'}}">
-            <label for="emergencyName" class="required">Emergency Contact name</label>
-            <input type="text" class="form-control" name="emergencyName" required="true">
-            <span class="help-block">{{errorMessage 'emergencyName'}}</span>
+          <div class="form-group">
+            <label for="emergencyName">Emergency Contact name</label>
+            <input type="text" class="form-control" name="emergencyName">
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'emergencyRelationship'}}">
-            <label for="emergencyRelationship" class="required">Relationship</label>
-            <input type="text" class="form-control" name="emergencyRelationship" required="true">
-            <span class="help-block">{{errorMessage 'emergencyRelationship'}}</span>
+          <div class="form-group">
+            <label for="emergencyRelationship">Relationship</label>
+            <input type="text" class="form-control" name="emergencyRelationship">
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group {{errorClass 'emergencyPhone'}}">
-            <label for="emergencyPhone" class="required">Phone Number</label>
-            <input type="text" class="form-control" name="emergencyPhone" required="true">
-            <span class="help-block">{{errorMessage 'emergencyPhone'}}</span>
+          <div class="form-group">
+            <label for="emergencyPhone">Phone Number</label>
+            <input type="text" class="form-control" name="emergencyPhone">
           </div>
         </div>
       </div>
