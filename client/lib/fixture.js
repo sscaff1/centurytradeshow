@@ -22,8 +22,9 @@ if (Employees.find().count() === 0) {
     {name:"Sean Tay",title:"Sales Manager",email:"stay@centurytradeshow.com",company:"vegas",order:50},
     {name:"Ariana Sherman",title:"Compliance Coordinator",email:"asherman@centurytradeshow.com",company:"vegas",order:150},
     {name:"Brian Nagunst",title:"Operations Manager",email:"bnagunst@centurytradeshow.com",company:"vegas",order:80},
-    {name:"Louis Lomeli",title:"Operations Manager",email:"llomeli@centurytradeshow.com",company:"vegas",order:90},
+    {name:"Luis Lomeli",title:"Operations Manager",email:"llomeli@centurytradeshow.com",company:"vegas",order:90},
     {name:"Terrance Wilkerson",title:"Operations Manager",email:"twilkerson@centurytradeshow.com",company:"vegas",order:100},
+    {name:"Christopher LeCours",title:"Director of Sales & Marketing",email:"clecours@centurytradeshow.com",company:"orlando",order:45},
   ];
   _.each(employees, function(employee) {
     Employees.insert(employee);

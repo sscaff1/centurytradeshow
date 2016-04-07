@@ -33,7 +33,7 @@ Meteor.methods({
   },
   sendSecurityEmail(doc) {
     this.unblock();
-    var toAddress = [doc.email, 'info@centurytradeshow.com'];
+    var toAddress = [doc.email, 'info@centurytradeshow.com', 'mstein@centurytradeshow.com'];
     Email.send({
       to: _.flatten(toAddress),
       from: "no-reply@centurytradeshow.com",
@@ -43,7 +43,7 @@ Meteor.methods({
   },
   sendStaffingEmail(doc) {
     this.unblock();
-    var toAddress = [doc.email, 'info@centurytradeshow.com'];
+    var toAddress = [doc.email, 'info@centurytradeshow.com', 'mstein@centurytradeshow.com'];
     Email.send({
       to: _.flatten(toAddress),
       from: "no-reply@centurytradeshow.com",
