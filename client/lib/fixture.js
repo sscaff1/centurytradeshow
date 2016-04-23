@@ -7,7 +7,6 @@ PriceRates = new Mongo.Collection(null);
 if (Employees.find().count() === 0) {
   var employees = [
     {name:"Michelle Baillargeon",title:"Schedule Coordinator",email:"mbaillargeon@centurytradeshow.com",company:"orlando",order:120},
-    {name:"Christine Hayward",title:"Sales & Marketing Manager",email:"chayward@centurytradeshow.com",company:"orlando",order:40},
     {name:"Daniel Campos",title:"Regional Vice President of Operations, East",email:"dcampos@centurytradeshow.com",company:"orlando",order:30},
     {name:"Marty Stein",title:"CFO",email:"mstein@centurytradeshow.com",company:"orlando",order:110},
     {name:"Hiram Ramirez",title:"Operations Manager",email:"hramirez@centurytradeshow.com",company:"orlando",order:60},
